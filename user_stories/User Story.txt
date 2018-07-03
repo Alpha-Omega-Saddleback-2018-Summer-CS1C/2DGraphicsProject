@@ -1,7 +1,7 @@
 David <DavidE92@live.com>
 Brett <bksaiki@gmail.com>
 Justis <justis.ketcham@gmail.com>
-Greg
+Greg <ggraffius0@saddleback.edu>
 
 #1 As a computer programmer, I would like to manually input a file to create shapes.
 a) Description: A file can be passed into the program which creates shapes to be drawn. Any error will result in the program notifying the user and exiting.
