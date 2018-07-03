@@ -1,13 +1,24 @@
 David Brett Justis Greg
 
-#1 As a [], I can []
-a) Description:
+#1 As a computer programmer, I would like to manually input a file to create shapes.
+a) Description: A file can be passed into the program which creates shapes to be drawn. Any error will result in the program notifying the user and exiting.
 b) Tasks:
+  - Create a parser to define shape parameters
+    - Check for syntax errors
+    - Notify and abort on error
+  - Add shapes to the shape vector
 c) Tests:
+  - Verify that a shape will be added to the vector
+  - Verify that any syntax errors will generate an error and cause the program to exit
 d) Assignee:
-e) Estimation:
-f) Priority:
-g) Done:
+  - Brett: implement file-to-token converter
+	- Greg: implement token-to-vector converter
+e) Estimation: 45 hours
+f) Priority: 3
+g) Goals:
+	- (Advanced) user is able to create file to parameterize shapes
+	- Adds shapes to the shape vector
+	- Any errors in syntax will result in the program aborting
 
 #2 As a [], I can []
 a) Description:
@@ -16,7 +27,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #3 As a [], I can []
 a) Description:
@@ -25,7 +36,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #4 As a [], I can []
 a) Description:
@@ -34,7 +45,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #5 As a [], I can []
 a) Description:
@@ -43,7 +54,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #6 As a [], I can []
 a) Description:
@@ -52,7 +63,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #7 As a [], I can []
 a) Description:
@@ -61,7 +72,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #8 As a [], I can []
 a) Description:
@@ -70,7 +81,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #9 As a [], I can []
 a) Description:
@@ -79,7 +90,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 #10 As a [], I can []
 a) Description:
@@ -88,7 +99,7 @@ c) Tests:
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Done:
+g) Goals:
 
 
 
