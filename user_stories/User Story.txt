@@ -3,7 +3,7 @@ Brett <bsaiki0@saddleback.edu>
 Justis <justis.ketcham@gmail.com>
 Greg <ggraffius0@saddleback.edu>
 
-#1 As a computer programmer, I would like to manually input a file to create shapes.
+#1 As a computer programmer, I can manually input a file to create shapes.
 a) Description: A file can be passed into the program which creates shapes to be drawn. Any error will result in the program notifying the user and exiting.
 b) Tasks:
   - Create a parser to define shape parameters
@@ -15,7 +15,7 @@ c) Tests:
   - Verify that any syntax errors will generate an error and cause the program to exit
 d) Assignee:
   - Brett: implement file-to-token converter
-	- Greg: implement token-to-vector converter
+  - Greg: implement token-to-vector converter
 e) Estimation: 45 hours
 f) Priority: 3
 g) Goals:
@@ -23,7 +23,38 @@ g) Goals:
 	- Adds shapes to the shape vector
 	- Any errors in syntax will result in the program aborting
 
-#2 As a [], I can []
+#2 As a computer programmer, I can receive verbose errors from the file parser
+a) Description: Any parser errors will print detailed errors or suggest fixes to the user
+b) Tasks:
+	- Create an error object (possibly)
+	- Print error to screen
+c) Tests:
+	- Verify that syntax errors result in accurate detailed errors
+d) Assignee:
+	- Brett: implement error logic
+	- Justis: implement error object
+e) Estimation: 30 hours
+f) Priority: 10
+g) Goals: 
+	- Prints errors and suggests fixes to user before exiting program
+
+#3 As a teacher, I can login to the program
+a) Description: Users can login to the program with a username and password. Program will only allow access when username and password matches
+b) Tasks:	
+	- Create username and password logic
+	- Create file to store username and password
+c) Tests:
+	- Verify that program will only allow access when username and password match
+	- Verify that username and password will persist past a single use
+d) Assignee:
+	- Brett: implement matcher
+	- David: implement saving and loading username and passwords
+e) Estimation: 12 hours
+f) Priority: 2
+g) Goals:
+	- A user can create a username and password and login
+
+#4 As a [], I can create multiple logins
 a) Description:
 b) Tasks:
 c) Tests:
@@ -32,7 +63,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#3 As a [], I can []
+#5 As a [], I can render shapes
 a) Description:
 b) Tasks:
 c) Tests:
@@ -41,7 +72,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#4 As a [], I can []
+#6 As a [], I can define multiple shapes
 a) Description:
 b) Tasks:
 c) Tests:
@@ -50,7 +81,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#5 As a [], I can []
+#7 As a [], I can save user-defined shapes to a file
 a) Description:
 b) Tasks:
 c) Tests:
@@ -59,7 +90,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#6 As a [], I can []
+#8 As a [], I can calculate the dimensions, perimeter, or area of any shape
 a) Description:
 b) Tasks:
 c) Tests:
@@ -68,25 +99,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#7 As a [], I can []
-a) Description:
-b) Tasks:
-c) Tests:
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
-
-#8 As a [], I can []
-a) Description:
-b) Tasks:
-c) Tests:
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
-
-#9 As a [], I can []
+#9 As a [], I can encrypt username and password
 a) Description:
 b) Tasks:
 c) Tests:
