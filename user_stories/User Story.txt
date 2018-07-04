@@ -55,13 +55,13 @@ g) Goals:
 	- A user can create a username and password and login
 
 #4 As a [], I can create multiple logins
-a) Description:
-b) Tasks:
-c) Tests:
+a) Description: asdf
+b) Tasks: asdf
+c) Tests: 		asdffdsa
 d) Assignee:
 e) Estimation:
 f) Priority:
-g) Goals:
+g) Goals:	asdf
 
 #5 As a [], I can render shapes
 a) Description:
