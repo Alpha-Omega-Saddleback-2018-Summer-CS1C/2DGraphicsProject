@@ -111,9 +111,11 @@ f) Priority:
 g) Goals:
 
 #9 As a programmer, I can utilize the hierachy of the abstract shape class
-a) Description:
+a) Description:	use the abstract shape class to define other shapes
 b) Tasks:
+	-include all the shapes needed
 c) Tests:
+	-works and doesnt crash
 d) Assignee:
 e) Estimation:
 f) Priority:
