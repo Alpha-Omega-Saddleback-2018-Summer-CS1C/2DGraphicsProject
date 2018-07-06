@@ -54,16 +54,36 @@ f) Priority: 2
 g) Goals:
 	- A user can create a username and password and login
 
-#4 As a [], I can create multiple logins
-a) Description: 
+#4 As a user, I can create multiple logins
+a) Description: allows the user to log in or create a new login
 b) Tasks: 
-c) Tests: 		
+	-read and write to a txt file
+	-create an easy to use interface
+	-possibly encrypt the txt file
+c) Tests: 	
+	-verify a new login works
+	-verify old login still works	
 d) Assignee:
+	-Greg
 e) Estimation:
 f) Priority:
 g) Goals:	
 
-#5 As a [], I can render shapes
+#5 As a student, I can render shapes
+a) Description: Take in a text file and output the shapes
+b) Tasks:
+	-finish the hiearchy of the shape class
+	-read from a text file
+	-utilize information from the text file
+	-draw shapes described from the text file
+c) Tests:
+	-verify it works
+d) Assignee:
+e) Estimation: 100 hrs
+f) Priority: 10
+g) Goals:
+
+#6 As a student, I can define multiple shapes
 a) Description:
 b) Tasks:
 c) Tests:
@@ -72,7 +92,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#6 As a [], I can define multiple shapes
+#7 As a user, I can save user-defined shapes to a file
 a) Description:
 b) Tasks:
 c) Tests:
@@ -81,7 +101,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#7 As a [], I can save user-defined shapes to a file
+#8 As a student, I can calculate the dimensions, perimeter, or area of any shape
 a) Description:
 b) Tasks:
 c) Tests:
@@ -90,7 +110,7 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#8 As a [], I can calculate the dimensions, perimeter, or area of any shape
+#9 As a programmer, I can utilize the hierachy of the abstract shape class
 a) Description:
 b) Tasks:
 c) Tests:
@@ -99,23 +119,18 @@ e) Estimation:
 f) Priority:
 g) Goals:
 
-#9 As a [], I can encrypt username and password
-a) Description:
+#10 As a user, I can update the shapes
+a) Description:	Allows the user to update or move the shapes then save changes
 b) Tasks:
+	-allows shapes to visually move
+	-changes are saved
 c) Tests:
+	-verify shapes can move
 d) Assignee:
-e) Estimation:
-f) Priority:
+e) Estimation: 60hrs
+f) Priority: 10
 g) Goals:
-
-#10 As a [], I can []
-a) Description:
-b) Tasks:
-c) Tests:
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
+	-probably the last thing to be implemented
 
 
 
