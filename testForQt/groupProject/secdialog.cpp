@@ -1,3 +1,4 @@
+/*
 #include "secdialog.h"
 #include "ui_secdialog.h"
 
@@ -12,3 +13,4 @@ SecDialog::~SecDialog()
 {
     delete ui;
 }
+*/

@@ -23,8 +23,6 @@ void MainWindow::on_pushButton_login_clicked()
     {
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
-        //secDialog = new SecDialog(this);
-        //secDialog->show();
     }
     else
         QMessageBox::information(this, "Login", "Username and password is NOT correct");

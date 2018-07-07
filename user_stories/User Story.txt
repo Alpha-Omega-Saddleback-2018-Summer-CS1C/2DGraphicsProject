@@ -65,130 +65,94 @@ c) Tests:
 	-verify old login still works	
 d) Assignee:
 	-Greg
-e) Estimation:
-f) Priority:
+e) Estimation: 9 hours
+f) Priority: 9
 g) Goals:	
+	- Mutliple users can login
 
 #5 As a student, I can render shapes
-a) Description: Take in a text file and output the shapes
+a) Description: Renders shapes from the shape vector
 b) Tasks:
-	-finish the hiearchy of the shape class
-	-read from a text file
-	-utilize information from the text file
-	-draw shapes described from the text file
+	- Create a function to render an object using QPainter
 c) Tests:
-	-verify it works
+	- Verify that shape is rendered
 d) Assignee:
+	- David 
 e) Estimation: 100 hrs
-f) Priority: 10
+f) Priority: 1
 g) Goals:
+	- draws any shape 
 
 #6 As a student, I can define multiple shapes
-a) Description:
+a) Description: Allows for a abstract shape class to define other shapes
 b) Tasks:
+	- The shape class inheritance is effective enough to derive other shapes
 c) Tests:
+	- Multiple shapes can be derived
 d) Assignee:
-e) Estimation:
-f) Priority:
+	- David
+e) Estimation: 16 hours
+f) Priority: 4
 g) Goals:
+	- Multiple shapes can be created
 
-#7 As a user, I can save user-defined shapes to a file
-a) Description:
-b) Tasks:
-c) Tests:
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
-
-#8 As a student, I can calculate the dimensions, perimeter, or area of any shape
-a) Description:
-b) Tasks:
-c) Tests:
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
-
-#9 As a programmer, I can utilize the hierachy of the abstract shape class
-a) Description:	use the abstract shape class to define other shapes
-b) Tasks:
-	-include all the shapes needed
-c) Tests:
-	-works and doesnt crash
-d) Assignee:
-e) Estimation:
-f) Priority:
-g) Goals:
-
-#10 As a user, I can update the shapes
-a) Description:	Allows the user to update or move the shapes then save changes
+#7 As a user, I can change user-defined shapes and save to a file
+a) Description: Allows the user to update or move the shapes then save changes
 b) Tasks:
 	-allows shapes to visually move
 	-changes are saved
 c) Tests:
-	-verify shapes can move
+	- verify shapes can move
+	- verify that shapes are saved
 d) Assignee:
-e) Estimation: 60hrs
-f) Priority: 10
+	- Brett
+e) Estimation: 16hrs
+f) Priority: 5
 g) Goals:
-	-probably the last thing to be implemented
+	- Shapes can be changed
+	- Shapes will persist past runtime
 
 
+#8 As a student, I can calculate the dimensions, perimeter, or area of any shape
+a) Description: Any shape on the shape vector will have its dimensions, perimeter and area displayed
+b) Tasks:
+	- Implement math for calculating perimeter and area
+	- Use QPainter to print to screen
+c) Tests:
+	- Verify that the values displayed are correct
+d) Assignee:
+	- Greg
+e) Estimation: 24 hours
+f) Priority: 6
+g) Goals:
+	- The dimensions, perimeter and/or area can be calculated for any shape
 
+#9 As a user, my username and password will be "encrypted"
+a) Description:	Any saved usernames or passwords will be encrypted (or not visible as a character)
+b) Tasks: 
+	- "Encrypt" any saved passwords
+		- Consider bitshifts, arithmetic operations
+c) Tests:
+	- Works and doesnt crash
+d) Assignee:
+	- Justis
+e) Estimation: 18 hours
+f) Priority: 8
+g) Goals:
+	- Passwords and usernames are not visible as characters
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
----- EXAMPLE USER STORY ----
-#1 As a user, I can cancel a reservation
-a)  Description:
-A site user can cancel a reservation for a full refund to her 
-credit card
-How far ahead a user must cancel reservation depends upon the user 
-type (see tasks)
-A cancelation confirmation will be emailed to the site user
-b)  Tasks:
-As a premium site member, I can cancel a reservation up to the last 
-minute
-As a non-premium member, I can cancel up to 24 hours in advance
-As a site visitor, I am emailed a confirmation of any cancelled 
-reservation
-c)  Tests:
-Verify that a premium member can cancel the same day without a fee
-Verify that a non-premium member is charged 10% for a same-day 
-cancellation
-Verify that an email confirmation is sent
-Verify that the hotel is notified of any cancellation
-d)  Assignee:
-James, implement front end UI and code behind logic, member class 
-data & operations reservation cancelation
-Sandra, implement class to email confirmation to user
-e)  Estimation: 25
-f)  Priority: 9
-g)  Done:
-User is able to login as a non-premium, premium, guest user and 
-cancel reservation (refer to tests)
-Appropriate fee is charged to user account
-User is refunded balance due minus fee
-Appropriate cancelation record recorded via hotel accounting system
-Email confirmation is sent to user
-All task, test conditions satisfied
-Baseline story point estimate value of one = 2 hrs of development time for 
-a single developer
-
+#10 As a tester, I know who developed the program and who to contact if I discover bugs
+a) Description:	Team logo and information is included with program
+b) Tasks:
+	- Render team logo / information
+	- README file
+c) Tests:
+	- Verify that team logo and information is rendered
+d) Assignee:
+	- Justis
+e) Estimation: 9 hours
+f) Priority: 7
+g) Goals:
+	- Anyone who needs to contact us knows who to contact
+	
+	

@@ -1,3 +1,4 @@
+/*
 #ifndef SECDIALOG_H
 #define SECDIALOG_H
 
@@ -20,3 +21,4 @@ private:
 };
 
 #endif // SECDIALOG_H
+*/
