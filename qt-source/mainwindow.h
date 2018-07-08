@@ -23,7 +23,6 @@
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "secdialog.h"
 #include <QMainWindow>
 
 namespace Ui {
@@ -43,7 +42,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    SecDialog *secDialog;
 };
 
 #endif // MAINWINDOW_H

@@ -25,10 +25,10 @@
 
 bool Parser::loadFile(const std::string& filePath)
 {
-
+    return false;
 }
 
 bool Parser::parse(/* Pass vector here? */)
 {
-
+    return false;
 }
