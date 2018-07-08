@@ -16,34 +16,19 @@
  *
  **/
 /*
-    File: mainwindow.h
+    File: parser.cpp
 
-    Defines UI features
+    Reads input file and creates shapes
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
-#include "secdialog.h"
-#include <QMainWindow>
+#include "parser.h"
 
-namespace Ui {
-class MainWindow;
+bool Parser::loadFile(const std::string& filePath)
+{
+
 }
 
-class MainWindow : public QMainWindow
+bool Parser::parse(/* Pass vector here? */)
 {
-    Q_OBJECT
 
-public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
-
-private slots:
-    void on_pushButton_login_clicked();
-
-private:
-    Ui::MainWindow *ui;
-    SecDialog *secDialog;
-};
-
-#endif // MAINWINDOW_H
+}
