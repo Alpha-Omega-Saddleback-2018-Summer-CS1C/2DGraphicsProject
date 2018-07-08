@@ -22,7 +22,8 @@
  */
 
 #include <QApplication>
-#include <string.h>
+#include <string>
+#include <iostream>
 #include "mainwindow.h"
 #include "parser.h"
 
@@ -31,12 +32,23 @@ const std::string file = "shapes.txt";
 int main(int argc, char *argv[])
 {
     Parser parser;
+
+    if(parser.loadFile(file))
+        std::cout << "File loaded." << std::endl;
+    else
+        std::cout << "File failed." << std::endl;
+    if(parser.parse())
+        std::cout << "File parsed." << std::endl;
+    else
+        std::cout << "Parsing failed." << std::endl;
+
+    /*
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    parser.loadFile(file);
-    parser.parse();
-
     return a.exec();
+    */
+
+    return 0;
 }
