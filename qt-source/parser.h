@@ -28,7 +28,7 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <map>
+#include <vector>
 
 /* Parser manager */
 class Parser
@@ -89,10 +89,10 @@ private:
 
 public:
     Parser() {}
-    ~Parser() { closeFile();}
+    ~Parser() { close();}
 
     /* Closes the input file if it is open */
-    void closeFile();
+    void close();
 
     /* Loads the file to be parsed. Returns true on success */
     bool loadFile(const std::string& filePath);
@@ -106,15 +106,13 @@ private:
     bool setInteger(int& dest, const std::string& source);
 
     /* Sets a part of shape info. Returns 0 on failure, 1 on new shape, and 2 on normal data entry */
-    int setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
+    void setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
+    std::string                 mInputFilePath;
     std::ifstream               mInputFile;
+    std::vector<std::string>    mErrorList;
     ShapeInfo                   mShapeInfo;
-    std::map<size_t, std::string>  mErrorList;
-    // Parse object
-    // Error handler
-
 };
 
 #endif
