@@ -102,10 +102,13 @@ public:
 
 private:
 
-    /* Sets the integer to the string if the string is an integer */
-    bool setInteger(int& dest, const std::string& source);
+    /* Parses ShapeDimension key/value. Returns the number of values extracted */
+    int* extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber);
 
-    /* Sets a part of shape info. Returns 0 on failure, 1 on new shape, and 2 on normal data entry */
+    /* Sets the integer to the string if the string is an integer */
+    bool setInteger(int& dest, const std::string& source) const;
+
+    /* Sets a part of shape info */
     void setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:

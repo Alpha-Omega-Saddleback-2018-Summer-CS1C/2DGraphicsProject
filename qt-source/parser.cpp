@@ -101,7 +101,65 @@ bool Parser::parse(/* Pass vector here? */)
  *  Helper functions
  */
 
-bool Parser::setInteger(int& dest, const std::string& source)
+int* Parser::extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber)
+{
+    std::string value;
+    size_t low = 0;
+    size_t i = 0;
+    int* dest = nullptr;
+    int* tmp = nullptr;
+
+    for(; i < source.length(); ++i)
+    {
+        if(std::isdigit(source[i]))
+        {
+            continue;
+        }
+        else if(source[i] == ',')
+        {
+            value = source.substr(low, i - low);
+
+            if(dest != nullptr)
+            {
+                tmp = dest;
+                dest = new int[size + 1];
+
+                for(size_t j = 0; j < size; ++j)
+                    dest[j] = tmp[j];
+                delete[] tmp;
+                dest[size] = std::stoi(value);
+                low = i + 1;
+                ++size;
+            }
+            else
+            {
+                dest = new int[1];
+                dest[0] = std::stoi(value);
+                low = i + 1;
+                size = 1;
+            }
+        }
+        else
+        {
+            mErrorList.push_back("Unexpected character (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
+        }
+    }
+
+    /* Insert final value */
+    value = source.substr(low, i - low);
+    tmp = dest;
+    dest = new int[size + 1];
+
+    for(size_t j = 0; j < size; ++j)
+        dest[j] = tmp[j];
+    delete[] tmp;
+    dest[size] = std::stoi(value);
+    ++size;
+
+    return dest;
+}
+
+bool Parser::setInteger(int& dest, const std::string& source) const
 {
     for(size_t i = 0; i < source.length(); ++i)
     {
@@ -117,65 +175,109 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
 {
     if(key == "BrushColor")
     {
-
+        mShapeInfo.brushColor = value;
     }
     else if(key == "BrushStyle")
     {
-
+        mShapeInfo.brushStyle = value;
     }
     else if(key == "PenCapStyle")
     {
-
+        mShapeInfo.penCapStyle = value;
     }
     else if(key == "PenColor")
     {
-
+        mShapeInfo.penColor = value;
     }
     else if(key == "PenJoinStyle")
     {
-
+        mShapeInfo.penJoinStyle = value;
     }
     else if(key == "PenStyle")
     {
-
+        mShapeInfo.penStyle = value;
     }
     else if(key == "PenWidth")
     {
-
+        if(!setInteger(mShapeInfo.penWidth, value))
+            mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "ShapeDimensions")
     {
+        int* array = nullptr;
+        size_t size = 0;
+
         if(mShapeInfo.shapeType == "Line")
         {
-
+           array = extractDimensions(value, size, line, lineNumber);
+           if(size == 4)
+               mShapeInfo.shapeDimensions = array;
+           else
+               mErrorList.push_back("Expected four values [x1, y1, x2, y2] (Line: " +
+                   std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Polyline")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(!(size % 2))
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Polygon")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(!(size % 2))
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Rectangle")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(size == 4)
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Square")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(size == 3)
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Expected three values [x, y, side] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Circle")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(size == 3)
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Expected three values [x, y, radius] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Ellipse")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(size == 4)
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Expected three values [x, y, rx, ry] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else if(mShapeInfo.shapeType == "Text")
         {
-
+            array = extractDimensions(value, size, line, lineNumber);
+            if(size == 4)
+                mShapeInfo.shapeDimensions = array;
+            else
+                mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
+                    std::to_string(lineNumber) + " \"" + line + "\")");
         }
         else
         {
@@ -189,9 +291,7 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         // Check for duplicate shape ID
 
         mShapeInfo.reset();
-        if(setInteger(mShapeInfo.shapeID, value))
-            mShapeInfo.shapeID = std::stoi(value);
-        else
+        if(!setInteger(mShapeInfo.shapeID, value))
             mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "ShapeType")
@@ -215,23 +315,24 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "TextColor")
     {
-
+        mShapeInfo.textColor = value;
     }
     else if(key == "TextFontFamily")
     {
-
+        mShapeInfo.textFontFamily = value;
     }
     else if(key == "TextFontStyle")
     {
-
+        mShapeInfo.textFontStyle = value;
     }
     else if(key == "TextFontWeight")
     {
-
+        mShapeInfo.textFontWeight = value;
     }
     else if(key == "TextPointSize")
     {
-
+        if(!setInteger(mShapeInfo.textPointSize, value))
+            mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "TextString")
     {
