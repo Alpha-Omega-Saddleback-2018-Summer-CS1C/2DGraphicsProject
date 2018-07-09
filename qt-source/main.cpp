@@ -42,13 +42,10 @@ int main(int argc, char *argv[])
     else
         std::cout << "Parsing failed." << std::endl;
 
-    /*
+
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
 
-    return a.exec();
-    */
-
-    return 0;
+	return 0;
 }
