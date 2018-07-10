@@ -154,5 +154,3 @@ e) Estimation: 9 hours
 f) Priority: 7
 g) Goals:
 	- Anyone who needs to contact us knows who to contact
-	
-	
