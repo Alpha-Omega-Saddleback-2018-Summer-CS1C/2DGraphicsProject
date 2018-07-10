@@ -23,7 +23,6 @@
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-#include "secdialog.h"
 #include <QMainWindow>
 
 namespace Ui {
