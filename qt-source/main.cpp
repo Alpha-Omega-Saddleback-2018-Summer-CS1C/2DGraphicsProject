@@ -26,6 +26,7 @@
 #include <iostream>
 #include "mainwindow.h"
 #include "parser.h"
+#include "custom_vector.h"
 
 const std::string file = "shapes.txt";
 
