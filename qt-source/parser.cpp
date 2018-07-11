@@ -44,7 +44,7 @@ bool Parser::loadFile(const std::string& filePath)
         return false;
 }
 
-bool Parser::parse(/* Pass vector here? */)
+bool Parser::parse(Vector<Shape>& shapeVector)
 {
     if(!mInputFile.is_open())
         return false;
@@ -79,7 +79,7 @@ bool Parser::parse(/* Pass vector here? */)
 
         std::string key = inputLine.substr(0, loc);
         std::string value = inputLine.substr(loc + 1, inputLine.size() - loc - 1);
-        setKeyValue(key, value, copyInput, lineNum);
+        setKeyValue(shapeVector, key, value, copyInput, lineNum);
 
         inputLine.clear();
         copyInput.clear();
@@ -171,7 +171,7 @@ bool Parser::setInteger(int& dest, const std::string& source) const
     return true;
 }
 
-void Parser::setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
+void Parser::setKeyValue(Vector<Shape>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
 {
     if(key == "BrushColor")
     {

@@ -27,18 +27,20 @@
 #include "mainwindow.h"
 #include "parser.h"
 #include "custom_vector.h"
+#include "shape.h"
 
 const std::string file = "shapes.txt";
 
 int main(int argc, char *argv[])
 {
     Parser parser;
+    Vector<Shape> shapeVector;
 
     if(parser.loadFile(file))
         std::cout << "File loaded." << std::endl;
     else
         std::cout << "File failed." << std::endl;
-    if(parser.parse())
+    if(parser.parse(shapeVector))
         std::cout << "File parsed." << std::endl;
     else
         std::cout << "Parsing failed." << std::endl;

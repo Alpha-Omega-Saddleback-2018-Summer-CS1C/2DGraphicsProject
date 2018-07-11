@@ -31,6 +31,9 @@
 #include <vector>
 #include <QString>
 
+#include "custom_vector.h"
+#include "shape.h"
+
 /* Parser manager */
 class Parser
 {
@@ -99,7 +102,7 @@ public:
     bool loadFile(const std::string& filePath);
 
     /* Loads the file to be parsed. Returns true on success */
-    bool parse(/* Pass vector here? */);
+    bool parse(Vector<Shape>& shapeVector);
 
 private:
 
@@ -110,7 +113,7 @@ private:
     bool setInteger(int& dest, const std::string& source) const;
 
     /* Sets a part of shape info */
-    void setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
+    void setKeyValue(Vector<Shape>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
     std::string             mInputFilePath;
