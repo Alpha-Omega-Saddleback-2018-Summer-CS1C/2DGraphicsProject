@@ -108,23 +108,22 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         Line* line = new Line(mShapeInfo.shapeID,
                 mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
                 mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
-
         QPen pen;
-        pen.setColor(mShapeInfo.penColor);
+
+        pen.setColor(QColor(mShapeInfo.penColor));
         pen.setWidth(mShapeInfo.penWidth);
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
         line->setPen(pen);
-
         shapeVector.push_back(line);
     }
     else if(mShapeInfo.shapeType == "Polyline")
     {
         Polyline* polyline = new Polyline(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
-
         QPen pen;
-        pen.setColor(mShapeInfo.penColor);
+
+        pen.setColor(QColor(mShapeInfo.penColor));
         pen.setWidth(mShapeInfo.penWidth);
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
@@ -135,7 +134,22 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
     }
     else if(mShapeInfo.shapeType == "Polygon")
     {
+        Polygon* polygon = new Polygon(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        QPen pen;
+        QBrush brush;
 
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        polygon->setPen(pen);
+
+        brush.setColor(QColor(mShapeInfo.brushColor));
+        brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+        polygon->setBrush(brush);
+
+        shapeVector.push_back(polygon);
     }
     else if(mShapeInfo.shapeType == "Rectangle")
     {
@@ -241,7 +255,17 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     }
     else if(key == "BrushStyle")
     {
-        mShapeInfo.brushStyle = QString::fromStdString(value);
+        if(value == "NoBrush")
+            mShapeInfo.brushStyle = Qt::NoBrush;
+        else if(value == "SolidPattern")
+            mShapeInfo.brushStyle = Qt::SolidPattern;
+        else if(value == "HorPattern")
+            mShapeInfo.brushStyle = Qt::HorPattern;
+        else if(value == "VerPattern")
+            mShapeInfo.brushStyle = Qt::HorPattern;
+        else
+            mErrorList.push_back("Invalid value. Expected \"NoBrush\", \"SolidPattern\", \"HorPattern\", or \"VerPattern\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenCapStyle")
     {
@@ -292,6 +316,12 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     {
         if(!setInteger(mShapeInfo.penWidth, value))
             mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
+
+        if(mShapeInfo.penWidth < 0 || mShapeInfo.penWidth > 20)
+        {
+            mErrorList.push_back("Must be an integer between 0 and 20, inclusive (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
+            mShapeInfo.penWidth = -1;
+        }
     }
     else if(key == "ShapeDimensions")
     {

@@ -37,9 +37,9 @@ Line::Line(int id, int x1, int y1, int x2, int y2)
     mPoint2 = { x2, y2 };
 }
 
-int Line::area() const
+double Line::area()
 {
-    return 0;
+    return 0.0;
 }
 
 void Line::draw(QPainter* painter)
@@ -53,9 +53,9 @@ void Line::move(const QPoint& offset)
     mPoint2 += offset;
 }
 
-int Line::perimeter() const
+double Line::perimeter()
 {
-    return 0;
+    return 0.0;
 }
 
 void Line::setPen(const QPen& pen)

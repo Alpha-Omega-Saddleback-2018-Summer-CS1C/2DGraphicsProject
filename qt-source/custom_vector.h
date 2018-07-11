@@ -33,7 +33,7 @@ public:
 
     /* Type aliasing */
     using iterator = T*;
-    using const_iterator = T;
+    using const_iterator = const T*;
 
     /* Default constructor */
     Vector() : mArray(new T[DEFAULT_SIZE]), mSize(0), mReservedSize(DEFAULT_SIZE)

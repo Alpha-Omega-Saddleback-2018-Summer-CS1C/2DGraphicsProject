@@ -36,7 +36,7 @@ public:
     ~Line() {}
 
     /* Returns the area of this shape */
-    int area() const override;
+    double area() override;
 
     /* Draws this shape */
     void draw(QPainter* painter) override;
@@ -45,7 +45,7 @@ public:
     void move(const QPoint& offset) override;
 
     /* Returns the perimeter of this this shape */
-    int perimeter() const override;
+    double perimeter() override;
 
     /* Sets the QPen type to change how the shape is drawn */
     void setPen(const QPen& pen);

@@ -35,6 +35,7 @@
 #include "shape.h"
 #include "line.h"
 #include "polyline.h"
+#include "polygon.h"
 
 /* Parser manager */
 class Parser
@@ -52,12 +53,12 @@ private:
         void reset()
         {
             brushColor.clear();
-            brushStyle.clear();
+            brushStyle = -1;
             penCapStyle = -1;
             penColor.clear();
             penJoinStyle = -1;
             penStyle = -1;
-            penWidth = 0;
+            penWidth = -1;
             shapeDimensionCount = 0;
             shapeID = 0;
             shapeType.clear();
@@ -77,7 +78,7 @@ private:
         }
 
         QString         brushColor;
-        QString         brushStyle;
+        int             brushStyle;
         int             penCapStyle;
         QString         penColor;
         int             penJoinStyle;

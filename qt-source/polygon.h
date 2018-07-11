@@ -16,25 +16,27 @@
  *
  **/
 /*
-    File: polyline.h
+    File: polygon.h
 
-    Derived class that defines a line with multiple points [x1, y1, x2, y2, ...]
+    Derived class that defines a polygon with multiple points [x1, y1, x2, y2, ...]
 */
 
-#ifndef POLYLINE_H
-#define POLYLINE_H
+#ifndef POLYGON_H
+#define POLYGON_H
 
+#include "math.h"
+#include <QBrush>
 #include <QPen>
 #include <QPoint>
 #include "shape.h"
 #include "custom_vector.h"
 
-class Polyline : public Shape
+class Polygon : public Shape
 {
 public:
-    Polyline();
-    Polyline(int id, int* pointData, int pointCount);
-    ~Polyline() {}
+    Polygon();
+    Polygon(int id, int* pointData, int pointCount);
+    ~Polygon() {}
 
     /* Adds a point to this shape */
     void addPoint(const QPoint& point);
@@ -51,6 +53,9 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
+    /* Sets the QBrush type to change how the shape is drawn */
+    void setBrush(const QBrush& pen);
+
     /* Sets the QPen type to change how the shape is drawn */
     void setPen(const QPen& pen);
 
@@ -60,6 +65,7 @@ public:
 private:
     Vector<QPoint> mPoints;
     QPen mPen;
+    QBrush mBrush;
 };
 
-#endif // POLYLINE_H
+#endif // POLYGON_H

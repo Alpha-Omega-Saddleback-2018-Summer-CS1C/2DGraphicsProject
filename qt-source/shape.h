@@ -59,7 +59,7 @@ public:
     }
 
     /* Returns the area of the shape */
-    virtual int area() const = 0;
+    virtual double area() = 0;
 
     /* Draws this shape */
     virtual void draw(QPainter* painter) = 0;
@@ -67,7 +67,7 @@ public:
     /* Translates this shape by a given offset */
     virtual void move(const QPoint& offset) = 0;
 
-    virtual int perimeter() const = 0;
+    virtual double perimeter() = 0;
 
 protected:
     int mID;

@@ -25,11 +25,12 @@
 
 Polyline::Polyline()
 {
-
+    mID = 0;
 }
 
 Polyline::Polyline(int id, int* pointData, int pointCount)
 {
+    mID = id;
     for(int i = 0; i < pointCount; ++i)
         mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
 }
@@ -39,9 +40,9 @@ void Polyline::addPoint(const QPoint& point)
     mPoints.push_back(point);
 }
 
-int Polyline::area() const
+double Polyline::area()
 {
-    return 0;
+    return 0.0;
 }
 
 void Polyline::draw(QPainter* painter)
@@ -55,9 +56,9 @@ void Polyline::move(const QPoint& offset)
         *it += offset;
 }
 
-int Polyline::perimeter() const
+double Polyline::perimeter()
 {
-    return 0;
+    return 0.0;
 }
 
 void Polyline::setPen(const QPen& pen)
