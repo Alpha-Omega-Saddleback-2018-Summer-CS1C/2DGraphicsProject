@@ -33,7 +33,8 @@ public:
 
 private:
     T*  mArray;
-    int m
+    int mSize;
+    int mReservedSize;
 };
 
 #endif // CUSTOM_VECTOR_H
