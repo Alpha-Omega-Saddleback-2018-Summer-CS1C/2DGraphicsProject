@@ -44,7 +44,7 @@ bool Parser::loadFile(const std::string& filePath)
         return false;
 }
 
-bool Parser::parse(Vector<Shape>& shapeVector)
+bool Parser::parse(Vector<Shape*>& shapeVector)
 {
     if(!mInputFile.is_open())
         return false;
@@ -100,6 +100,58 @@ bool Parser::parse(Vector<Shape>& shapeVector)
 /*
  *  Helper functions
  */
+
+ void Parser::addShape(Vector<Shape*>& shapeVector)
+ {
+    if(mShapeInfo.shapeType == "Line")
+    {
+        Line* line = new Line(mShapeInfo.shapeID,
+                mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+                mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        QPen pen;
+
+        pen.setColor(mShapeInfo.penColor);
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        line->setPen(pen);
+
+        shapeVector.push_back(line);
+    }
+    else if(mShapeInfo.shapeType == "Polyline")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Polygon")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Rectangle")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Square")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Ellipse")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Circle")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Text")
+    {
+
+    }
+    else
+    {
+        mErrorList.push_back("Missing shape type! (Shape Creator [ShapeID = " + std::to_string(mShapeInfo.shapeID) + "])");
+    }
+ }
 
 int* Parser::extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber)
 {
@@ -171,7 +223,7 @@ bool Parser::setInteger(int& dest, const std::string& source) const
     return true;
 }
 
-void Parser::setKeyValue(Vector<Shape>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
+void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
 {
     if(key == "BrushColor")
     {
@@ -183,7 +235,15 @@ void Parser::setKeyValue(Vector<Shape>& shapeVector, const std::string& key, con
     }
     else if(key == "PenCapStyle")
     {
-        mShapeInfo.penCapStyle = QString::fromStdString(value);
+        if(value == "SquareCap")
+            mShapeInfo.penCapStyle = Qt::SquareCap;
+        else if(value == "FlatCap")
+            mShapeInfo.penCapStyle = Qt::FlatCap;
+        else if(value == "RoundCap")
+            mShapeInfo.penCapStyle = Qt::RoundCap;
+        else
+            mErrorList.push_back("Invalid value. Expected \"SquareCap\", \"FlatCap\", or \"RoundCap\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenColor")
     {
@@ -191,11 +251,32 @@ void Parser::setKeyValue(Vector<Shape>& shapeVector, const std::string& key, con
     }
     else if(key == "PenJoinStyle")
     {
-        mShapeInfo.penJoinStyle = QString::fromStdString(value);
+        if(value == "MiterJoin")
+            mShapeInfo.penJoinStyle = Qt::MiterJoin;
+        else if(value == "BevelJoin")
+            mShapeInfo.penJoinStyle = Qt::BevelJoin;
+        else if(value == "RoundJoin")
+            mShapeInfo.penJoinStyle = Qt::RoundJoin;
+        else
+            mErrorList.push_back("Invalid value. Expected \"MiterJoin\", \"BevelJoin\", or \"RoundJoin\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenStyle")
     {
-        mShapeInfo.penStyle = QString::fromStdString(value);
+        if(value == "SolidLine")
+            mShapeInfo.penStyle = Qt::SolidLine;
+        else if(value == "DashLine")
+            mShapeInfo.penStyle = Qt::DashLine;
+        else if(value == "DotLine")
+            mShapeInfo.penStyle = Qt::DotLine;
+        else if(value == "DashDotLine")
+            mShapeInfo.penStyle = Qt::DashDotLine;
+        else if(value == "DashDotDotLine")
+            mShapeInfo.penStyle = Qt::DashDotDotLine;
+        else
+            mErrorList.push_back("Invalid value. Expected \"SolidLine\", \"DashLine\", \"DotLine\", \"DashDotLine\", or \"DashDotDotLine\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
+
     }
     else if(key == "PenWidth")
     {
@@ -287,10 +368,12 @@ void Parser::setKeyValue(Vector<Shape>& shapeVector, const std::string& key, con
     }
     else if(key == "ShapeId")
     {
-        // Add shape to vector
-        // Check for duplicate shape ID
+        if(mShapeInfo.shapeID != 0)
+        {
+            addShape(shapeVector);
+            mShapeInfo.reset();
+        }
 
-        mShapeInfo.reset();
         if(!setInteger(mShapeInfo.shapeID, value))
             mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
     }

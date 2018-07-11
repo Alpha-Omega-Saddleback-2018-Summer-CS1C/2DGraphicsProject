@@ -24,14 +24,53 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <QPainter>
+
 class Shape
 {
 public:
-    Shape();
     virtual ~Shape() {}
 
-private:
+    inline bool operator==(const Shape& shape) const
+    {
+        return mID == shape.mID;
+    }
 
+    inline bool operator>(const Shape& shape) const
+    {
+        return mID > shape.mID;
+    }
+
+    inline bool operator<(const Shape& shape) const
+    {
+        return mID < shape.mID;
+    }
+
+    /* Returns the Shape ID */
+    inline int getID() const
+    {
+        return mID;
+    }
+
+    /* Sets the Shape ID */
+    inline void setID(int id)
+    {
+        mID = id;
+    }
+
+    /* Returns the area of the shape */
+    virtual int area() const = 0;
+
+    /* Draws this shape */
+    virtual void draw(QPainter* painter) = 0;
+
+    /* Translates this shape by a given offset */
+    virtual void move(const QPoint& offset) = 0;
+
+    virtual int perimeter() const = 0;
+
+protected:
+    int mID;
 };
 
 #endif // SHAPE_H

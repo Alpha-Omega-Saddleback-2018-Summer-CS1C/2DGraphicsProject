@@ -33,6 +33,7 @@
 
 #include "custom_vector.h"
 #include "shape.h"
+#include "line.h"
 
 /* Parser manager */
 class Parser
@@ -51,9 +52,10 @@ private:
         {
             brushColor.clear();
             brushStyle.clear();
-            penCapStyle.clear();
+            penCapStyle = -1;
             penColor.clear();
-            penJoinStyle.clear();
+            penJoinStyle = -1;
+            penStyle = -1;
             penWidth = 0;
             shapeID = 0;
             shapeType.clear();
@@ -74,10 +76,10 @@ private:
 
         QString         brushColor;
         QString         brushStyle;
-        QString         penCapStyle;
+        int             penCapStyle;
         QString         penColor;
-        QString         penJoinStyle;
-        QString         penStyle;
+        int             penJoinStyle;
+        int             penStyle;
         int             penWidth;
         int*            shapeDimensions;
         int             shapeID;
@@ -102,9 +104,12 @@ public:
     bool loadFile(const std::string& filePath);
 
     /* Loads the file to be parsed. Returns true on success */
-    bool parse(Vector<Shape>& shapeVector);
+    bool parse(Vector<Shape*>& shapeVector);
 
 private:
+
+    /* Adds a shape to the shape vector */
+    void addShape(Vector<Shape*>& shapeVector);
 
     /* Parses ShapeDimension key/value. Returns the number of values extracted */
     int* extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber);
@@ -113,13 +118,13 @@ private:
     bool setInteger(int& dest, const std::string& source) const;
 
     /* Sets a part of shape info */
-    void setKeyValue(Vector<Shape>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
+    void setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
-    std::string             mInputFilePath;
-    std::ifstream           mInputFile;
+    std::string                 mInputFilePath;
+    std::ifstream               mInputFile;
     std::vector<std::string>    mErrorList;
-    ShapeInfo               mShapeInfo;
+    ShapeInfo                   mShapeInfo;
 };
 
 #endif

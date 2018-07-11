@@ -34,7 +34,7 @@ const std::string file = "shapes.txt";
 int main(int argc, char *argv[])
 {
     Parser parser;
-    Vector<Shape> shapeVector;
+    Vector<Shape*> shapeVector;
 
     if(parser.loadFile(file))
         std::cout << "File loaded." << std::endl;
