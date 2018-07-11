@@ -29,6 +29,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <QString>
 
 /* Parser manager */
 class Parser
@@ -68,23 +69,23 @@ private:
             }
         }
 
-        std::string         brushColor;
-        std::string         brushStyle;
-        std::string         penCapStyle;
-        std::string         penColor;
-        std::string         penJoinStyle;
-        std::string         penStyle;
-        int                 penWidth;
-        int*                shapeDimensions;
-        int                 shapeID;
-        std::string         shapeType;
-        std::string         textAlignment;
-        std::string         textColor;
-        std::string         textFontFamily;
-        std::string         textFontStyle;
-        std::string         textFontWeight;
-        int                 textPointSize;
-        std::string         textString;
+        QString         brushColor;
+        QString         brushStyle;
+        QString         penCapStyle;
+        QString         penColor;
+        QString         penJoinStyle;
+        QString         penStyle;
+        int             penWidth;
+        int*            shapeDimensions;
+        int             shapeID;
+        QString         shapeType;
+        QString         textAlignment;
+        QString         textColor;
+        QString         textFontFamily;
+        QString         textFontStyle;
+        QString         textFontWeight;
+        int             textPointSize;
+        QString         textString;
     };
 
 public:
@@ -112,10 +113,10 @@ private:
     void setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
-    std::string                 mInputFilePath;
-    std::ifstream               mInputFile;
+    std::string             mInputFilePath;
+    std::ifstream           mInputFile;
     std::vector<std::string>    mErrorList;
-    ShapeInfo                   mShapeInfo;
+    ShapeInfo               mShapeInfo;
 };
 
 #endif
