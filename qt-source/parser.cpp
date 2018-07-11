@@ -175,27 +175,27 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
 {
     if(key == "BrushColor")
     {
-        mShapeInfo.brushColor = value;
+        mShapeInfo.brushColor = QString::fromStdString(value);
     }
     else if(key == "BrushStyle")
     {
-        mShapeInfo.brushStyle = value;
+        mShapeInfo.brushStyle = QString::fromStdString(value);
     }
     else if(key == "PenCapStyle")
     {
-        mShapeInfo.penCapStyle = value;
+        mShapeInfo.penCapStyle = QString::fromStdString(value);
     }
     else if(key == "PenColor")
     {
-        mShapeInfo.penColor = value;
+        mShapeInfo.penColor = QString::fromStdString(value);
     }
     else if(key == "PenJoinStyle")
     {
-        mShapeInfo.penJoinStyle = value;
+        mShapeInfo.penJoinStyle = QString::fromStdString(value);
     }
     else if(key == "PenStyle")
     {
-        mShapeInfo.penStyle = value;
+        mShapeInfo.penStyle = QString::fromStdString(value);
     }
     else if(key == "PenWidth")
     {
@@ -304,7 +304,7 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
            (value == "Circle") ||
            (value == "Ellipse") ||
            (value == "Text"))
-            mShapeInfo.shapeType = value;
+            mShapeInfo.shapeType = QString::fromStdString(value);
         else
             mErrorList.push_back("Unexpected value. Try \"Line\", \"\"Polyline\", \"Polygon\", \"Rectangle\", \"Ellipse\", \"Text\" (Line: " +
                 std::to_string(lineNumber) + " \"" + line + "\")");
@@ -315,19 +315,19 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "TextColor")
     {
-        mShapeInfo.textColor = value;
+        mShapeInfo.textColor = QString::fromStdString(value);
     }
     else if(key == "TextFontFamily")
     {
-        mShapeInfo.textFontFamily = value;
+        mShapeInfo.textFontFamily = QString::fromStdString(value);
     }
     else if(key == "TextFontStyle")
     {
-        mShapeInfo.textFontStyle = value;
+        mShapeInfo.textFontStyle = QString::fromStdString(value);
     }
     else if(key == "TextFontWeight")
     {
-        mShapeInfo.textFontWeight = value;
+        mShapeInfo.textFontWeight = QString::fromStdString(value);
     }
     else if(key == "TextPointSize")
     {
@@ -336,7 +336,7 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "TextString")
     {
-        mShapeInfo.textString = value;
+        mShapeInfo.textString = QString::fromStdString(value);
     }
     else
     {

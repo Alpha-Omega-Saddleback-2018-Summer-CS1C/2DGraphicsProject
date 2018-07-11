@@ -28,13 +28,14 @@ template<typename T>
 class Vector
 {
 public:
-
-
+    Vector() : mArray(new T[vectorDefaultSize]), mSize(0), mReservedSize(0)
 
 private:
     T*  mArray;
     int mSize;
     int mReservedSize;
+
+    static const int vectorDefaultSize = 8;
 };
 
 #endif // CUSTOM_VECTOR_H
