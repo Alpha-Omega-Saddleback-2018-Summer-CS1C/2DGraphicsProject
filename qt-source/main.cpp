@@ -29,7 +29,7 @@
 #include "custom_vector.h"
 
 const std::string file = "shapes.txt";
-/*
+
 int main(int argc, char *argv[])
 {
     Parser parser;
@@ -51,35 +51,3 @@ int main(int argc, char *argv[])
     return a.exec();
 }
 
-*/
-
-int main(int argc, char *argv[])
-{
-    Vector<double> vector;
-    vector.push_back(1.0);
-    vector.push_back(2.0);
-    vector.push_back(3.0);
-
-    Vector<double> copy(vector);
-    copy.push_back(4.0);
-    copy.push_back(5.0);
-    copy.push_back(6.0);
-    copy.push_back(7.0);
-    copy.push_back(8.0);
-    copy.push_back(9.0);
-
-    copy.insert(copy.begin() + 4, 3.14);
-    copy.erase(copy.begin() + 4);
-
-    std::cout << "[vector] <" << vector.size() << ", " << vector.capacity() << "> : ";
-    for(Vector<double>::iterator it = vector.begin(); it != vector.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-   std::cout << "[copy] <" << copy.size() << ", " << copy.capacity() << "> : ";
-    for(Vector<double>::iterator it = copy.begin(); it != copy.end(); ++it)
-        std::cout << *it << " ";
-    std::cout << std::endl;
-
-    return 0;
-}
