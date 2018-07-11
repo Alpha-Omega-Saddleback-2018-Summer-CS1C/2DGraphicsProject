@@ -34,6 +34,7 @@
 #include "custom_vector.h"
 #include "shape.h"
 #include "line.h"
+#include "polyline.h"
 
 /* Parser manager */
 class Parser
@@ -57,6 +58,7 @@ private:
             penJoinStyle = -1;
             penStyle = -1;
             penWidth = 0;
+            shapeDimensionCount = 0;
             shapeID = 0;
             shapeType.clear();
             textAlignment.clear();
@@ -82,6 +84,7 @@ private:
         int             penStyle;
         int             penWidth;
         int*            shapeDimensions;
+        int             shapeDimensionCount;
         int             shapeID;
         QString         shapeType;
         QString         textAlignment;
@@ -112,7 +115,7 @@ private:
     void addShape(Vector<Shape*>& shapeVector);
 
     /* Parses ShapeDimension key/value. Returns the number of values extracted */
-    int* extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber);
+    int* extractDimensions(const std::string& source, int& size, const std::string& line, size_t lineNumber);
 
     /* Sets the integer to the string if the string is an integer */
     bool setInteger(int& dest, const std::string& source) const;

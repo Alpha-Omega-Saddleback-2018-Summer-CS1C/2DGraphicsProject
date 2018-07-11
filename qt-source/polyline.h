@@ -16,24 +16,28 @@
  *
  **/
 /*
-    File: line.h
+    File: polyline.h
 
-    Derived class that defines a line [x1, y1, x2, y2]
+    Derived class that defines a line with multiple points [x1, y1, x2, y2, ...]
 */
 
-#ifndef LINE_H
-#define LINE_H
+#ifndef POLYLINE_H
+#define POLYLINE_H
 
 #include <QPen>
 #include <QPoint>
 #include "shape.h"
+#include "custom_vector.h"
 
-class Line : public Shape
+class Polyline : public Shape
 {
 public:
-    Line();
-    Line(int id, int x1, int y1, int x2, int y2);
-    ~Line() {}
+    Polyline();
+    Polyline(int id, int* pointData, int pointCount);
+    ~Polyline() {}
+
+    /* Adds a point to this shape */
+    void addPoint(const QPoint& point);
 
     /* Returns the area of this shape */
     int area() const override;
@@ -50,10 +54,12 @@ public:
     /* Sets the QPen type to change how the shape is drawn */
     void setPen(const QPen& pen);
 
+    /* Sets a point of this shape */
+    void setPoint(int index, const QPoint& point);
+
 private:
-    QPoint mPoint1;
-    QPoint mPoint2;
+    Vector<QPoint> mPoints;
     QPen mPen;
 };
 
-#endif // LINE_H
+#endif // POLYLINE_H

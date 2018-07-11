@@ -108,8 +108,8 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         Line* line = new Line(mShapeInfo.shapeID,
                 mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
                 mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
-        QPen pen;
 
+        QPen pen;
         pen.setColor(mShapeInfo.penColor);
         pen.setWidth(mShapeInfo.penWidth);
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
@@ -121,7 +121,17 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
     }
     else if(mShapeInfo.shapeType == "Polyline")
     {
+        Polyline* polyline = new Polyline(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
 
+        QPen pen;
+        pen.setColor(mShapeInfo.penColor);
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        polyline->setPen(pen);
+
+        shapeVector.push_back(polyline);
     }
     else if(mShapeInfo.shapeType == "Polygon")
     {
@@ -153,7 +163,7 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
     }
  }
 
-int* Parser::extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber)
+int* Parser::extractDimensions(const std::string& source, int& size, const std::string& line, size_t lineNumber)
 {
     std::string value;
     size_t low = 0;
@@ -176,7 +186,7 @@ int* Parser::extractDimensions(const std::string& source, size_t& size, const st
                 tmp = dest;
                 dest = new int[size + 1];
 
-                for(size_t j = 0; j < size; ++j)
+                for(int j = 0; j < size; ++j)
                     dest[j] = tmp[j];
                 delete[] tmp;
                 dest[size] = std::stoi(value);
@@ -202,7 +212,7 @@ int* Parser::extractDimensions(const std::string& source, size_t& size, const st
     tmp = dest;
     dest = new int[size + 1];
 
-    for(size_t j = 0; j < size; ++j)
+    for(int j = 0; j < size; ++j)
         dest[j] = tmp[j];
     delete[] tmp;
     dest[size] = std::stoi(value);
@@ -286,12 +296,11 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     else if(key == "ShapeDimensions")
     {
         int* array = nullptr;
-        size_t size = 0;
 
         if(mShapeInfo.shapeType == "Line")
         {
-           array = extractDimensions(value, size, line, lineNumber);
-           if(size == 4)
+           array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+           if(mShapeInfo.shapeDimensionCount == 4)
                mShapeInfo.shapeDimensions = array;
            else
                mErrorList.push_back("Expected four values [x1, y1, x2, y2] (Line: " +
@@ -299,8 +308,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Polyline")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(!(size % 2))
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(!(mShapeInfo.shapeDimensionCount % 2))
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
@@ -308,8 +317,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Polygon")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(!(size % 2))
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(!(mShapeInfo.shapeDimensionCount % 2))
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
@@ -317,8 +326,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Rectangle")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
@@ -326,8 +335,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Square")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 3)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 3)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, side] (Line: " +
@@ -335,8 +344,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Circle")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 3)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 3)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, radius] (Line: " +
@@ -344,8 +353,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Ellipse")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, rx, ry] (Line: " +
@@ -353,8 +362,8 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         }
         else if(mShapeInfo.shapeType == "Text")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
