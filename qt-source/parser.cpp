@@ -106,8 +106,8 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
     if(mShapeInfo.shapeType == "Line")
     {
         Line* line = new Line(mShapeInfo.shapeID,
-                mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-                mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
         QPen pen;
 
         pen.setColor(QColor(mShapeInfo.penColor));
@@ -153,7 +153,24 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
     }
     else if(mShapeInfo.shapeType == "Rectangle")
     {
+        Rectangle* rectangle = new Rectangle(mShapeInfo.shapeID,
+            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        QPen pen;
+        QBrush brush;
 
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        rectangle->setPen(pen);
+
+        brush.setColor(QColor(mShapeInfo.brushColor));
+        brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+        rectangle->setBrush(brush);
+
+        shapeVector.push_back(rectangle);
     }
     else if(mShapeInfo.shapeType == "Square")
     {

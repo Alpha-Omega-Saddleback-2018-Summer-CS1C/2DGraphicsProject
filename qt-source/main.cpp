@@ -50,9 +50,6 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    double x = shapeVector[2]->area();
-    std::cout << x << std::endl;
-
     return a.exec();
 }
 

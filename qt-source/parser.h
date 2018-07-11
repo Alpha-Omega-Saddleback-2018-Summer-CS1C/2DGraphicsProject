@@ -36,6 +36,7 @@
 #include "line.h"
 #include "polyline.h"
 #include "polygon.h"
+#include "rectangle.h"
 
 /* Parser manager */
 class Parser
