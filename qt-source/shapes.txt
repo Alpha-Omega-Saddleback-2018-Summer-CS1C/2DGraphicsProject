@@ -80,5 +80,5 @@ TextColor: blue
 TextAlignment: AlignCenter
 TextPointSize: 10
 TextFontFamily: Comic Sans MS
-TextFontStyle: FlatCap
+TextFontStyle: StyleNormal
 TextFontWeight: Normal

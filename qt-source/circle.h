@@ -35,24 +35,24 @@
 
 class Circle: public Shape
 {
- 	public:
-		Circle();
-		Circle(int id, int x, int y, int r); //ID, Position X, Y, Radius 
-		~Circle(){}
-		
-		double area() override; // Return the area of the ciricle
-		void draw(QPainter* painter) override; // Draw the circle
-		void move(const QPoint& offset) override; // Translates the circle by a given offset
-		double perimeter() override; // return the circumference of the ciricle
-		void setBrush(const QBrush& pen); // Sets the QBrush type to change hwo the shape is drawn
-		void setRadius(int r); // set the radius of the ciricle
-		void setPen(const QPen& pen); // Set the Qpen type ot change hwo the circle is drawn
-		void setPosition(int x, int y) // Set the position of the circle
-		
-	private:
-		QPoint mPosition;
-		int radius;
-		Qpen mPen;
-		QBrush mBrush;	
+public:
+    Circle();
+    Circle(int id, int x, int y, int r); //ID, Position X, Y, Radius
+    ~Circle(){}
+
+    double area() override; // Return the area of the ciricle
+    void draw(QPainter* painter) override; // Draw the circle
+    void move(const QPoint& offset) override; // Translates the circle by a given offset
+    double perimeter() override; // return the circumference of the ciricle
+    void setBrush(const QBrush& pen); // Sets the QBrush type to change hwo the shape is drawn
+    void setRadius(int r); // set the radius of the ciricle
+    void setPen(const QPen& pen); // Set the Qpen type ot change hwo the circle is drawn
+    void setPosition(int x, int y) // Set the position of the circle
+
+private:
+    QPoint mPosition;
+    int radius;
+    Qpen mPen;
+    QBrush mBrush;
 };
 #endif // CIRCLE_H

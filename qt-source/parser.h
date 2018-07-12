@@ -57,6 +57,8 @@ private:
             penWidth = -1;
             shapeDimensionCount = 0;
             shapeID = 0;
+            textFontStyle = -1;
+            textFontWeight = 0;
             textPointSize = 0;
             textAlignment = 0;
         }
@@ -76,8 +78,8 @@ private:
             textAlignment = 0;
             textColor.clear();
             textFontFamily.clear();
-            textFontStyle.clear();
-            textFontWeight.clear();
+            textFontStyle = -1;
+            textFontWeight = 0;
             textPointSize = 0;
             textString.clear();
 
@@ -102,8 +104,8 @@ private:
         int             textAlignment;
         QString         textColor;
         QString         textFontFamily;
-        QString         textFontStyle;
-        QString         textFontWeight;
+        int             textFontStyle;
+        int             textFontWeight;
         int             textPointSize;
         QString         textString;
     };

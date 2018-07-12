@@ -193,6 +193,12 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         QFont font;
 
         pen.setColor(QColor(mShapeInfo.penColor));
+        text->setPen(pen);
+
+        font.setPointSize(mShapeInfo.textPointSize);
+        font.setFamily(mShapeInfo.textFontFamily);
+        font.setStyle(mShapeInfo.textFontStyle);
+        text->setFont(font);
 
         text->setText(mShapeInfo.textString);
         text->setAlignment(mShapeInfo.textAlignment);
@@ -485,11 +491,19 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     }
     else if(key == "TextFontStyle")
     {
-        mShapeInfo.textFontStyle = QString::fromStdString(value);
+        if(value == "StyleNormal")
+            mShapeInfo.textFontStyle = QFont::StyleNormal;
+        else if(value == "StyleItalic")
+            mShapeInfo.textFontStyle = QFont::StyleItalic;
+        else if(value == "StyleOblique")
+            mShapeInfo.textFontStyle = QFont::StyleOblique;
+        else
+            mErrorList.push_back("Unexpected value. Try \"StyleNormal\", \"\"StyleItalic\", or \"StyleOblique\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "TextFontWeight")
     {
-        mShapeInfo.textFontWeight = QString::fromStdString(value);
+        if(value == "Thin")
     }
     else if(key == "TextPointSize")
     {
