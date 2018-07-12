@@ -194,7 +194,6 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
 
         pen.setColor(QColor(mShapeInfo.penColor));
 
-
         text->setText(mShapeInfo.textString);
         text->setAlignment(mShapeInfo.textAlignment);
         shapeVector.push_back(text);
