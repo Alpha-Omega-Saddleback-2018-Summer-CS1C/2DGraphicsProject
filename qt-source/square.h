@@ -16,26 +16,27 @@
  *
  **/
 /*
-    File: textbox.h
+    File: square.h
 
-    Derived a text box [x, y, length, width]
+    Derived class that defines a square [x, y, side]
 */
 
-#ifndef TEXTBOX_H
-#define TEXTBOX_H
+#ifndef SQUARE_H
+#define SQUARE_H
 
+#include "math.h"
+#include <QBrush>
 #include <QPen>
 #include <QPoint>
-#include <QString>
 #include "shape.h"
 #include "custom_vector.h"
 
-class TextBox : public Shape
+class Square : public Shape
 {
 public:
-    TextBox();
-    TextBox(int id, int x, int y, int w, int h);
-    ~TextBox() {}
+    Square();
+    Square(int id, int x, int y, int side);
+    ~Square() {}
 
     /* Returns the area of this shape */
     double area() override;
@@ -49,14 +50,11 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the alignment of the text */
-    void setAlignment(Qt::AlignmentFlag flags);
+    /* Sets the QBrush type to change how the shape is drawn */
+    void setBrush(const QBrush& pen);
 
     /* Sets the dimension of this shape */
-    void setDimensions(int w, int h);
-
-    /* Sets the QFont type to change how the shape is drawn */
-    void setFont(const QFont& font);
+    void setDimensions(int side);
 
     /* Sets the QPen type to change how the shape is drawn */
     void setPen(const QPen& pen);
@@ -64,18 +62,16 @@ public:
     /* Sets the position of this shape */
     void setPosition(int x, int y);
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setText(const QString& text);
-
 private:
+    int mID;
     QPoint mPosition;
-    int mWidth;
-    int mHeight;
-
+    int mSide;
     QPen mPen;
-    QFont mFont;
-    QString mText;
-    Qt::AlignmentFlag mAlignmentFlags;
+    QBrush mBrush;
 };
 
-#endif // TEXTBOX_H
+#endif // SQUARE_H
+
+
+
+

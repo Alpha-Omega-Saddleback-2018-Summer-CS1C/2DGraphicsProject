@@ -12,3 +12,12 @@ secDialog::~secDialog()
 {
     delete ui;
 }
+
+/*
+    rendering area
+    add user  //verify password //third dialog box
+    add shapes
+    edit shape
+    move
+    update
+*/
