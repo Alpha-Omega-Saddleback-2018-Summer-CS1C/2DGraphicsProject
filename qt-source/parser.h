@@ -48,7 +48,15 @@ private:
     {
         ShapeInfo()
         {
-            reset();
+            brushStyle = -1;
+            penCapStyle = -1;
+            shapeDimensions = nullptr;
+            penJoinStyle = -1;
+            penStyle = -1;
+            penWidth = -1;
+            shapeDimensionCount = 0;
+            shapeID = 0;
+            textPointSize = 0;
         }
 
         void reset()
