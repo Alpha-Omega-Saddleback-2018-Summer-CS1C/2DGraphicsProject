@@ -193,7 +193,7 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         QFont font;
 
         pen.setColor(QColor(mShapeInfo.penColor));
-
+        text->setPen(QColor(mShapeInfo));
 
         text->setText(mShapeInfo.textString);
         text->setAlignment(mShapeInfo.textAlignment);

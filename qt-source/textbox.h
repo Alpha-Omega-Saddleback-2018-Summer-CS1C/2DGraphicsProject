@@ -16,26 +16,26 @@
  *
  **/
 /*
-    File: rectangle.h
+    File: textbox.h
 
-    Derived class that defines a rectangle [x, y, length, width]
+    Derived a text box [x, y, length, width]
 */
 
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef TEXTBOX_H
+#define TEXTBOX_H
 
-#include <QBrush>
 #include <QPen>
 #include <QPoint>
+#include <QString>
 #include "shape.h"
 #include "custom_vector.h"
 
-class Rectangle : public Shape
+class TextBox : public Shape
 {
 public:
-    Rectangle();
-    Rectangle(int id, int x, int y, int w, int h);
-    ~Rectangle() {}
+    TextBox();
+    TextBox(int id, int x, int y, int w, int h);
+    ~TextBox() {}
 
     /* Returns the area of this shape */
     double area() override;
@@ -49,11 +49,14 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the QBrush type to change how the shape is drawn */
-    void setBrush(const QBrush& pen);
+    /* Sets the alignment of the text */
+    void setAlignment(int flags);
 
     /* Sets the dimension of this shape */
     void setDimensions(int w, int h);
+
+    /* Sets the QFont type to change how the shape is drawn */
+    void setFont(const QFont& font);
 
     /* Sets the QPen type to change how the shape is drawn */
     void setPen(const QPen& pen);
@@ -61,12 +64,18 @@ public:
     /* Sets the position of this shape */
     void setPosition(int x, int y);
 
+    /* Sets the QPen type to change how the shape is drawn */
+    void setText(const QString& text);
+
 private:
     QPoint mPosition;
     int mWidth;
     int mHeight;
+
     QPen mPen;
-    QBrush mBrush;
+    QFont mFont;
+    QString mText;
+    int mAlignmentFlags;
 };
 
-#endif // RECTANGLE_H
+#endif // TEXTBOX_H

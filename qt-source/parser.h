@@ -37,6 +37,7 @@
 #include "polyline.h"
 #include "polygon.h"
 #include "rectangle.h"
+#include "textbox.h"
 
 /* Parser manager */
 class Parser
@@ -57,6 +58,7 @@ private:
             shapeDimensionCount = 0;
             shapeID = 0;
             textPointSize = 0;
+            textAlignment = 0;
         }
 
         void reset()
@@ -71,7 +73,7 @@ private:
             shapeDimensionCount = 0;
             shapeID = 0;
             shapeType.clear();
-            textAlignment.clear();
+            textAlignment = 0;
             textColor.clear();
             textFontFamily.clear();
             textFontStyle.clear();
@@ -97,7 +99,7 @@ private:
         int             shapeDimensionCount;
         int             shapeID;
         QString         shapeType;
-        QString         textAlignment;
+        int             textAlignment;
         QString         textColor;
         QString         textFontFamily;
         QString         textFontStyle;
