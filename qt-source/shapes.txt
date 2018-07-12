@@ -41,7 +41,7 @@ BrushStyle: VerPattern
 
 ShapeId: 5
 ShapeType: Square
-ShapeDimensions: 250, 150, 200
+ShapeDimensions: 250, 150, 20z
 PenColor: red
 PenWidth: 0
 PenStyle: SolidLine
