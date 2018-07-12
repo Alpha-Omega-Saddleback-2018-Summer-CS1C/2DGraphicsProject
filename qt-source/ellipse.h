@@ -16,8 +16,8 @@
  *
  **/
 /*
-    File: circle.h
-    Derived class that defines a circle [x, y, radius]
+    File: ellipse.h
+    Derived class that defines a ellipse [x, y, rx, ry]
 */
 
 #ifndef ELLIPSE_H
@@ -45,14 +45,14 @@ class Ellipse: public Shape
 		void move(const QPoint& offset) override; // Translates the circle by a given offset
 		double perimeter() override; // return the circumference of the ciricle
 		void setBrush(const QBrush& pen); // Sets the QBrush type to change hwo the shape is drawn
-		void setRadius(int r); // set the radius of the ciricle
+        void setRadii(int rx, int ry); // set the radius of the ciricle
 		void setPen(const QPen& pen); // Set the Qpen type ot change hwo the circle is drawn
-		void setPosition(int x, int y) // Set the position of the circle
+        void setPosition(int x, int y); // Set the position of the circle
 		
 	private:
 		QPoint mPosition;
-		int radiusA, radiusB;
-		Qpen mPen;
+        int mRadiusX, mRadiusY;
+        QPen mPen;
 		QBrush mBrush;	
 };
 #endif // ELLIPSE_H

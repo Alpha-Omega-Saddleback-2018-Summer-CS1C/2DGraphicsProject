@@ -28,16 +28,16 @@ Square::Square()
     mID = 0;
 }
 
-Square::Square(int id, int x, int y, int s)
+Square::Square(int id, int x, int y, int side)
 {
     mID = id;
     mPosition = { x, y };
-    side = s;
+    mSide = side;
 }
 
 double Square::area()
 {
-    return (double)(side*side);
+    return (double)(mSide * mSide);
 }
 
 void Square::draw(QPainter* painter)
@@ -52,7 +52,7 @@ void Square::move(const QPoint& offset)
 
 double Square::perimeter()
 {
-    return 4*side;
+    return 4 * mSide;
 }
 
 void Square::setBrush(const QBrush& brush)
@@ -60,9 +60,9 @@ void Square::setBrush(const QBrush& brush)
     mBrush = brush;
 }
 
-void Square::setDimensions(int s)
+void Square::setDimensions(int side)
 {
-    side = s;
+    mSide = side;
 }
 
 void Square::setPen(const QPen& pen)

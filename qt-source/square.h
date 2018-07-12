@@ -65,7 +65,7 @@ public:
 private:
     int mID;
     QPoint mPosition;
-    int side;
+    int mSide;
     QPen mPen;
     QBrush mBrush;
 };

@@ -50,7 +50,7 @@ public:
     double perimeter() override;
 
     /* Sets the alignment of the text */
-    void setAlignment(int flags);
+    void setAlignment(Qt::AlignmentFlag flags);
 
     /* Sets the dimension of this shape */
     void setDimensions(int w, int h);
@@ -75,7 +75,7 @@ private:
     QPen mPen;
     QFont mFont;
     QString mText;
-    int mAlignmentFlags;
+    Qt::AlignmentFlag mAlignmentFlags;
 };
 
 #endif // TEXTBOX_H

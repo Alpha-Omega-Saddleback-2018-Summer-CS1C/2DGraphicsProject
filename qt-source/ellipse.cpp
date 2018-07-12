@@ -1,4 +1,3 @@
-79 lines (65 sloc)  1.3 KB
 /*
  *  2D Graphics Modeler
  *  July 2018
@@ -17,28 +16,28 @@
  *
  **/
 /*
-    File: circle.cpp
-    Derived class that defines a circle [x, y, radius]
+    File: ellipse.cpp
+    Derived class that defines a ellipse [x, y, rx, ry]
 */
 
 #include "ellipse.h"
 
 Ellipse::Ellipse()
 {
-	mId = 6;
+    mID = 0;
 }
 
-Ellipse::Ellipse(int id, ind x, int y, int ra, int rb)
+Ellipse::Ellipse(int id, int x, int y, int rx, int ry)
 {
 	mID = id;
 	mPosition = {x, y};
-	radiusA = ra;
-	radiusB = rb;
+    mRadiusX = rx;
+    mRadiusY = ry;
 }
 
 double Ellipse::area()
 {
-	return (double)(M_PI * radiusA * radiusB);
+    return (M_PI * mRadiusX * mRadiusY);
 }
 
 void Ellipse::draw(QPainter* painter)
@@ -53,7 +52,7 @@ void Ellipse::move(const QPoint& offset)
 
 double Ellipse::perimeter()
 {
-	return(double)(MPI * ( 3 * (radiusA + radiusB) - sqrt( (3*radiusA+radiusB) * (radiusA + 3 * radiusB) ) ) )
+    return M_PI * (3 * (mRadiusX + mRadiusY) - sqrt((3 * mRadiusX + mRadiusY) * (mRadiusX + 3 * mRadiusY )));
 }
 
 void Ellipse::setBrush(const QBrush& brush)
@@ -61,9 +60,10 @@ void Ellipse::setBrush(const QBrush& brush)
 	mBrush = brush;
 }
 
-void Ellipse::setRadius(int r)
+void Ellipse::setRadii(int rx, int ry)
 {
-	radius = r;
+    mRadiusX = rx;
+    mRadiusY = ry;
 }
 
 void Ellipse::setPen(const QPen& pen)

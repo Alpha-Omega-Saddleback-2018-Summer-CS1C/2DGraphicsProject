@@ -29,15 +29,20 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
 #include <QString>
 
+#include "circle.h"
 #include "custom_vector.h"
-#include "shape.h"
+#include "ellipse.h"
 #include "line.h"
 #include "polyline.h"
 #include "polygon.h"
 #include "rectangle.h"
 #include "textbox.h"
+#include "shape.h"
+#include "square.h"
+#include "string_util.h"
 
 /* Parser manager */
 class Parser
@@ -57,10 +62,10 @@ private:
             penWidth = -1;
             shapeDimensionCount = 0;
             shapeID = 0;
+            textAlignment = 0;
             textFontStyle = -1;
             textFontWeight = 0;
             textPointSize = 0;
-            textAlignment = 0;
         }
 
         void reset()

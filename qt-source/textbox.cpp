@@ -56,7 +56,7 @@ double TextBox::perimeter()
     return 2.0 * (mWidth + mHeight);
 }
 
-void TextBox::setAlignment(int flags)
+void TextBox::setAlignment(Qt::AlignmentFlag flags)
 {
     mAlignmentFlags = flags;
 }

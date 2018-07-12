@@ -47,12 +47,12 @@ public:
     void setBrush(const QBrush& pen); // Sets the QBrush type to change hwo the shape is drawn
     void setRadius(int r); // set the radius of the ciricle
     void setPen(const QPen& pen); // Set the Qpen type ot change hwo the circle is drawn
-    void setPosition(int x, int y) // Set the position of the circle
+    void setPosition(int x, int y); // Set the position of the circle
 
 private:
     QPoint mPosition;
     int radius;
-    Qpen mPen;
+    QPen mPen;
     QBrush mBrush;
 };
 #endif // CIRCLE_H

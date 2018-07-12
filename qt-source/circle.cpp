@@ -1,4 +1,3 @@
-79 lines (65 sloc)  1.3 KB
 /*
  *  2D Graphics Modeler
  *  July 2018
@@ -25,10 +24,10 @@
 
 Circle::Circle()
 {
-	mId = 7;
+    mID = 0;
 }
 
-Circle::Circle(int id, ind x, int y, int r)
+Circle::Circle(int id, int x, int y, int r)
 {
 	mID = id;
 	mPosition = {x, y};
