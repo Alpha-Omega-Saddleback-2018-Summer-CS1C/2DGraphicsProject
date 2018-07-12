@@ -504,6 +504,9 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     else if(key == "TextFontWeight")
     {
         if(value == "Thin")
+        {
+
+        }
     }
     else if(key == "TextPointSize")
     {
