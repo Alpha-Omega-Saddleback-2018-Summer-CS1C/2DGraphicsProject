@@ -28,6 +28,7 @@
 #include "parser.h"
 #include "custom_vector.h"
 #include "shape.h"
+//#include "secdialog.h"
 
 const std::string file = "shapes.txt";
 
