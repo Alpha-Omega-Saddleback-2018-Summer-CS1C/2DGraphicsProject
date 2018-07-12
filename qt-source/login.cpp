@@ -16,13 +16,13 @@
  *
  **/
 /*
-    File: mainwindow.cpp
+    File: login.cpp
 
     Defines UI features
  */
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "login.h"
+#include "ui_login.h"
 
 #include <QMessageBox>
 

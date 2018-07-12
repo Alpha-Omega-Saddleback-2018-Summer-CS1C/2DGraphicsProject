@@ -24,7 +24,7 @@
 #include <QApplication>
 #include <string>
 #include <iostream>
-#include "mainwindow.h"
+#include "login.h"
 #include "parser.h"
 #include "custom_vector.h"
 #include "shape.h"
