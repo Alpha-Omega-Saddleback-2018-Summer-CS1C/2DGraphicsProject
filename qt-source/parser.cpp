@@ -44,7 +44,7 @@ bool Parser::loadFile(const std::string& filePath)
         return false;
 }
 
-bool Parser::parse(/* Pass vector here? */)
+bool Parser::parse(Vector<Shape*>& shapeVector)
 {
     if(!mInputFile.is_open())
         return false;
@@ -79,7 +79,7 @@ bool Parser::parse(/* Pass vector here? */)
 
         std::string key = inputLine.substr(0, loc);
         std::string value = inputLine.substr(loc + 1, inputLine.size() - loc - 1);
-        setKeyValue(key, value, copyInput, lineNum);
+        setKeyValue(shapeVector, key, value, copyInput, lineNum);
 
         inputLine.clear();
         copyInput.clear();
@@ -101,7 +101,110 @@ bool Parser::parse(/* Pass vector here? */)
  *  Helper functions
  */
 
-int* Parser::extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber)
+ void Parser::addShape(Vector<Shape*>& shapeVector)
+ {
+    if(mShapeInfo.shapeType == "Line")
+    {
+        Line* line = new Line(mShapeInfo.shapeID,
+            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        QPen pen;
+
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        line->setPen(pen);
+        shapeVector.push_back(line);
+    }
+    else if(mShapeInfo.shapeType == "Polyline")
+    {
+        Polyline* polyline = new Polyline(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        QPen pen;
+
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        polyline->setPen(pen);
+
+        shapeVector.push_back(polyline);
+    }
+    else if(mShapeInfo.shapeType == "Polygon")
+    {
+        Polygon* polygon = new Polygon(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        polygon->setPen(pen);
+
+        brush.setColor(QColor(mShapeInfo.brushColor));
+        brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+        polygon->setBrush(brush);
+
+        shapeVector.push_back(polygon);
+    }
+    else if(mShapeInfo.shapeType == "Rectangle")
+    {
+        Rectangle* rectangle = new Rectangle(mShapeInfo.shapeID,
+            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(mShapeInfo.penColor));
+        pen.setWidth(mShapeInfo.penWidth);
+        pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
+        pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
+        pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+        rectangle->setPen(pen);
+
+        brush.setColor(QColor(mShapeInfo.brushColor));
+        brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+        rectangle->setBrush(brush);
+
+        shapeVector.push_back(rectangle);
+    }
+    else if(mShapeInfo.shapeType == "Square")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Ellipse")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Circle")
+    {
+
+    }
+    else if(mShapeInfo.shapeType == "Text")
+    {
+        TextBox* text = new TextBox(mShapeInfo.shapeID,
+                mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+                mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        QPen pen;
+        QFont font;
+
+        pen.setColor(QColor(mShapeInfo.penColor));
+
+        text->setText(mShapeInfo.textString);
+        text->setAlignment(mShapeInfo.textAlignment);
+        shapeVector.push_back(text);
+    }
+    else
+    {
+        mErrorList.push_back("Missing shape type! (Shape Creator [ShapeID = " + std::to_string(mShapeInfo.shapeID) + "])");
+    }
+ }
+
+int* Parser::extractDimensions(const std::string& source, int& size, const std::string& line, size_t lineNumber)
 {
     std::string value;
     size_t low = 0;
@@ -124,7 +227,7 @@ int* Parser::extractDimensions(const std::string& source, size_t& size, const st
                 tmp = dest;
                 dest = new int[size + 1];
 
-                for(size_t j = 0; j < size; ++j)
+                for(int j = 0; j < size; ++j)
                     dest[j] = tmp[j];
                 delete[] tmp;
                 dest[size] = std::stoi(value);
@@ -150,7 +253,7 @@ int* Parser::extractDimensions(const std::string& source, size_t& size, const st
     tmp = dest;
     dest = new int[size + 1];
 
-    for(size_t j = 0; j < size; ++j)
+    for(int j = 0; j < size; ++j)
         dest[j] = tmp[j];
     delete[] tmp;
     dest[size] = std::stoi(value);
@@ -171,7 +274,7 @@ bool Parser::setInteger(int& dest, const std::string& source) const
     return true;
 }
 
-void Parser::setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
+void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber)
 {
     if(key == "BrushColor")
     {
@@ -179,11 +282,29 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "BrushStyle")
     {
-        mShapeInfo.brushStyle = QString::fromStdString(value);
+        if(value == "NoBrush")
+            mShapeInfo.brushStyle = Qt::NoBrush;
+        else if(value == "SolidPattern")
+            mShapeInfo.brushStyle = Qt::SolidPattern;
+        else if(value == "HorPattern")
+            mShapeInfo.brushStyle = Qt::HorPattern;
+        else if(value == "VerPattern")
+            mShapeInfo.brushStyle = Qt::HorPattern;
+        else
+            mErrorList.push_back("Invalid value. Expected \"NoBrush\", \"SolidPattern\", \"HorPattern\", or \"VerPattern\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenCapStyle")
     {
-        mShapeInfo.penCapStyle = QString::fromStdString(value);
+        if(value == "SquareCap")
+            mShapeInfo.penCapStyle = Qt::SquareCap;
+        else if(value == "FlatCap")
+            mShapeInfo.penCapStyle = Qt::FlatCap;
+        else if(value == "RoundCap")
+            mShapeInfo.penCapStyle = Qt::RoundCap;
+        else
+            mErrorList.push_back("Invalid value. Expected \"SquareCap\", \"FlatCap\", or \"RoundCap\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenColor")
     {
@@ -191,26 +312,52 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "PenJoinStyle")
     {
-        mShapeInfo.penJoinStyle = QString::fromStdString(value);
+        if(value == "MiterJoin")
+            mShapeInfo.penJoinStyle = Qt::MiterJoin;
+        else if(value == "BevelJoin")
+            mShapeInfo.penJoinStyle = Qt::BevelJoin;
+        else if(value == "RoundJoin")
+            mShapeInfo.penJoinStyle = Qt::RoundJoin;
+        else
+            mErrorList.push_back("Invalid value. Expected \"MiterJoin\", \"BevelJoin\", or \"RoundJoin\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "PenStyle")
     {
-        mShapeInfo.penStyle = QString::fromStdString(value);
+        if(value == "SolidLine")
+            mShapeInfo.penStyle = Qt::SolidLine;
+        else if(value == "DashLine")
+            mShapeInfo.penStyle = Qt::DashLine;
+        else if(value == "DotLine")
+            mShapeInfo.penStyle = Qt::DotLine;
+        else if(value == "DashDotLine")
+            mShapeInfo.penStyle = Qt::DashDotLine;
+        else if(value == "DashDotDotLine")
+            mShapeInfo.penStyle = Qt::DashDotDotLine;
+        else
+            mErrorList.push_back("Invalid value. Expected \"SolidLine\", \"DashLine\", \"DotLine\", \"DashDotLine\", or \"DashDotDotLine\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
+
     }
     else if(key == "PenWidth")
     {
         if(!setInteger(mShapeInfo.penWidth, value))
             mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
+
+        if(mShapeInfo.penWidth < 0 || mShapeInfo.penWidth > 20)
+        {
+            mErrorList.push_back("Must be an integer between 0 and 20, inclusive (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
+            mShapeInfo.penWidth = -1;
+        }
     }
     else if(key == "ShapeDimensions")
     {
         int* array = nullptr;
-        size_t size = 0;
 
         if(mShapeInfo.shapeType == "Line")
         {
-           array = extractDimensions(value, size, line, lineNumber);
-           if(size == 4)
+           array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+           if(mShapeInfo.shapeDimensionCount == 4)
                mShapeInfo.shapeDimensions = array;
            else
                mErrorList.push_back("Expected four values [x1, y1, x2, y2] (Line: " +
@@ -218,8 +365,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Polyline")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(!(size % 2))
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(!(mShapeInfo.shapeDimensionCount % 2))
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
@@ -227,8 +374,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Polygon")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(!(size % 2))
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(!(mShapeInfo.shapeDimensionCount % 2))
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Odd number of values. Expected coordinates pairs. [x1, y1, x2, y2, ...] (Line: " +
@@ -236,8 +383,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Rectangle")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
@@ -245,8 +392,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Square")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 3)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 3)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, side] (Line: " +
@@ -254,8 +401,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Circle")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 3)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 3)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, radius] (Line: " +
@@ -263,8 +410,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Ellipse")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected three values [x, y, rx, ry] (Line: " +
@@ -272,8 +419,8 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
         }
         else if(mShapeInfo.shapeType == "Text")
         {
-            array = extractDimensions(value, size, line, lineNumber);
-            if(size == 4)
+            array = extractDimensions(value, mShapeInfo.shapeDimensionCount, line, lineNumber);
+            if(mShapeInfo.shapeDimensionCount == 4)
                 mShapeInfo.shapeDimensions = array;
             else
                 mErrorList.push_back("Expected four values [x, y, width, height] (Line: " +
@@ -287,10 +434,12 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
     }
     else if(key == "ShapeId")
     {
-        // Add shape to vector
-        // Check for duplicate shape ID
+        if(mShapeInfo.shapeID != 0)
+        {
+            addShape(shapeVector);
+            mShapeInfo.reset();
+        }
 
-        mShapeInfo.reset();
         if(!setInteger(mShapeInfo.shapeID, value))
             mErrorList.push_back("Expected integer (Line: " + std::to_string(lineNumber) + " \"" + line + "\")");
     }
@@ -306,11 +455,24 @@ void Parser::setKeyValue(const std::string& key, const std::string& value, const
            (value == "Text"))
             mShapeInfo.shapeType = QString::fromStdString(value);
         else
-            mErrorList.push_back("Unexpected value. Try \"Line\", \"\"Polyline\", \"Polygon\", \"Rectangle\", \"Ellipse\", \"Text\" (Line: " +
+            mErrorList.push_back("Unexpected value. Try \"Line\", \"\"Polyline\", \"Polygon\", \"Rectangle\", \"Square\", \"Circle\", \"Ellipse\", \"Text\" (Line: " +
                 std::to_string(lineNumber) + " \"" + line + "\")");
     }
     else if(key == "TextAlignment")
     {
+        if(value == "AlignLeft")
+            mShapeInfo.textAlignment |= Qt::AlignLeft;
+        else if(value == "AlignRight")
+            mShapeInfo.textAlignment |= Qt::AlignRight;
+        else if(value == "AlignRight")
+            mShapeInfo.textAlignment |= Qt::AlignTop;
+        else if(value == "AlignBottom")
+            mShapeInfo.textAlignment |= Qt::AlignBottom;
+        else if(value == "AlignCenter")
+            mShapeInfo.textAlignment |= Qt::AlignCenter;
+        else
+            mErrorList.push_back("Unexpected value. Try \"AlignLeft\", \"\"AlignRight\", \"AlignTop\", \"AlignBottom\", or \"AlignCenter\" (Line: " +
+                std::to_string(lineNumber) + " \"" + line + "\")");
 
     }
     else if(key == "TextColor")

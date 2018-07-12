@@ -31,6 +31,14 @@
 #include <vector>
 #include <QString>
 
+#include "custom_vector.h"
+#include "shape.h"
+#include "line.h"
+#include "polyline.h"
+#include "polygon.h"
+#include "rectangle.h"
+#include "textbox.h"
+
 /* Parser manager */
 class Parser
 {
@@ -41,20 +49,31 @@ private:
     {
         ShapeInfo()
         {
-            reset();
+            brushStyle = -1;
+            penCapStyle = -1;
+            shapeDimensions = nullptr;
+            penJoinStyle = -1;
+            penStyle = -1;
+            penWidth = -1;
+            shapeDimensionCount = 0;
+            shapeID = 0;
+            textPointSize = 0;
+            textAlignment = 0;
         }
 
         void reset()
         {
             brushColor.clear();
-            brushStyle.clear();
-            penCapStyle.clear();
+            brushStyle = -1;
+            penCapStyle = -1;
             penColor.clear();
-            penJoinStyle.clear();
-            penWidth = 0;
+            penJoinStyle = -1;
+            penStyle = -1;
+            penWidth = -1;
+            shapeDimensionCount = 0;
             shapeID = 0;
             shapeType.clear();
-            textAlignment.clear();
+            textAlignment = 0;
             textColor.clear();
             textFontFamily.clear();
             textFontStyle.clear();
@@ -70,16 +89,17 @@ private:
         }
 
         QString         brushColor;
-        QString         brushStyle;
-        QString         penCapStyle;
+        int             brushStyle;
+        int             penCapStyle;
         QString         penColor;
-        QString         penJoinStyle;
-        QString         penStyle;
+        int             penJoinStyle;
+        int             penStyle;
         int             penWidth;
         int*            shapeDimensions;
+        int             shapeDimensionCount;
         int             shapeID;
         QString         shapeType;
-        QString         textAlignment;
+        int             textAlignment;
         QString         textColor;
         QString         textFontFamily;
         QString         textFontStyle;
@@ -99,24 +119,27 @@ public:
     bool loadFile(const std::string& filePath);
 
     /* Loads the file to be parsed. Returns true on success */
-    bool parse(/* Pass vector here? */);
+    bool parse(Vector<Shape*>& shapeVector);
 
 private:
 
+    /* Adds a shape to the shape vector */
+    void addShape(Vector<Shape*>& shapeVector);
+
     /* Parses ShapeDimension key/value. Returns the number of values extracted */
-    int* extractDimensions(const std::string& source, size_t& size, const std::string& line, size_t lineNumber);
+    int* extractDimensions(const std::string& source, int& size, const std::string& line, size_t lineNumber);
 
     /* Sets the integer to the string if the string is an integer */
     bool setInteger(int& dest, const std::string& source) const;
 
     /* Sets a part of shape info */
-    void setKeyValue(const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
+    void setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
-    std::string             mInputFilePath;
-    std::ifstream           mInputFile;
+    std::string                 mInputFilePath;
+    std::ifstream               mInputFile;
     std::vector<std::string>    mErrorList;
-    ShapeInfo               mShapeInfo;
+    ShapeInfo                   mShapeInfo;
 };
 
 #endif

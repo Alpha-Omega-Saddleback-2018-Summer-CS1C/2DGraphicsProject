@@ -16,13 +16,14 @@
  *
  **/
 /*
-    File: mainwindow.cpp
+    File: login.cpp
 
     Defines UI features
  */
 
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "login.h"
+#include "ui_login.h"
+#include "secdialog.h"
 
 #include <QMessageBox>
 
@@ -47,6 +48,9 @@ void MainWindow::on_pushButton_login_clicked()
     {
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
+        secDialog secondWindow;
+        secondWindow.setModal(true);
+        secondWindow.exec();
     }
     else
         QMessageBox::information(this, "Login", "Username and password is NOT correct");
