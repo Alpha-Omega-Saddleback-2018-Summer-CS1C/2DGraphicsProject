@@ -1,4 +1,5 @@
-# C++ (Best) Makefile 
+# Makefile for C++
+# 7/15/2017 
 
 ### Variables ###
 
@@ -21,21 +22,15 @@ run: $(MAIN)
 	@echo
 	@./$(MAIN)
 
-# Add "-g" to CFLAGS to use !!!
-debug: $(MAIN)
-	@echo "Debugging..."
-	@echo "--- ##### ---"
-	@echo
-	@gdb ./$(MAIN)
-
-# Possible: Add "tar" as prerequisite
 clean:
 	@echo "Removing object files and executable..."
 	@rm *.o $(MAIN)
 	@echo "Done."
 
 tar:
+	@echo "Creating tarball..."
 	@tar cfz $(MAIN).tar.gz $(wildcard *.h) $(SRCS) $(wildcard *.scr) Makefile
+	@echo "Done."
 
 ### Internal ###
 
