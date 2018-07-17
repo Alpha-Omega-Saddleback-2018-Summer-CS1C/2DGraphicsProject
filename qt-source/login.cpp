@@ -28,7 +28,7 @@
 #include <QMessageBox>
 
 Login::Login(QWidget *parent) :
-    QMainWindow(parent),
+    QWidget(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
@@ -39,7 +39,7 @@ Login::~Login()
     delete ui;
 }
 
-void Login::on_pushButton_login_clicked()
+void Login::on_loginButton_clicked()
 {
     QString userName = ui->input_username->text();
     QString password = ui->input_password->text();
@@ -49,9 +49,10 @@ void Login::on_pushButton_login_clicked()
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
         MainWindow mainWindow;
-        mainWindow.setModal(true);
-        mainWindow.exec();
+        this->hide();
     }
     else
+    {
         QMessageBox::information(this, "Login", "Username and password is NOT correct");
+    }
 }
