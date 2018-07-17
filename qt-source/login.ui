@@ -82,51 +82,47 @@
       <string>Login</string>
      </property>
     </widget>
-    <widget class="QWidget" name="layoutWidget">
+    <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>40</y>
-       <width>211</width>
-       <height>24</height>
+       <width>205</width>
+       <height>57</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="username">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QLabel" name="label_username">
-        <property name="text">
-         <string>username</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="username">
+        <item>
+         <widget class="QLabel" name="label_username">
+          <property name="text">
+           <string>username</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="input_username"/>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QLineEdit" name="input_username"/>
-      </item>
-     </layout>
-    </widget>
-    <widget class="QWidget" name="layoutWidget1">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>70</y>
-       <width>211</width>
-       <height>24</height>
-      </rect>
-     </property>
-     <layout class="QHBoxLayout" name="password">
-      <item>
-       <widget class="QLabel" name="label_password">
-        <property name="text">
-         <string>password</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="input_password">
-        <property name="echoMode">
-         <enum>QLineEdit::Password</enum>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="password">
+        <item>
+         <widget class="QLabel" name="label_password">
+          <property name="text">
+           <string>password</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="input_password">
+          <property name="echoMode">
+           <enum>QLineEdit::Password</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>

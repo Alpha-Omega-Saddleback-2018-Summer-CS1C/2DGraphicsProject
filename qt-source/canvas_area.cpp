@@ -16,22 +16,25 @@
  *
  **/
 /*
-    File: canvas.cpp
+    File: canvas_area.cpp
 
     Defines a widget that will be drawn on by QPainter
 */
 
-#include "canvas.h"
-#include "ui_canvas.h"
+#include "canvas_area.h"
+#include "ui_canvas_area.h"
 
-Canvas::Canvas(QWidget *parent) :
+CanvasArea::CanvasArea(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::Canvas)
+    ui(new Ui::CanvasArea)
 {
     ui->setupUi(this);
+
+    setBackgroundRole(QPalette::Base);
+    setAutoFillBackground(true);
 }
 
-Canvas::~Canvas()
+CanvasArea::~CanvasArea()
 {
     delete ui;
 }

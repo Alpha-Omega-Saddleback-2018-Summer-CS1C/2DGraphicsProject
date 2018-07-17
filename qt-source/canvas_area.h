@@ -16,30 +16,30 @@
  *
  **/
 /*
-    File: canvas.h
+    File: canvas_area.h
 
     Defines a widget that will be drawn on by QPainter
 */
 
-#ifndef CANVAS_H
-#define CANVAS_H
+#ifndef CANVAS_AREA_H
+#define CANVAS_AREA_H
 
 #include <QWidget>
 
 namespace Ui {
-class Canvas;
+class CanvasArea;
 }
 
-class Canvas : public QWidget
+class CanvasArea : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Canvas(QWidget *parent = 0);
-    ~Canvas();
+    explicit CanvasArea(QWidget* parent = 0);
+    ~CanvasArea();
 
 private:
-    Ui::Canvas *ui;
+    Ui::CanvasArea *ui;
 };
 
 #endif // CANVAS_H
