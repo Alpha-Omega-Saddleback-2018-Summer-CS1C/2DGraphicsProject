@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "canvas.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,7 +17,8 @@ public:
     ~MainWindow();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow*     ui;
+    Canvas*             canvasArea;
 };
 
 #endif // SECDIALOG_H

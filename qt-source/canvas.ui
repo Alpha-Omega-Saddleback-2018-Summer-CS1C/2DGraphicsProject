@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Canvas</class>
+ <widget class="QWidget" name="Canvas">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,8 +16,14 @@
     <height>500</height>
    </size>
   </property>
+  <property name="maximumSize">
+   <size>
+    <width>1000</width>
+    <height>500</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>2D Graphics Project</string>
+   <string>Form</string>
   </property>
  </widget>
  <resources/>
