@@ -26,6 +26,18 @@
 
 #include <QPainter>
 
+enum ShapeType
+{
+	LINE = 0,
+	POLYLINE,
+	POLYGON,
+	RECTANGLE,
+	SQUARE,
+	CIRCLE,
+	ELLIPSE,
+	TEXTBOX
+};
+
 class Shape
 {
 public:
@@ -70,7 +82,8 @@ public:
     virtual double perimeter() = 0;
 
 protected:
-    int mID;
+    int 		mID;
+	ShapeType 	mType;
 };
 
 #endif // SHAPE_H

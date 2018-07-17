@@ -26,11 +26,13 @@
 Polyline::Polyline()
 {
     mID = 0;
+	mType = POLYLINE;
 }
 
 Polyline::Polyline(int id, int* pointData, int pointCount)
 {
     mID = id;
+	mType = POLYLINE;
     for(int i = 0; i < pointCount; ++i)
         mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
 }

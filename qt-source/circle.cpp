@@ -25,11 +25,13 @@
 Circle::Circle()
 {
     mID = 0;
+	mType = CIRCLE;
 }
 
 Circle::Circle(int id, int x, int y, int r)
 {
 	mID = id;
+	mType = CIRCLE;
 	mPosition = {x, y};
 	radius = r;
 }

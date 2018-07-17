@@ -26,13 +26,15 @@
 Line::Line()
 {
     mID = 0;
+	mType = LINE;
     mPoint1 = { 0, 0 };
     mPoint2 = { 0, 0 };
 }
 
 Line::Line(int id, int x1, int y1, int x2, int y2)
 {
-    mID =id;
+    mID = id;
+	mType = LINE;
     mPoint1 = { x1, y1 };
     mPoint2 = { x2, y2 };
 }

@@ -25,11 +25,13 @@
 Ellipse::Ellipse()
 {
     mID = 0;
+	mType = ELLIPSE;
 }
 
 Ellipse::Ellipse(int id, int x, int y, int rx, int ry)
 {
 	mID = id;
+	mType = ELLIPSE;
 	mPosition = {x, y};
     mRadiusX = rx;
     mRadiusY = ry;

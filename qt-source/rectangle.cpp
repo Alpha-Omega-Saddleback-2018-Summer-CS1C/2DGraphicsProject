@@ -26,11 +26,13 @@
 Rectangle::Rectangle()
 {
     mID = 0;
+	mType = RECTANGLE;
 }
 
 Rectangle::Rectangle(int id, int x, int y, int w, int h)
 {
     mID = id;
+	mType = RECTANGLE;
     mPosition = { x, y };
     mWidth = w;
     mHeight = h;

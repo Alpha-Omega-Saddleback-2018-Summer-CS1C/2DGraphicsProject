@@ -26,11 +26,13 @@
 TextBox::TextBox()
 {
     mID = 0;
+	mType = TEXTBOX;
 }
 
 TextBox::TextBox(int id, int x, int y, int w, int h)
 {
     mID = id;
+	mType = TEXTBOX;
     mPosition = { x, y };
     mWidth = w;
     mHeight = h;

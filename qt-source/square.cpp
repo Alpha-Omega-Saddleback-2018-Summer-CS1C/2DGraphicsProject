@@ -26,11 +26,13 @@
 Square::Square()
 {
     mID = 0;
+	mType = SQUARE;
 }
 
 Square::Square(int id, int x, int y, int side)
 {
     mID = id;
+	mType = SQUARE;
     mPosition = { x, y };
     mSide = side;
 }
