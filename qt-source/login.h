@@ -24,13 +24,13 @@
 #ifndef LOGIN_H
 #define LOGIN_H
 
-#include <QWidget>
+#include <QMainWindow>
 
 namespace Ui {
 class Login;
 }
 
-class Login : public QWidget
+class Login : public QMainWindow
 {
     Q_OBJECT
 
@@ -40,6 +40,10 @@ public:
 
 private slots:
     void on_loginButton_clicked();
+    void openMainWindow();
+
+signals:
+    void requestNewMainWindow();
 
 private:
     Ui::Login *ui;

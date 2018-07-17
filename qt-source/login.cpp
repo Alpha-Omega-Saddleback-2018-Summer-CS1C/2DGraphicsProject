@@ -27,11 +27,14 @@
 
 #include <QMessageBox>
 
+MainWindow* gMainWindow = nullptr;
+
 Login::Login(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+    connect(this, SIGNAL(requestNewMainWindow()), this, SLOT(openMainWindow()));
 }
 
 Login::~Login()
@@ -46,14 +49,17 @@ void Login::on_loginButton_clicked()
 
     if(userName == "test" && password == "test")
     {
-        QMessageBox::information(this, "Login", "Username and password is correct");
-        hide();
-        MainWindow mainWindow;
-        mainWindow.show();
-        this->hide();
+        emit requestNewMainWindow();
     }
     else
     {
-        QMessageBox::information(this, "Login", "Username and password is NOT correct");
+        QMessageBox::warning(this, "Login", "Incorrect username or password!");
     }
+}
+
+void Login::openMainWindow()
+{
+    gMainWindow = new MainWindow;
+    gMainWindow->show();
+    this->hide();
 }
