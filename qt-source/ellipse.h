@@ -23,36 +23,26 @@
 #ifndef ELLIPSE_H
 #define ELLIPSE_H
 
-#include "math.h"
-#include <QBrush>
-#include <QPen>
+#include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"
 #include "custom_vector.h"
 
-// M_PI = pi 
-// Use: radius * M_PI
-
 class Ellipse: public Shape
 {
  	public:
-		Ellipse();
-		Ellipse(int id, int x, int y, int ra, int rb); //ID, Position X, Y, Radius 
+        Ellipse(QPaintDevice* paintDevice = nullptr, int id = -1); //ID, Position X, Y, Radius
 		~Ellipse(){}
 		
 		double area() override; // Return the area of the ciricle
-		void draw(QPainter* painter) override; // Draw the circle
+        void draw() override; // Draw the circle
 		void move(const QPoint& offset) override; // Translates the circle by a given offset
 		double perimeter() override; // return the circumference of the ciricle
-		void setBrush(const QBrush& pen); // Sets the QBrush type to change hwo the shape is drawn
         void setRadii(int rx, int ry); // set the radius of the ciricle
-		void setPen(const QPen& pen); // Set the Qpen type ot change hwo the circle is drawn
         void setPosition(int x, int y); // Set the position of the circle
 		
 	private:
 		QPoint mPosition;
         int mRadiusX, mRadiusY;
-        QPen mPen;
-		QBrush mBrush;	
 };
 #endif // ELLIPSE_H

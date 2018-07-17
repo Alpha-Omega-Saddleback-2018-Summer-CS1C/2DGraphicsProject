@@ -23,20 +23,13 @@
 
 #include "line.h"
 
-Line::Line()
-{
-    mID = 0;
-	mType = LINE;
-    mPoint1 = { 0, 0 };
-    mPoint2 = { 0, 0 };
-}
-
-Line::Line(int id, int x1, int y1, int x2, int y2)
+Line::Line(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = LINE;
-    mPoint1 = { x1, y1 };
-    mPoint2 = { x2, y2 };
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double Line::area()
@@ -44,7 +37,7 @@ double Line::area()
     return 0.0;
 }
 
-void Line::draw(QPainter* painter)
+void Line::draw()
 {
 
 }
@@ -60,7 +53,8 @@ double Line::perimeter()
     return 0.0;
 }
 
-void Line::setPen(const QPen& pen)
+void Line::setPoints(int x1, int y1, int x2, int y2)
 {
-    mPen = pen;
+    mPoint1 = { x1, y1 };
+    mPoint2 = { x2, y2 };
 }

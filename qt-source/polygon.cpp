@@ -22,20 +22,15 @@
 */
 
 #include "polygon.h"
+#include "math.h"
 
-Polygon::Polygon()
-{
-    mID = 0;
-	mType = POLYGON;
-	
-}
-
-Polygon::Polygon(int id, int* pointData, int pointCount)
+Polygon::Polygon(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = POLYGON;
-    for(int i = 0; i < pointCount; ++i)
-        mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 void Polygon::addPoint(const QPoint& point)
@@ -60,7 +55,7 @@ double Polygon::area()
     return sum / 2;
 }
 
-void Polygon::draw(QPainter* painter)
+void Polygon::draw()
 {
 
 }
@@ -90,14 +85,10 @@ double Polygon::perimeter()
     return sum;
 }
 
-void Polygon::setBrush(const QBrush& brush)
+void Polygon::setPointData(int* pointData, int pointCount)
 {
-    mBrush = brush;
-}
-
-void Polygon::setPen(const QPen& pen)
-{
-    mPen = pen;
+    for(int i = 0; i < pointCount; ++i)
+        mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
 }
 
 void Polygon::setPoint(int index, const QPoint& point)

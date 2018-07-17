@@ -23,18 +23,13 @@
 
 #include "polyline.h"
 
-Polyline::Polyline()
-{
-    mID = 0;
-	mType = POLYLINE;
-}
-
-Polyline::Polyline(int id, int* pointData, int pointCount)
+Polyline::Polyline(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = POLYLINE;
-    for(int i = 0; i < pointCount; ++i)
-        mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 void Polyline::addPoint(const QPoint& point)
@@ -47,7 +42,7 @@ double Polyline::area()
     return 0.0;
 }
 
-void Polyline::draw(QPainter* painter)
+void Polyline::draw()
 {
 
 }
@@ -63,9 +58,10 @@ double Polyline::perimeter()
     return 0.0;
 }
 
-void Polyline::setPen(const QPen& pen)
+void Polyline::setPointData(int* pointData, int pointCount)
 {
-    mPen = pen;
+    for(int i = 0; i < pointCount; ++i)
+        mPoints.push_back({ pointData[i * 2], pointData[i * 2 + 1]});
 }
 
 void Polyline::setPoint(int index, const QPoint& point)

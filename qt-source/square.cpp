@@ -23,18 +23,13 @@
 
 #include "square.h"
 
-Square::Square()
-{
-    mID = 0;
-	mType = SQUARE;
-}
-
-Square::Square(int id, int x, int y, int side)
+Square::Square(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = SQUARE;
-    mPosition = { x, y };
-    mSide = side;
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double Square::area()
@@ -42,7 +37,7 @@ double Square::area()
     return (double)(mSide * mSide);
 }
 
-void Square::draw(QPainter* painter)
+void Square::draw()
 {
 
 }
@@ -57,22 +52,17 @@ double Square::perimeter()
     return 4 * mSide;
 }
 
-void Square::setBrush(const QBrush& brush)
-{
-    mBrush = brush;
-}
-
 void Square::setDimensions(int side)
 {
     mSide = side;
 }
 
-void Square::setPen(const QPen& pen)
-{
-    mPen = pen;
-}
-
 void Square::setPosition(int x, int y)
 {
     mPosition = { x, y };
+}
+
+void Square::setSide(int side)
+{
+    mSide = side;
 }

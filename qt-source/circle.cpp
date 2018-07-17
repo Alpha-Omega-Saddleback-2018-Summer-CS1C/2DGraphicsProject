@@ -21,19 +21,15 @@
 */
 
 #include "circle.h"
+#include "math.h"
 
-Circle::Circle()
-{
-    mID = 0;
-	mType = CIRCLE;
-}
-
-Circle::Circle(int id, int x, int y, int r)
+Circle::Circle(QPaintDevice* paintDevice, int id)
 {
 	mID = id;
 	mType = CIRCLE;
-	mPosition = {x, y};
-	radius = r;
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double Circle::area()
@@ -41,7 +37,7 @@ double Circle::area()
 	return (double)(M_PI * radius * radius);
 }
 
-void Circle::draw(QPainter* painter)
+void Circle::draw()
 {
 	
 }
@@ -56,19 +52,9 @@ double Circle::perimeter()
 	return (2 * M_PI * radius);
 }
 
-void Circle::setBrush(const QBrush& brush)
-{
-	mBrush = brush;
-}
-
 void Circle::setRadius(int r)
 {
 	radius = r;
-}
-
-void Circle::setPen(const QPen& pen)
-{
-	mPen = pen;
 }
 
 void Circle::setPosition(int x, int y)

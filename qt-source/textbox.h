@@ -24,7 +24,7 @@
 #ifndef TEXTBOX_H
 #define TEXTBOX_H
 
-#include <QPen>
+#include <QPaintDevice>
 #include <QPoint>
 #include <QString>
 #include "shape.h"
@@ -33,15 +33,14 @@
 class TextBox : public Shape
 {
 public:
-    TextBox();
-    TextBox(int id, int x, int y, int w, int h);
+    TextBox(QPaintDevice* paintDevice = nullptr, int id = -1);
     ~TextBox() {}
 
     /* Returns the area of this shape */
     double area() override;
 
     /* Draws this shape */
-    void draw(QPainter* painter) override;
+    void draw() override;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;
@@ -58,9 +57,6 @@ public:
     /* Sets the QFont type to change how the shape is drawn */
     void setFont(const QFont& font);
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setPen(const QPen& pen);
-
     /* Sets the position of this shape */
     void setPosition(int x, int y);
 
@@ -72,7 +68,6 @@ private:
     int mWidth;
     int mHeight;
 
-    QPen mPen;
     QFont mFont;
     QString mText;
     Qt::AlignmentFlag mAlignmentFlags;

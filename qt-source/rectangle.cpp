@@ -23,19 +23,13 @@
 
 #include "rectangle.h"
 
-Rectangle::Rectangle()
-{
-    mID = 0;
-	mType = RECTANGLE;
-}
-
-Rectangle::Rectangle(int id, int x, int y, int w, int h)
+Rectangle::Rectangle(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = RECTANGLE;
-    mPosition = { x, y };
-    mWidth = w;
-    mHeight = h;
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double Rectangle::area()
@@ -43,7 +37,7 @@ double Rectangle::area()
     return (double)(mWidth * mHeight);
 }
 
-void Rectangle::draw(QPainter* painter)
+void Rectangle::draw()
 {
 
 }
@@ -58,20 +52,10 @@ double Rectangle::perimeter()
     return 2.0 * (mWidth + mHeight);
 }
 
-void Rectangle::setBrush(const QBrush& brush)
-{
-    mBrush = brush;
-}
-
 void Rectangle::setDimensions(int w, int h)
 {
     mWidth = w;
     mHeight = h;
-}
-
-void Rectangle::setPen(const QPen& pen)
-{
-    mPen = pen;
 }
 
 void Rectangle::setPosition(int x, int y)

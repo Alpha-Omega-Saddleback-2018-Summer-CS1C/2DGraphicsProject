@@ -23,19 +23,13 @@
 
 #include "textbox.h"
 
-TextBox::TextBox()
-{
-    mID = 0;
-	mType = TEXTBOX;
-}
-
-TextBox::TextBox(int id, int x, int y, int w, int h)
+TextBox::TextBox(QPaintDevice* paintDevice, int id)
 {
     mID = id;
 	mType = TEXTBOX;
-    mPosition = { x, y };
-    mWidth = w;
-    mHeight = h;
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double TextBox::area()
@@ -43,7 +37,7 @@ double TextBox::area()
     return (double)(mWidth * mHeight);
 }
 
-void TextBox::draw(QPainter* painter)
+void TextBox::draw()
 {
 
 }
@@ -72,11 +66,6 @@ void TextBox::setDimensions(int w, int h)
 void TextBox::setFont(const QFont& font)
 {
     mFont = font;
-}
-
-void TextBox::setPen(const QPen& pen)
-{
-    mPen = pen;
 }
 
 void TextBox::setPosition(int x, int y)

@@ -61,7 +61,7 @@ private:
             penStyle = -1;
             penWidth = -1;
             shapeDimensionCount = 0;
-            shapeID = 0;
+            shapeID = -1;
             textAlignment = 0;
             textFontStyle = -1;
             textFontWeight = 0;
@@ -78,7 +78,7 @@ private:
             penStyle = -1;
             penWidth = -1;
             shapeDimensionCount = 0;
-            shapeID = 0;
+            shapeID = -1;
             shapeType.clear();
             textAlignment = 0;
             textColor.clear();

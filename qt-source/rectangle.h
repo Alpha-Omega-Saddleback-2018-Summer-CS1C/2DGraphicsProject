@@ -24,8 +24,7 @@
 #ifndef RECTANGLE_H
 #define RECTANGLE_H
 
-#include <QBrush>
-#include <QPen>
+#include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"
 #include "custom_vector.h"
@@ -33,15 +32,14 @@
 class Rectangle : public Shape
 {
 public:
-    Rectangle();
-    Rectangle(int id, int x, int y, int w, int h);
+    Rectangle(QPaintDevice* paintDevice = nullptr, int id = -1);
     ~Rectangle() {}
 
     /* Returns the area of this shape */
     double area() override;
 
     /* Draws this shape */
-    void draw(QPainter* painter) override;
+    void draw() override;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;
@@ -49,14 +47,8 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the QBrush type to change how the shape is drawn */
-    void setBrush(const QBrush& pen);
-
     /* Sets the dimension of this shape */
     void setDimensions(int w, int h);
-
-    /* Sets the QPen type to change how the shape is drawn */
-    void setPen(const QPen& pen);
 
     /* Sets the position of this shape */
     void setPosition(int x, int y);
@@ -65,8 +57,6 @@ private:
     QPoint mPosition;
     int mWidth;
     int mHeight;
-    QPen mPen;
-    QBrush mBrush;
 };
 
 #endif // RECTANGLE_H

@@ -24,7 +24,9 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
+#include <QBrush>
 #include <QPainter>
+#include <QPen>
 
 enum ShapeType
 {
@@ -41,49 +43,48 @@ enum ShapeType
 class Shape
 {
 public:
+
     virtual ~Shape() {}
 
-    inline bool operator==(const Shape& shape) const
-    {
-        return mID == shape.mID;
-    }
-
-    inline bool operator>(const Shape& shape) const
-    {
-        return mID > shape.mID;
-    }
-
-    inline bool operator<(const Shape& shape) const
-    {
-        return mID < shape.mID;
-    }
+    /* Compares ID's */
+    bool operator==(const Shape& shape) const;
+    bool operator>(const Shape& shape) const;
+    bool operator<(const Shape& shape) const;
 
     /* Returns the Shape ID */
-    inline int getID() const
-    {
-        return mID;
-    }
-
-    /* Sets the Shape ID */
-    inline void setID(int id)
-    {
-        mID = id;
-    }
+    int getID() const;
 
     /* Returns the area of the shape */
     virtual double area() = 0;
 
     /* Draws this shape */
-    virtual void draw(QPainter* painter) = 0;
+    virtual void draw() = 0;
 
     /* Translates this shape by a given offset */
     virtual void move(const QPoint& offset) = 0;
 
+    /* Returns the perimeter of the shape */
     virtual double perimeter() = 0;
+
+    /* Sets the QBrush type */
+    void setBrush(const QBrush& brush);
+
+    /* Sets the Shape ID */
+    void setID(int id);
+
+    /* Sets the QPainter type */
+    void setPainter(QPaintDevice* paintDevice);
+
+    /* Sets the QPen type */
+    void setPen(const QPen& pen);
 
 protected:
     int 		mID;
 	ShapeType 	mType;
+
+    QPainter*   mPainter;
+    QPen        mPen;
+    QBrush      mBrush;
 };
 
 #endif // SHAPE_H

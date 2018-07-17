@@ -101,9 +101,7 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
  {
     if(mShapeInfo.shapeType == "Line")
     {
-        Line* line = new Line(mShapeInfo.shapeID,
-            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        Line* line = new Line();
         QPen pen;
 
         pen.setColor(QColor(mShapeInfo.penColor));
@@ -111,12 +109,17 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+
+        line->setID(mShapeInfo.shapeID);
+        line->setPoints(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
+            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
         line->setPen(pen);
+
         shapeVector.push_back(line);
     }
     else if(mShapeInfo.shapeType == "Polyline")
     {
-        Polyline* polyline = new Polyline(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        Polyline* polyline = new Polyline();
         QPen pen;
 
         pen.setColor(QColor(mShapeInfo.penColor));
@@ -124,13 +127,16 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
+
+        polyline->setID(mShapeInfo.shapeID);
+        polyline->setPointData(mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
         polyline->setPen(pen);
 
         shapeVector.push_back(polyline);
     }
     else if(mShapeInfo.shapeType == "Polygon")
     {
-        Polygon* polygon = new Polygon(mShapeInfo.shapeID, mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        Polygon* polygon = new Polygon();
         QPen pen;
         QBrush brush;
 
@@ -139,19 +145,20 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
-        polygon->setPen(pen);
 
         brush.setColor(QColor(mShapeInfo.brushColor));
         brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+
+        polygon->setID(mShapeInfo.shapeID);
+        polygon->setPointData(mShapeInfo.shapeDimensions, mShapeInfo.shapeDimensionCount / 2);
+        polygon->setPen(pen);
         polygon->setBrush(brush);
 
         shapeVector.push_back(polygon);
     }
     else if(mShapeInfo.shapeType == "Rectangle")
     {
-        Rectangle* rectangle = new Rectangle(mShapeInfo.shapeID,
-            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        Rectangle* rectangle = new Rectangle();
         QPen pen;
         QBrush brush;
 
@@ -160,19 +167,21 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
-        rectangle->setPen(pen);
 
         brush.setColor(QColor(mShapeInfo.brushColor));
         brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+
+        rectangle->setID(mShapeInfo.shapeID);
+        rectangle->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
+        rectangle->setDimensions(mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        rectangle->setPen(pen);
         rectangle->setBrush(brush);
 
         shapeVector.push_back(rectangle);
     }
     else if(mShapeInfo.shapeType == "Square")
     {
-        Square* square = new Square(mShapeInfo.shapeID,
-            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-            mShapeInfo.shapeDimensions[2]);
+        Square* square = new Square();
         QPen pen;
         QBrush brush;
 
@@ -181,19 +190,21 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
-        square->setPen(pen);
 
         brush.setColor(QColor(mShapeInfo.brushColor));
         brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+
+        square->setID(mShapeInfo.shapeID);
+        square->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
+        square->setSide(mShapeInfo.shapeDimensions[2]);
+        square->setPen(pen);
         square->setBrush(brush);
 
         shapeVector.push_back(square);
     }
     else if(mShapeInfo.shapeType == "Ellipse")
     {
-        Ellipse* ellipse = new Ellipse(mShapeInfo.shapeID,
-            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-            mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        Ellipse* ellipse = new Ellipse();
         QPen pen;
         QBrush brush;
 
@@ -202,19 +213,21 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
-        ellipse->setPen(pen);
 
         brush.setColor(QColor(mShapeInfo.brushColor));
         brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+
+        ellipse->setID(mShapeInfo.shapeID);
+        ellipse->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
+        ellipse->setRadii(mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        ellipse->setPen(pen);
         ellipse->setBrush(brush);
 
         shapeVector.push_back(ellipse);
     }
     else if(mShapeInfo.shapeType == "Circle")
     {
-        Circle* circle = new Circle(mShapeInfo.shapeID,
-            mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-            mShapeInfo.shapeDimensions[2]);
+        Circle* circle = new Circle();
         QPen pen;
         QBrush brush;
 
@@ -223,33 +236,40 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         pen.setStyle(static_cast<Qt::PenStyle>(mShapeInfo.penStyle));
         pen.setCapStyle(static_cast<Qt::PenCapStyle>(mShapeInfo.penCapStyle));
         pen.setJoinStyle(static_cast<Qt::PenJoinStyle>(mShapeInfo.penJoinStyle));
-        circle->setPen(pen);
 
         brush.setColor(QColor(mShapeInfo.brushColor));
         brush.setStyle(static_cast<Qt::BrushStyle>(mShapeInfo.brushStyle));
+
+        circle->setID(mShapeInfo.shapeID);
+        circle->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
+        circle->setRadius(mShapeInfo.shapeDimensions[2]);
+        circle->setPen(pen);
         circle->setBrush(brush);
 
         shapeVector.push_back(circle);
     }
     else if(mShapeInfo.shapeType == "Text")
     {
-        TextBox* text = new TextBox(mShapeInfo.shapeID,
-                mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1],
-                mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
+        TextBox* text = new TextBox();
         QPen pen;
         QFont font;
 
         pen.setColor(QColor(mShapeInfo.textColor));
-        text->setPen(pen);
 
         font.setPointSize(mShapeInfo.textPointSize);
         font.setFamily(mShapeInfo.textFontFamily);
         font.setStyle(static_cast<QFont::Style>(mShapeInfo.textFontStyle));
         font.setWeight(mShapeInfo.textFontWeight);
-        text->setFont(font);
 
+
+        text->setID(mShapeInfo.shapeID);
+        text->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
+        text->setDimensions(mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
         text->setText(mShapeInfo.textString);
         text->setAlignment(static_cast<Qt::AlignmentFlag>(mShapeInfo.textAlignment));
+        text->setFont(font);
+        text->setPen(pen);
+
         shapeVector.push_back(text);
     }
     else
@@ -504,7 +524,7 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
     }
     else if(key == "ShapeId")
     {
-        if(mShapeInfo.shapeID != 0)
+        if(mShapeInfo.shapeID > 0)
         {
             addShape(shapeVector);
             mShapeInfo.reset();

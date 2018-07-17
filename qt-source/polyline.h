@@ -24,7 +24,7 @@
 #ifndef POLYLINE_H
 #define POLYLINE_H
 
-#include <QPen>
+#include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"
 #include "custom_vector.h"
@@ -32,8 +32,7 @@
 class Polyline : public Shape
 {
 public:
-    Polyline();
-    Polyline(int id, int* pointData, int pointCount);
+    Polyline(QPaintDevice* paintDevice = nullptr, int id = -1);
     ~Polyline() {}
 
     /* Adds a point to this shape */
@@ -43,7 +42,7 @@ public:
     double area() override;
 
     /* Draws this shape */
-    void draw(QPainter* painter) override;
+    void draw() override;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;
@@ -51,15 +50,14 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setPen(const QPen& pen);
+    /* Sets all the points of this shape */
+    void setPointData(int* pointData, int pointCount);
 
     /* Sets a point of this shape */
     void setPoint(int index, const QPoint& point);
 
 private:
     Vector<QPoint> mPoints;
-    QPen mPen;
 };
 
 #endif // POLYLINE_H

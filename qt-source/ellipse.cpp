@@ -21,20 +21,15 @@
 */
 
 #include "ellipse.h"
+#include "math.h"
 
-Ellipse::Ellipse()
-{
-    mID = 0;
-	mType = ELLIPSE;
-}
-
-Ellipse::Ellipse(int id, int x, int y, int rx, int ry)
+Ellipse::Ellipse(QPaintDevice* paintDevice, int id)
 {
 	mID = id;
 	mType = ELLIPSE;
-	mPosition = {x, y};
-    mRadiusX = rx;
-    mRadiusY = ry;
+
+    if(paintDevice != nullptr)
+        mPainter = new QPainter(paintDevice);
 }
 
 double Ellipse::area()
@@ -42,7 +37,7 @@ double Ellipse::area()
     return (M_PI * mRadiusX * mRadiusY);
 }
 
-void Ellipse::draw(QPainter* painter)
+void Ellipse::draw()
 {
 	
 }
@@ -57,20 +52,10 @@ double Ellipse::perimeter()
     return M_PI * (3 * (mRadiusX + mRadiusY) - sqrt((3 * mRadiusX + mRadiusY) * (mRadiusX + 3 * mRadiusY )));
 }
 
-void Ellipse::setBrush(const QBrush& brush)
-{
-	mBrush = brush;
-}
-
 void Ellipse::setRadii(int rx, int ry)
 {
     mRadiusX = rx;
     mRadiusY = ry;
-}
-
-void Ellipse::setPen(const QPen& pen)
-{
-	mPen = pen;
 }
 
 void Ellipse::setPosition(int x, int y)

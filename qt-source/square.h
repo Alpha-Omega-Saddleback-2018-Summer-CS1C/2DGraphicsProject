@@ -24,9 +24,7 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include "math.h"
-#include <QBrush>
-#include <QPen>
+#include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"
 #include "custom_vector.h"
@@ -34,15 +32,14 @@
 class Square : public Shape
 {
 public:
-    Square();
-    Square(int id, int x, int y, int side);
+    Square(QPaintDevice* paintDevice = nullptr, int id = -1);
     ~Square() {}
 
     /* Returns the area of this shape */
     double area() override;
 
     /* Draws this shape */
-    void draw(QPainter* painter) override;
+    void draw() override;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;
@@ -50,24 +47,19 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the QBrush type to change how the shape is drawn */
-    void setBrush(const QBrush& pen);
-
     /* Sets the dimension of this shape */
     void setDimensions(int side);
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setPen(const QPen& pen);
-
     /* Sets the position of this shape */
     void setPosition(int x, int y);
+
+    /* Sets the side length of this shape */
+    void setSide(int side);
 
 private:
     int mID;
     QPoint mPosition;
     int mSide;
-    QPen mPen;
-    QBrush mBrush;
 };
 
 #endif // SQUARE_H

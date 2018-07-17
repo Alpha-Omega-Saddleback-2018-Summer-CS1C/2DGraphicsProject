@@ -24,6 +24,7 @@
 #ifndef LINE_H
 #define LINE_H
 
+#include <QPaintDevice>
 #include <QPen>
 #include <QPoint>
 #include "shape.h"
@@ -31,15 +32,14 @@
 class Line : public Shape
 {
 public:
-    Line();
-    Line(int id, int x1, int y1, int x2, int y2);
+    Line(QPaintDevice* paintDevice = nullptr, int id = -1);
     ~Line() {}
 
     /* Returns the area of this shape */
     double area() override;
 
     /* Draws this shape */
-    void draw(QPainter* painter) override;
+    void draw() override;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;
@@ -47,13 +47,12 @@ public:
     /* Returns the perimeter of this this shape */
     double perimeter() override;
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setPen(const QPen& pen);
+    /* Sets the points of this line */
+    void setPoints(int x1, int y1, int x2, int y2);
 
 private:
     QPoint mPoint1;
     QPoint mPoint2;
-    QPen mPen;
 };
 
 #endif // LINE_H
