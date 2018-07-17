@@ -49,6 +49,7 @@ void Login::on_loginButton_clicked()
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
         MainWindow mainWindow;
+        mainWindow.show();
         this->hide();
     }
     else
