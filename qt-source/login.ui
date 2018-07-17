@@ -1,85 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>Login</class>
+ <widget class="QMainWindow" name="Login">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>392</width>
     <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Login</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>90</x>
+      <x>80</x>
       <y>10</y>
-      <width>191</width>
+      <width>231</width>
       <height>211</height>
      </rect>
     </property>
     <property name="title">
      <string>   Alpha Omega Group Project</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <widget class="QPushButton" name="pushButton_login">
      <property name="geometry">
       <rect>
-       <x>50</x>
-       <y>100</y>
+       <x>80</x>
+       <y>110</y>
        <width>93</width>
        <height>28</height>
       </rect>
      </property>
      <property name="text">
-      <string>Log in</string>
+      <string>Login</string>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
-       <x>11</x>
+       <x>1</x>
        <y>40</y>
-       <width>160</width>
+       <width>221</width>
        <height>24</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="username">
       <item>
-       <widget class="QLabel" name="label">
+       <widget class="QLabel" name="label_username">
         <property name="text">
-         <string>un</string>
+         <string>username</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_userName"/>
+       <widget class="QLineEdit" name="input_username"/>
       </item>
      </layout>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget1">
      <property name="geometry">
       <rect>
-       <x>11</x>
+       <x>1</x>
        <y>71</y>
-       <width>163</width>
+       <width>221</width>
        <height>24</height>
       </rect>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <layout class="QHBoxLayout" name="password">
       <item>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label_password">
         <property name="text">
-         <string>pw</string>
+         <string>password</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit_password"/>
+       <widget class="QLineEdit" name="input_password"/>
       </item>
      </layout>
     </widget>
@@ -90,7 +93,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>392</width>
      <height>26</height>
     </rect>
    </property>

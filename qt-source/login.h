@@ -16,33 +16,33 @@
  *
  **/
 /*
-    File: mainwindow.h
+    File: login.h
 
-    Defines UI features
+    Defines login window
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef LOGIN_H
+#define LOGIN_H
 
 #include <QMainWindow>
 
 namespace Ui {
-class MainWindow;
+class Login;
 }
 
-class MainWindow : public QMainWindow
+class Login : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit Login(QWidget *parent = nullptr);
+    ~Login();
 
 private slots:
     void on_pushButton_login_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::Login *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif // LOGIN_H

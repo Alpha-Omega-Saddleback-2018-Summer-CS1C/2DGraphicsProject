@@ -18,39 +18,39 @@
 /*
     File: login.cpp
 
-    Defines UI features
+    Defines login window
  */
 
 #include "login.h"
 #include "ui_login.h"
-#include "secdialog.h"
+#include "mainwindow.h"
 
 #include <QMessageBox>
 
-MainWindow::MainWindow(QWidget *parent) :
+Login::Login(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::MainWindow)
+    ui(new Ui::Login)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+Login::~Login()
 {
     delete ui;
 }
 
-void MainWindow::on_pushButton_login_clicked()
+void Login::on_pushButton_login_clicked()
 {
-    QString userName = ui->lineEdit_userName->text();
-    QString password = ui->lineEdit_password->text();
+    QString userName = ui->input_username->text();
+    QString password = ui->input_password->text();
 
     if(userName == "test" && password == "test")
     {
         QMessageBox::information(this, "Login", "Username and password is correct");
         hide();
-        secDialog secondWindow;
-        secondWindow.setModal(true);
-        secondWindow.exec();
+        MainWindow mainWindow;
+        mainWindow.setModal(true);
+        mainWindow.exec();
     }
     else
         QMessageBox::information(this, "Login", "Username and password is NOT correct");
