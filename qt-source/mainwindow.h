@@ -25,7 +25,9 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "custom_vector.h"
 #include "renderarea.h"
+#include "shape.h"
 
 /* Forward decleration */
 class QPushButton;
@@ -36,8 +38,10 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow();
+    MainWindow(Vector<Shape*>* shapes = nullptr);
     ~MainWindow();
+
+    void addShapes(Vector<Shape*>* shapes);
 
 private slots:
     void shapeChanged();
@@ -48,6 +52,8 @@ private:
     QPushButton*    addShapeButton;
     QPushButton*    editShapeButton;
     QPushButton*    deleteShapeButton;
+
+    Vector<Shape*>* shapeVector;
 };
 
 #endif // MAINWINDOW_H

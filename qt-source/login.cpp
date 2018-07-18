@@ -29,7 +29,7 @@
 
 MainWindow* gMainWindow = nullptr;
 
-Login::Login(QWidget *parent) :
+Login::Login(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::Login)
 {
@@ -40,6 +40,11 @@ Login::Login(QWidget *parent) :
 Login::~Login()
 {
     delete ui;
+}
+
+void Login::addShapes(Vector<Shape*>* shapes)
+{
+    shapeVector = shapes;
 }
 
 void Login::on_loginButton_clicked()
@@ -60,6 +65,7 @@ void Login::on_loginButton_clicked()
 void Login::openMainWindow()
 {
     gMainWindow = new MainWindow;
+    gMainWindow->addShapes(shapeVector);
     gMainWindow->show();
     this->hide();
 }

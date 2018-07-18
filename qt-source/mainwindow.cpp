@@ -24,20 +24,20 @@
 #include <QtWidgets>
 #include "mainwindow.h"
 
-MainWindow::MainWindow()
+MainWindow::MainWindow(Vector<Shape*>* shapes)
 {
     renderArea = new RenderArea;
 
+    shapeComboBox = new QComboBox;
     addShapeButton = new QPushButton("Add Shape", this);
     editShapeButton = new QPushButton("Edit Shape", this);
     deleteShapeButton = new QPushButton("Delete Shape", this);
 
-    shapeComboBox = new QComboBox;
-
     QGridLayout* leftSideLayout = new QGridLayout;
-    leftSideLayout->addWidget(addShapeButton, 0, 0, 1, 1);
-    leftSideLayout->addWidget(editShapeButton, 1, 0, 1, 1);
-    leftSideLayout->addWidget(deleteShapeButton, 2, 0, 1, 1);
+    leftSideLayout->addWidget(shapeComboBox, 0, 0, 1, 1);
+    leftSideLayout->addWidget(addShapeButton, 1, 0, 1, 1);
+    leftSideLayout->addWidget(editShapeButton, 2, 0, 1, 1);
+    leftSideLayout->addWidget(deleteShapeButton, 3, 0, 1, 1);
     leftSideLayout->setContentsMargins(100, 10, 100, 10);
 
     QGridLayout* rightSideLayout = new QGridLayout;
@@ -51,6 +51,13 @@ MainWindow::MainWindow()
     setWindowTitle("Basic Drawing");
     setMinimumSize(1100, 700);
     setMaximumSize(1100, 700);
+}
+
+void MainWindow::addShapes(Vector<Shape*>* shapes)
+{
+    shapeVector = shapes;
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
+        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
 }
 
 MainWindow::~MainWindow()

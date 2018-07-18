@@ -25,6 +25,8 @@
 #define LOGIN_H
 
 #include <QMainWindow>
+#include "custom_vector.h"
+#include "shape.h"
 
 namespace Ui {
 class Login;
@@ -38,6 +40,8 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
+    void addShapes(Vector<Shape*>* shapes);
+
 private slots:
     void on_loginButton_clicked();
     void openMainWindow();
@@ -46,7 +50,8 @@ signals:
     void requestNewMainWindow();
 
 private:
-    Ui::Login *ui;
+    Ui::Login* ui;
+    Vector<Shape*>* shapeVector; // Does not need deletion
 };
 
 #endif // LOGIN_H

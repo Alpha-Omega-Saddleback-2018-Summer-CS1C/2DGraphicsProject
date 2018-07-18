@@ -43,6 +43,23 @@ int Shape::getID() const
     return mID;
 }
 
+ShapeType Shape::getType() const
+{
+    return mType;
+}
+
+QString Shape::getTypeAsQString() const
+{
+    if(mType == LINE)            return QString("Line");
+    else if(mType == POLYLINE)   return QString("Polyline");
+    else if(mType == POLYGON)    return QString("Polygon");
+    else if(mType == RECTANGLE)  return QString("Rectangle");
+    else if(mType == SQUARE)     return QString("Square");
+    else if(mType == CIRCLE)     return QString("Circle");
+    else if(mType == ELLIPSE)    return QString("Ellipse");
+    else /* mType == TEXTBOX */  return QString("Textbox");
+}
+
 void Shape::setBrush(const QBrush& brush)
 {
     mBrush = brush;

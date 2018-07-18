@@ -27,6 +27,7 @@
 #include <QBrush>
 #include <QPainter>
 #include <QPen>
+#include <QString>
 
 enum ShapeType
 {
@@ -53,6 +54,12 @@ public:
 
     /* Returns the Shape ID */
     int getID() const;
+
+    /* Returns the Shape type */
+    ShapeType getType() const;
+
+    /* Returns the Shape type as a QString */
+    QString getTypeAsQString() const;
 
     /* Returns the area of the shape */
     virtual double area() = 0;
