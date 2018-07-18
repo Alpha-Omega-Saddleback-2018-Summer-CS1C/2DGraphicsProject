@@ -55,6 +55,9 @@ public:
     /* Returns the Shape ID */
     int getID() const;
 
+    /* Returns the QPainter */
+    QPainter& getPainter();
+
     /* Returns the Shape type */
     ShapeType getType() const;
 
@@ -79,9 +82,6 @@ public:
     /* Sets the Shape ID */
     void setID(int id);
 
-    /* Sets the QPainter type */
-    void setPainter(QPaintDevice* paintDevice);
-
     /* Sets the QPen type */
     void setPen(const QPen& pen);
 
@@ -89,7 +89,7 @@ protected:
     int 		mID;
 	ShapeType 	mType;
 
-    QPainter*   mPainter;
+    QPainter    mPainter;
     QPen        mPen;
     QBrush      mBrush;
 };

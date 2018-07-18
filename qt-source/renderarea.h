@@ -26,17 +26,22 @@
 
 #include <QPen>
 #include <QWidget>
+#include "custom_vector.h"
+#include "shape.h"
 
 class RenderArea : public QWidget
 {
 public:
     RenderArea(QWidget* parent = 0);
+    void addShapeVector(Vector<Shape*>* shapes);
 
 public slots:
 
 protected:
+    void paintEvent(QPaintEvent* event) override;
 
 private:
+    Vector<Shape*>* shapeVector;
 };
 
 #endif // RENDERAREA_H

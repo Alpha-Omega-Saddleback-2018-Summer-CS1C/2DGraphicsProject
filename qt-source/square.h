@@ -33,7 +33,7 @@ class Square : public Shape
 {
 public:
     Square(QPaintDevice* paintDevice = nullptr, int id = -1);
-    ~Square() {}
+    ~Square();
 
     /* Returns the area of this shape */
     double area() override;

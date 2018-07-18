@@ -65,7 +65,7 @@ void Login::on_loginButton_clicked()
 void Login::openMainWindow()
 {
     gMainWindow = new MainWindow;
-    gMainWindow->addShapes(shapeVector);
     gMainWindow->show();
+    gMainWindow->addShapes(shapeVector);
     this->hide();
 }

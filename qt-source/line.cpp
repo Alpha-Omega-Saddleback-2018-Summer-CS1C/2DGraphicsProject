@@ -29,7 +29,12 @@ Line::Line(QPaintDevice* paintDevice, int id)
 	mType = LINE;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Line::~Line()
+{
+    mPainter.end();
 }
 
 double Line::area()
@@ -39,7 +44,9 @@ double Line::area()
 
 void Line::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawLine(mPoint1, mPoint2);
 }
 
 void Line::move(const QPoint& offset)

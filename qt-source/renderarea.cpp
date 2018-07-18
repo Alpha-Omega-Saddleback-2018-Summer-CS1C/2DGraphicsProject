@@ -24,8 +24,29 @@
 #include "renderarea.h"
 
 RenderArea::RenderArea(QWidget* parent)
-    : QWidget(parent)
+    : QWidget(parent),
+      shapeVector(nullptr)
 {
     setMinimumSize(1000, 500);
     setMaximumSize(1000, 500);
+    setBackgroundRole(QPalette::Base);
+    setAutoFillBackground(true);
+}
+
+void RenderArea::addShapeVector(Vector<Shape*>* shapes)
+{
+    shapeVector = shapes;
+    update();
+}
+
+void RenderArea::paintEvent(QPaintEvent* /* event */)
+{
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
+    {
+        (*it)->getPainter().begin(this);
+        (*it)->getPainter().save();
+        (*it)->draw();
+        (*it)->getPainter().restore();
+        (*it)->getPainter().end();
+    }
 }

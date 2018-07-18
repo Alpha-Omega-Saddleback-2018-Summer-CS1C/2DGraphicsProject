@@ -33,7 +33,7 @@ class Line : public Shape
 {
 public:
     Line(QPaintDevice* paintDevice = nullptr, int id = -1);
-    ~Line() {}
+    ~Line();
 
     /* Returns the area of this shape */
     double area() override;

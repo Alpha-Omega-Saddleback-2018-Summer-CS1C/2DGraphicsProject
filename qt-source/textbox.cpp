@@ -29,7 +29,12 @@ TextBox::TextBox(QPaintDevice* paintDevice, int id)
 	mType = TEXTBOX;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+TextBox::~TextBox()
+{
+    mPainter.end();
 }
 
 double TextBox::area()

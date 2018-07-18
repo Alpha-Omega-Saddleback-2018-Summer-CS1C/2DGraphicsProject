@@ -24,7 +24,7 @@
 #include <QtWidgets>
 #include "mainwindow.h"
 
-MainWindow::MainWindow(Vector<Shape*>* shapes)
+MainWindow::MainWindow()
 {
     renderArea = new RenderArea;
 
@@ -44,20 +44,22 @@ MainWindow::MainWindow(Vector<Shape*>* shapes)
     rightSideLayout->setContentsMargins(100, 10, 100, 10);
 
     QGridLayout* mainLayout = new QGridLayout;
-    mainLayout->addWidget(renderArea, 0, 0, 1, 2);
+    mainLayout->addWidget(renderArea, 0, 0, 1, 2, Qt::AlignHCenter);
     mainLayout->addLayout(leftSideLayout, 1, 0, 1, 1);
 
     setLayout(mainLayout);
     setWindowTitle("Basic Drawing");
     setMinimumSize(1100, 700);
-    setMaximumSize(1100, 700);
 }
 
 void MainWindow::addShapes(Vector<Shape*>* shapes)
 {
+    renderArea->addShapeVector(shapes);
     shapeVector = shapes;
     for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
+    {
         shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
+    }
 }
 
 MainWindow::~MainWindow()

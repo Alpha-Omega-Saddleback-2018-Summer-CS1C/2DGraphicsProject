@@ -29,7 +29,12 @@ Rectangle::Rectangle(QPaintDevice* paintDevice, int id)
 	mType = RECTANGLE;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Rectangle::~Rectangle()
+{
+    mPainter.end();
 }
 
 double Rectangle::area()

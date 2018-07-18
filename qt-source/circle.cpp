@@ -29,7 +29,12 @@ Circle::Circle(QPaintDevice* paintDevice, int id)
 	mType = CIRCLE;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Circle::~Circle()
+{
+    mPainter.end();
 }
 
 double Circle::area()

@@ -38,7 +38,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
 public:
-    MainWindow(Vector<Shape*>* shapes = nullptr);
+    MainWindow();
     ~MainWindow();
 
     void addShapes(Vector<Shape*>* shapes);

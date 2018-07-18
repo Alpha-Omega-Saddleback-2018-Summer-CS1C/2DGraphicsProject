@@ -29,7 +29,12 @@ Ellipse::Ellipse(QPaintDevice* paintDevice, int id)
 	mType = ELLIPSE;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Ellipse::~Ellipse()
+{
+    mPainter.end();
 }
 
 double Ellipse::area()

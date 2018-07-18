@@ -43,6 +43,11 @@ int Shape::getID() const
     return mID;
 }
 
+QPainter& Shape::getPainter()
+{
+    return mPainter;
+}
+
 ShapeType Shape::getType() const
 {
     return mType;
@@ -68,17 +73,6 @@ void Shape::setBrush(const QBrush& brush)
 void Shape::setID(int id)
 {
     mID = id;
-}
-
-void Shape::setPainter(QPaintDevice* paintDevice)
-{
-    if(paintDevice == nullptr)
-        return;
-
-    if(mPainter != nullptr)
-        delete mPainter;
-
-    mPainter = new QPainter(paintDevice);
 }
 
 void Shape::setPen(const QPen& pen)

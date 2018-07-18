@@ -30,7 +30,12 @@ Polygon::Polygon(QPaintDevice* paintDevice, int id)
 	mType = POLYGON;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Polygon::~Polygon()
+{
+    mPainter.end();
 }
 
 void Polygon::addPoint(const QPoint& point)

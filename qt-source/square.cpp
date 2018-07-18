@@ -29,7 +29,12 @@ Square::Square(QPaintDevice* paintDevice, int id)
 	mType = SQUARE;
 
     if(paintDevice != nullptr)
-        mPainter = new QPainter(paintDevice);
+        mPainter.begin(paintDevice);
+}
+
+Square::~Square()
+{
+    mPainter.end();
 }
 
 double Square::area()

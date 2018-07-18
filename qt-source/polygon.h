@@ -34,7 +34,7 @@ class Polygon : public Shape
 {
 public:
     Polygon(QPaintDevice* paintDevice = nullptr, int id = -1);
-    ~Polygon() {}
+    ~Polygon();
 
     /* Adds a point to this shape */
     void addPoint(const QPoint& point);
