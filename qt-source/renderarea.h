@@ -16,30 +16,27 @@
  *
  **/
 /*
-    File: canvas_area.h
+    File: renderarea.h
 
-    Defines a widget that will be drawn on by QPainter
-*/
+    Defines a main window
+ */
 
-#ifndef CANVAS_AREA_H
-#define CANVAS_AREA_H
+#ifndef RENDERAREA_H
+#define RENDERAREA_H
 
+#include <QPen>
 #include <QWidget>
 
-namespace Ui {
-class CanvasArea;
-}
-
-class CanvasArea : public QWidget
+class RenderArea : public QWidget
 {
-    Q_OBJECT
-
 public:
-    explicit CanvasArea(QWidget* parent = 0);
-    ~CanvasArea();
+    RenderArea(QWidget* parent = 0);
+
+public slots:
+
+protected:
 
 private:
-    Ui::CanvasArea *ui;
 };
 
-#endif // CANVAS_H
+#endif // RENDERAREA_H

@@ -18,30 +18,36 @@
 /*
     File: mainwindow.h
 
-    Defines the main window
-*/
+    Defines a main window
+ */
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include "canvas_area.h"
+#include <QWidget>
+#include "renderarea.h"
 
-namespace Ui {
-class MainWindow;
-}
+/* Forward decleration */
+class QPushButton;
+class QComboBox;
 
-class MainWindow : public QMainWindow
+class MainWindow : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
+    MainWindow();
     ~MainWindow();
 
+private slots:
+    void shapeChanged();
+
 private:
-    Ui::MainWindow*     ui;
-    CanvasArea*         canvasArea;
+    RenderArea*     renderArea;
+    QComboBox*      shapeComboBox;
+    QPushButton*    addShapeButton;
+    QPushButton*    editShapeButton;
+    QPushButton*    deleteShapeButton;
 };
 
-#endif // SECDIALOG_H
+#endif // MAINWINDOW_H

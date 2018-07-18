@@ -16,25 +16,16 @@
  *
  **/
 /*
-    File: canvas_area.cpp
+    File: renderarea.cpp
 
-    Defines a widget that will be drawn on by QPainter
-*/
+    Defines a main window
+ */
 
-#include "canvas_area.h"
-#include "ui_canvas_area.h"
+#include "renderarea.h"
 
-CanvasArea::CanvasArea(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::CanvasArea)
+RenderArea::RenderArea(QWidget* parent)
+    : QWidget(parent)
 {
-    ui->setupUi(this);
-
-    setBackgroundRole(QPalette::Base);
-    setAutoFillBackground(true);
-}
-
-CanvasArea::~CanvasArea()
-{
-    delete ui;
+    setMinimumSize(1000, 500);
+    setMaximumSize(1000, 500);
 }

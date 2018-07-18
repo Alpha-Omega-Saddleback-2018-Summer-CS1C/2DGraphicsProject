@@ -18,32 +18,52 @@
 /*
     File: mainwindow.cpp
 
-    Defines the main window
-*/
+    Defines a main window
+ */
 
+#include <QtWidgets>
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow),
-    canvasArea(new CanvasArea)
+MainWindow::MainWindow()
 {
-    ui->setupUi(this);
-    ui->gridLayout->addWidget(canvasArea, 0, 0, 1, 4);
+    renderArea = new RenderArea;
+
+    addShapeButton = new QPushButton("Add Shape", this);
+    editShapeButton = new QPushButton("Edit Shape", this);
+    deleteShapeButton = new QPushButton("Delete Shape", this);
+
+    shapeComboBox = new QComboBox;
+
+    QGridLayout* leftSideLayout = new QGridLayout;
+    leftSideLayout->addWidget(addShapeButton, 0, 0, 1, 1);
+    leftSideLayout->addWidget(editShapeButton, 1, 0, 1, 1);
+    leftSideLayout->addWidget(deleteShapeButton, 2, 0, 1, 1);
+    leftSideLayout->setContentsMargins(100, 10, 100, 10);
+
+    QGridLayout* rightSideLayout = new QGridLayout;
+    rightSideLayout->setContentsMargins(100, 10, 100, 10);
+
+    QGridLayout* mainLayout = new QGridLayout;
+    mainLayout->addWidget(renderArea, 0, 0, 1, 2);
+    mainLayout->addLayout(leftSideLayout, 1, 0, 1, 1);
+
+    setLayout(mainLayout);
+    setWindowTitle("Basic Drawing");
+    setMinimumSize(1100, 700);
+    setMaximumSize(1100, 700);
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
-    delete canvasArea;
+    delete renderArea;
+
+    delete shapeComboBox;
+    delete addShapeButton;
+    delete editShapeButton;
+    delete deleteShapeButton;
 }
 
-/*
-    rendering area
-    add user  //verify password //third dialog box
-    add shapes
-    edit shape
-    move
-    update
-*/
+void MainWindow::shapeChanged()
+{
+
+}
