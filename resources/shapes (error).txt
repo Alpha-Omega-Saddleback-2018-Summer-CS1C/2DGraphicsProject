@@ -8,10 +8,10 @@ PenStyle: DashDotLine
 PenCapStyle: FlatCap
 PenJoinStyle: MiterJoin
 
-ShapeId: 2
+ShapeId: asdf
 ShapeType: Polyline
 ShapeDimensions: 460, 90, 470, 20, 530, 40, 540, 80
-PenColor: green
+PenColor:
 PenWidth: 6
 PenStyle: SolidLine
 PenCapStyle: FlatCap
@@ -80,5 +80,6 @@ TextColor: blue
 TextAlignment: AlignCenter
 TextPointSize: 10
 TextFontFamily: Comic Sans MS
-TextFontStyle: StyleNormal
+TextFontStyle: FlatCap
 TextFontWeight: Normal
+blob

@@ -44,7 +44,9 @@ double TextBox::area()
 
 void TextBox::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawText(mPosition.x(), mPosition.y(), mWidth, mHeight, mAlignmentFlags, mText);
 }
 
 void TextBox::move(const QPoint& offset)

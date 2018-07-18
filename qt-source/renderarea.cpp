@@ -44,9 +44,15 @@ void RenderArea::paintEvent(QPaintEvent* /* event */)
     for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
     {
         (*it)->getPainter().begin(this);
+        (*it)->getPainter().setRenderHint(QPainter::Antialiasing, true);
         (*it)->getPainter().save();
         (*it)->draw();
         (*it)->getPainter().restore();
         (*it)->getPainter().end();
     }
+
+    QPainter localPainter(this);
+    localPainter.setPen(palette().dark().color());
+    localPainter.setBrush(Qt::NoBrush);
+    localPainter.drawRect(QRect(0, 0, width() - 1, height() -1 ));
 }

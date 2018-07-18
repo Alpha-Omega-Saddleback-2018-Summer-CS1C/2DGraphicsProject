@@ -49,7 +49,9 @@ double Polyline::area()
 
 void Polyline::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawPolyline(&mPoints[0], mPoints.size());
 }
 
 void Polyline::move(const QPoint& offset)

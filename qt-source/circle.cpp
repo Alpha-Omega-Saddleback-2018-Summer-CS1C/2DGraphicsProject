@@ -44,7 +44,9 @@ double Circle::area()
 
 void Circle::draw()
 {
-	
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawEllipse(mPosition, radius, radius);
 }
 
 void Circle::move(const QPoint& offset)

@@ -44,7 +44,9 @@ double Square::area()
 
 void Square::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawRect(mPosition.x(), mPosition.y(), mSide, mSide);
 }
 
 void Square::move(const QPoint& offset)

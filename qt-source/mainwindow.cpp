@@ -49,7 +49,7 @@ MainWindow::MainWindow()
 
     setLayout(mainLayout);
     setWindowTitle("Basic Drawing");
-    setMinimumSize(1100, 700);
+    setMinimumSize(1100, 500);
 }
 
 void MainWindow::addShapes(Vector<Shape*>* shapes)

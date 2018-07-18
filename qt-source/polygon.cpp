@@ -62,7 +62,9 @@ double Polygon::area()
 
 void Polygon::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawPolygon(&mPoints[0], mPoints.size());
 }
 
 void Polygon::move(const QPoint& offset)

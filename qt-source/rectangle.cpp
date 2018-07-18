@@ -44,7 +44,9 @@ double Rectangle::area()
 
 void Rectangle::draw()
 {
-
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawRect(mPosition.x(), mPosition.y(), mWidth, mHeight);
 }
 
 void Rectangle::move(const QPoint& offset)

@@ -44,7 +44,9 @@ double Ellipse::area()
 
 void Ellipse::draw()
 {
-	
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawEllipse(mPosition, mRadiusX, mRadiusY);
 }
 
 void Ellipse::move(const QPoint& offset)
