@@ -128,6 +128,9 @@ public:
     /* Loads the file to be parsed. Returns true on success */
     bool parse(Vector<Shape*>& shapeVector);
 
+public:
+    /* Functions used by MainWindow class to get QString values */
+
 private:
 
     /* Adds a shape to the shape vector */

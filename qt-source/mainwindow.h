@@ -32,6 +32,8 @@
 /* Forward decleration */
 class QPushButton;
 class QComboBox;
+class QLabel;
+class QGridLayout;
 
 class MainWindow : public QWidget
 {
@@ -47,11 +49,57 @@ private slots:
     void shapeChanged();
 
 private:
+
+private:
     RenderArea*     renderArea;
+    QGridLayout*    mainLayout;
+    QGridLayout*    leftSideLayout;
+    QGridLayout*    rightSideLayout;
+
+    /* Left side */
+    QLabel*         selectedShapeLabel;
     QComboBox*      shapeComboBox;
     QPushButton*    addShapeButton;
     QPushButton*    editShapeButton;
     QPushButton*    deleteShapeButton;
+
+    /* Right-side (general) */
+    QLabel*         shapeIDLabel;
+    QLabel*         shapeIDValueLabel;
+    QLabel*         shapeTypeLabel;
+    QLabel*         shapeTypeValueLabel;
+
+    /* Right side (non-text) */
+    QLabel*         penColorLabel;
+    QLabel*         penColorValueLabel;
+    QLabel*         penWidthLabel;
+    QLabel*         penWidthValueLabel;
+    QLabel*         penStyleLabel;
+    QLabel*         penStyleValueLabel;
+    QLabel*         penCapStyleLabel;
+    QLabel*         penCapStyleValueLabel;
+    QLabel*         penJoinStyleLabel;
+    QLabel*         penJoinStyleValueLabel;
+    QLabel*         brushColorLabel;
+    QLabel*         brushColorValueLabel;
+    QLabel*         brushStyleLabel;
+    QLabel*         brushStyleValueLabel;
+
+    /* Right side (text) */
+    QLabel*         textStringLabel;
+    QLabel*         textStringValueLabel;
+    QLabel*         textColorLabel;
+    QLabel*         textColorValueLabel;
+    QLabel*         textAlignmentLabel;
+    QLabel*         textAlignmentValueLabel;
+    QLabel*         textPointSizeLabel;
+    QLabel*         textPointSizeValueLabel;
+    QLabel*         textFontFamilyLabel;
+    QLabel*         textFontFamilyValueLabel;
+    QLabel*         textFontStyleLabel;
+    QLabel*         textFontStyleValueLabel;
+    QLabel*         textFontWeightLabel;
+    QLabel*         textFontWeightValueLabel;
 
     Vector<Shape*>* shapeVector;
 };

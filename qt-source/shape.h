@@ -52,11 +52,18 @@ public:
     bool operator>(const Shape& shape) const;
     bool operator<(const Shape& shape) const;
 
+
+    /* Returns the QBrush */
+    QBrush& getBrush();
+
     /* Returns the Shape ID */
     int getID() const;
 
     /* Returns the QPainter */
     QPainter& getPainter();
+
+    /* Returns the QPen */
+    QPen& getPen();
 
     /* Returns the Shape type */
     ShapeType getType() const;

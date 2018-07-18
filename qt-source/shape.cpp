@@ -38,6 +38,13 @@ bool Shape::operator<(const Shape& shape) const
     return mID < shape.mID;
 }
 
+/* Returns the QBrush */
+QBrush& Shape::getBrush()
+{
+    return mBrush;
+}
+
+
 int Shape::getID() const
 {
     return mID;
@@ -46,6 +53,12 @@ int Shape::getID() const
 QPainter& Shape::getPainter()
 {
     return mPainter;
+}
+
+/* Returns the QPen */
+QPen& Shape::getPen()
+{
+    return mPen;
 }
 
 ShapeType Shape::getType() const
