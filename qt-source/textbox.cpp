@@ -34,7 +34,8 @@ TextBox::TextBox(QPaintDevice* paintDevice, int id)
 
 TextBox::~TextBox()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double TextBox::area()
@@ -42,11 +43,39 @@ double TextBox::area()
     return (double)(mWidth * mHeight);
 }
 
+Vector<QString> TextBox::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Upper-Left Corner:");
+    ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
+    ret.push_back("Width:");
+    ret.push_back(QString::number(mWidth));
+    ret.push_back("Height:");
+    ret.push_back(QString::number(mHeight));
+
+    return ret;
+}
+
 void TextBox::draw()
 {
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawText(mPosition.x(), mPosition.y(), mWidth, mHeight, mAlignmentFlags, mText);
+}
+
+QFont& TextBox::getFont()
+{
+    return mFont;
+}
+
+Qt::AlignmentFlag TextBox::getAlignment() const
+{
+    return mAlignmentFlags;
+}
+
+QString TextBox::getText() const
+{
+    return mText;
 }
 
 void TextBox::move(const QPoint& offset)

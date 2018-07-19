@@ -26,7 +26,6 @@
 #include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"
-#include "custom_vector.h"
 
 class Circle: public Shape
 {
@@ -35,6 +34,7 @@ public:
     ~Circle();
 
     double area() override; // Return the area of the ciricle
+    Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
     void draw() override; // Draw the circle
     void move(const QPoint& offset) override; // Translates the circle by a given offset
     double perimeter() override; // return the circumference of the ciricle

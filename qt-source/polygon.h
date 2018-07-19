@@ -42,6 +42,9 @@ public:
     /* Returns the area of this shape */
     double area() override;
 
+    /* Returns the dimensions of this shape for use in QLabels */
+    Vector<QString> dimensionLabels() override;
+
     /* Draws this shape */
     void draw() override;
 

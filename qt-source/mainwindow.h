@@ -39,6 +39,8 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 
+    static const int shapeDimensionLabelCount = 10;
+
 public:
     MainWindow();
     ~MainWindow();
@@ -47,8 +49,6 @@ public:
 
 private slots:
     void shapeChanged();
-
-private:
 
 private:
     RenderArea*     renderArea;
@@ -68,6 +68,8 @@ private:
     QLabel*         shapeIDValueLabel;
     QLabel*         shapeTypeLabel;
     QLabel*         shapeTypeValueLabel;
+    QLabel*         shapeDimensionLabels[shapeDimensionLabelCount];
+    bool            isText;
 
     /* Right side (non-text) */
     QLabel*         penColorLabel;

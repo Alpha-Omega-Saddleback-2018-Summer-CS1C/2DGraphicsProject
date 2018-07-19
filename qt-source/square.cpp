@@ -34,12 +34,24 @@ Square::Square(QPaintDevice* paintDevice, int id)
 
 Square::~Square()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double Square::area()
 {
     return (double)(mSide * mSide);
+}
+
+Vector<QString> Square::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Upper-Left Corner:");
+    ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
+    ret.push_back("Side:");
+    ret.push_back(QString::number(mSide));
+
+    return ret;
 }
 
 void Square::draw()

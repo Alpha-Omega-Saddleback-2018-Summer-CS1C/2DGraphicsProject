@@ -34,12 +34,24 @@ Line::Line(QPaintDevice* paintDevice, int id)
 
 Line::~Line()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double Line::area()
 {
     return 0.0;
+}
+
+Vector<QString> Line::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Point 1:");
+    ret.push_back("(" + QString::number(mPoint1.x()) + ", " + QString::number(mPoint1.y()) + ")");
+    ret.push_back("Point 2:");
+    ret.push_back("(" + QString::number(mPoint2.x()) + ", " + QString::number(mPoint2.y()) + ")");
+
+    return ret;
 }
 
 void Line::draw()

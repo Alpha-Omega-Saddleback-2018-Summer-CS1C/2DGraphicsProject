@@ -34,7 +34,8 @@ Polyline::Polyline(QPaintDevice* paintDevice, int id)
 
 Polyline::~Polyline()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 void Polyline::addPoint(const QPoint& point)
@@ -45,6 +46,36 @@ void Polyline::addPoint(const QPoint& point)
 double Polyline::area()
 {
     return 0.0;
+}
+
+Vector<QString> Polyline::dimensionLabels()
+{
+    Vector<QString> ret;
+    int pointCount = mPoints.size();
+
+    if(pointCount > 5)
+    {
+        for(int i = 0; i < 3; ++i)
+        {
+            ret.push_back("Point " + QString::number(i + 1) + ":");
+            ret.push_back("(" + QString::number(mPoints[i].x()) + ", " + QString::number(mPoints[i].y()) + ")");
+        }
+
+        ret.push_back("...");
+        ret.push_back("...");
+        ret.push_back("Point " + QString::number(pointCount) + ":");
+        ret.push_back("(" + QString::number(mPoints[pointCount - 1].x()) + ", " + QString::number(mPoints[pointCount - 1].y()) + ")");
+    }
+    else
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            ret.push_back("Point " + QString::number(i + 1) + ":");
+            ret.push_back("(" + QString::number(mPoints[i].x()) + ", " + QString::number(mPoints[i].y()) + ")");
+        }
+    }
+
+    return ret;
 }
 
 void Polyline::draw()

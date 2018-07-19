@@ -34,7 +34,8 @@ Ellipse::Ellipse(QPaintDevice* paintDevice, int id)
 
 Ellipse::~Ellipse()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double Ellipse::area()
@@ -47,6 +48,19 @@ void Ellipse::draw()
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawEllipse(mPosition, mRadiusX, mRadiusY);
+}
+
+Vector<QString> Ellipse::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Center:");
+    ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
+    ret.push_back("RadiusX:");
+    ret.push_back(QString::number(mRadiusX));
+    ret.push_back("RadiusY:");
+    ret.push_back(QString::number(mRadiusY));
+
+    return ret;
 }
 
 void Ellipse::move(const QPoint& offset)

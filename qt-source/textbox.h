@@ -39,8 +39,20 @@ public:
     /* Returns the area of this shape */
     double area() override;
 
+    /* Returns the dimensions of this shape for use in QLabels */
+    Vector<QString> dimensionLabels() override;
+
     /* Draws this shape */
     void draw() override;
+
+    /* Returns the QFont of the text box */
+    QFont& getFont();
+
+    /* Returns the alignment of the text box */
+    Qt::AlignmentFlag getAlignment() const;
+
+    /* Returns the text string */
+    QString getText() const;
 
     /* Translates this shape by a given offset */
     void move(const QPoint& offset) override;

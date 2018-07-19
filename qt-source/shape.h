@@ -28,6 +28,7 @@
 #include <QPainter>
 #include <QPen>
 #include <QString>
+#include "custom_vector.h"
 
 enum ShapeType
 {
@@ -52,6 +53,14 @@ public:
     bool operator>(const Shape& shape) const;
     bool operator<(const Shape& shape) const;
 
+    /* Returns the area of the shape */
+    virtual double area() = 0;
+
+    /* Draws this shape */
+    virtual void draw() = 0;
+
+    /* Returns the dimensions of this shape for use in QLabels */
+    virtual Vector<QString> dimensionLabels() = 0;
 
     /* Returns the QBrush */
     QBrush& getBrush();
@@ -70,12 +79,6 @@ public:
 
     /* Returns the Shape type as a QString */
     QString getTypeAsQString() const;
-
-    /* Returns the area of the shape */
-    virtual double area() = 0;
-
-    /* Draws this shape */
-    virtual void draw() = 0;
 
     /* Translates this shape by a given offset */
     virtual void move(const QPoint& offset) = 0;

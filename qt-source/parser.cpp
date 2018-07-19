@@ -375,7 +375,7 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
         else if(value == "HorPattern")
             mShapeInfo.brushStyle = Qt::HorPattern;
         else if(value == "VerPattern")
-            mShapeInfo.brushStyle = Qt::HorPattern;
+            mShapeInfo.brushStyle = Qt::VerPattern;
         else
             mErrorList.push_back("Unexpected value. Try \"NoBrush\", \"SolidPattern\", \"HorPattern\", or \"VerPattern\" (Line: " +
                 std::to_string(lineNumber) + " \"" + line + "\")");

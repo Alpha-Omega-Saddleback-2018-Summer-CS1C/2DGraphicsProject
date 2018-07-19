@@ -34,12 +34,24 @@ Circle::Circle(QPaintDevice* paintDevice, int id)
 
 Circle::~Circle()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double Circle::area()
 {
 	return (double)(M_PI * radius * radius);
+}
+
+Vector<QString> Circle::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Center:");
+    ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
+    ret.push_back("Radius:");
+    ret.push_back(QString::number(radius));
+
+    return ret;
 }
 
 void Circle::draw()

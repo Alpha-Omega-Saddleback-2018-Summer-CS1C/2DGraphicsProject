@@ -35,7 +35,8 @@ Polygon::Polygon(QPaintDevice* paintDevice, int id)
 
 Polygon::~Polygon()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 void Polygon::addPoint(const QPoint& point)
@@ -58,6 +59,36 @@ double Polygon::area()
     }
 
     return sum / 2;
+}
+
+Vector<QString> Polygon::dimensionLabels()
+{
+    Vector<QString> ret;
+    int pointCount = mPoints.size();
+
+    if(pointCount > 5)
+    {
+        for(int i = 0; i < 3; ++i)
+        {
+            ret.push_back("Point " + QString::number(i + 1) + ":");
+            ret.push_back("(" + QString::number(mPoints[i].x()) + ", " + QString::number(mPoints[i].y()) + ")");
+        }
+
+        ret.push_back("...");
+        ret.push_back("...");
+        ret.push_back("Point " + QString::number(pointCount) + ":");
+        ret.push_back("(" + QString::number(mPoints[pointCount - 1].x()) + ", " + QString::number(mPoints[pointCount - 1].y()) + ")");
+    }
+    else
+    {
+        for(int i = 0; i < 5; ++i)
+        {
+            ret.push_back("Point " + QString::number(i + 1) + ":");
+            ret.push_back("(" + QString::number(mPoints[i].x()) + ", " + QString::number(mPoints[i].y()) + ")");
+        }
+    }
+
+    return ret;
 }
 
 void Polygon::draw()

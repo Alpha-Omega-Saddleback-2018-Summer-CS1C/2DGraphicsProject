@@ -34,12 +34,26 @@ Rectangle::Rectangle(QPaintDevice* paintDevice, int id)
 
 Rectangle::~Rectangle()
 {
-    mPainter.end();
+    if(mPainter.device() != 0)
+        mPainter.end();
 }
 
 double Rectangle::area()
 {
     return (double)(mWidth * mHeight);
+}
+
+Vector<QString> Rectangle::dimensionLabels()
+{
+    Vector<QString> ret;
+    ret.push_back("Upper-Left Corner:");
+    ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
+    ret.push_back("Width:");
+    ret.push_back(QString::number(mWidth));
+    ret.push_back("Height:");
+    ret.push_back(QString::number(mHeight));
+
+    return ret;
 }
 
 void Rectangle::draw()
