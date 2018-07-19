@@ -34,7 +34,6 @@ Login::Login(QWidget* parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-    connect(this, SIGNAL(requestNewMainWindow()), this, SLOT(openMainWindow()));
 }
 
 Login::~Login()
@@ -42,30 +41,42 @@ Login::~Login()
     delete ui;
 }
 
-void Login::addShapes(Vector<Shape*>& shapes)
+void Login::passParams(Vector<Shape*>& shapes, Vector<User>& users)
 {
     shapeVector = shapes;
+    userVector = users;
 }
 
 void Login::on_loginButton_clicked()
 {
-    QString userName = ui->input_username->text();
+    QString username = ui->input_username->text();
     QString password = ui->input_password->text();
+    bool loginSuccess = false;
 
-    if(userName == "test" && password == "test")
+    for(Vector<User>::iterator it = userVector.begin(); it != userVector.end(); ++it)
     {
-        emit requestNewMainWindow();
+        if(username == it->mUsername && password == it->mPassword)
+        {
+            loginSuccess = true;
+            break;
+        }
+    }
+
+    if(loginSuccess)
+    {
+        openMainWindow();
     }
     else
     {
-        QMessageBox::warning(this, "Login", "Incorrect username or password!");
+        QMessageBox::warning(this, "Invalid Sign In", "Incorrect username or password!");
     }
 }
 
 void Login::openMainWindow()
 {
+    User user;
     gMainWindow = new MainWindow;
     gMainWindow->show();
-    gMainWindow->addShapes(shapeVector);
-    this->hide();
+    gMainWindow->passParams(shapeVector, user);
+    this->close();
 }

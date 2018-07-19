@@ -5,7 +5,7 @@
  *  David Epstein <DavidE92@live.com>
  *  Greg Graffius <ggraffius0@saddleback.edu>
  *  Justis Ketcham Justis <justis.ketcham@gmail.com>
- *  Brett Saiki <bksaiki@gmail.com>
+ *  Brett Saiki <bsaiki0@saddleback.edu>
  *
  *  Descr:   Final project for CS1C at Saddleback College (Summer 2018)
  *  Teacher: John Kath
@@ -29,6 +29,7 @@
 #include "usermanager.h"
 #include "shape.h"
 #include "custom_vector.h"
+#include "userparser.h"
 
 /* Forward decleration */
 class QPushButton;
@@ -48,7 +49,7 @@ public:
     MainWindow();
     ~MainWindow();
 
-    void addShapes(Vector<Shape*>& shapes);
+    void passParams(Vector<Shape*>& shapes, User& user);
 
 private slots:
     void updateShapeInfo();
@@ -75,6 +76,7 @@ private:
     bool            isText;
 
     Vector<Shape*> shapeVector;
+    User currentUser;
     UserManager* userManager;
 };
 

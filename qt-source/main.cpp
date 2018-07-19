@@ -5,7 +5,7 @@
  *  David Epstein <DavidE92@live.com>
  *  Greg Graffius <ggraffius0@saddleback.edu>
  *  Justis Ketcham Justis <justis.ketcham@gmail.com>
- *  Brett Saiki <bksaiki@gmail.com>
+ *  Brett Saiki <bsaiki0@saddleback.edu>
  *
  *  Descr:   Final project for CS1C at Saddleback College (Summer 2018)
  *  Teacher: John Kath
@@ -28,32 +28,50 @@
 #include "parser.h"
 #include "custom_vector.h"
 #include "shape.h"
+#include "userparser.h"
 
-const std::string file = "shapes.txt";
+const std::string shapeFile = "shapes.txt";
+const std::string userFile = "users.txt";
 
 int main(int argc, char *argv[])
 {
-    Parser parser;
+    Parser shapeParser;
+    UserParser userParser;
     Vector<Shape*> shapeVector;
+    Vector<User> userVector;
 
     //
     // Parser
     //
 
-    if(!parser.loadFile(file))
+    if(!shapeParser.loadFile(shapeFile))
     {
-        std::cout << "Couldn't load file \"" << file << "\"!" << std::endl;
+        std::cout << "Couldn't load file \"" << shapeFile << "\"!" << std::endl;
         return 0;
     }
 
-    if(!parser.parse(shapeVector))
+    if(!userParser.loadFile(userFile))
     {
-        std::cout << "Parsing failed!" << std::endl;
+        std::cout << "Couldn't load file \"" << userFile << "\"!" << std::endl;
         return 0;
     }
 
-    std::cout << "File \"" << file << "\" loaded and parsed successfully." << std::endl;
-    parser.close();
+    if(!shapeParser.parse(shapeVector))
+    {
+        std::cout << "Parsing file \"" << shapeFile << "\"failed!" << std::endl;
+        return 0;
+    }
+
+    if(!userParser.parse(userVector))
+    {
+        std::cout << "Parsing file \"" << userFile << "\"failed!" << std::endl;
+        return 0;
+    }
+
+    std::cout << "File \"" << shapeFile << "\" loaded and parsed successfully." << std::endl;
+    std::cout << "File \"" << userFile << "\" loaded and parsed successfully." << std::endl;
+    shapeParser.close();
+    userParser.close();
 
     //
     // QApplication
@@ -61,7 +79,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     Login w;
-    w.addShapes(shapeVector);
+    w.passParams(shapeVector, userVector);
     w.show();
 
     return a.exec();

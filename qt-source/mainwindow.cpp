@@ -5,7 +5,7 @@
  *  David Epstein <DavidE92@live.com>
  *  Greg Graffius <ggraffius0@saddleback.edu>
  *  Justis Ketcham Justis <justis.ketcham@gmail.com>
- *  Brett Saiki <bksaiki@gmail.com>
+ *  Brett Saiki <bsaiki0@saddleback.edu>
  *
  *  Descr:   Final project for CS1C at Saddleback College (Summer 2018)
  *  Teacher: John Kath
@@ -198,9 +198,10 @@ MainWindow::MainWindow()
     setMaximumSize(1100, 800);
 }
 
-void MainWindow::addShapes(Vector<Shape*>& shapes)
+void MainWindow::passParams(Vector<Shape*>& shapes, User& user)
 {
     shapeVector = shapes;
+    currentUser = user;
 
     renderArea->addShapeVector(shapes);
     for(Vector<Shape*>::iterator it = shapeVector.begin(); it != shapeVector.end(); ++it)

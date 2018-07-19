@@ -5,7 +5,7 @@
  *  David Epstein <DavidE92@live.com>
  *  Greg Graffius <ggraffius0@saddleback.edu>
  *  Justis Ketcham Justis <justis.ketcham@gmail.com>
- *  Brett Saiki <bksaiki@gmail.com>
+ *  Brett Saiki <bsaiki0@saddleback.edu>
  *
  *  Descr:   Final project for CS1C at Saddleback College (Summer 2018)
  *  Teacher: John Kath
@@ -27,6 +27,7 @@
 #include <QMainWindow>
 #include "custom_vector.h"
 #include "shape.h"
+#include "userparser.h"
 
 namespace Ui {
 class Login;
@@ -40,18 +41,16 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-    void addShapes(Vector<Shape*>& shapes);
+    void passParams(Vector<Shape*>& shapes, Vector<User>& users);
 
 private slots:
     void on_loginButton_clicked();
     void openMainWindow();
 
-signals:
-    void requestNewMainWindow();
-
 private:
     Ui::Login* ui;
     Vector<Shape*> shapeVector;
+    Vector<User> userVector;
 };
 
 #endif // LOGIN_H

@@ -1,1 +1,2 @@
-admin password
+admin pass 1
+guest test 0
