@@ -40,6 +40,7 @@ class MainWindow : public QWidget
     Q_OBJECT
 
     static const int shapeDimensionLabelCount = 10;
+    static const int shapeDescriptionLabelCount = 14;
 
 public:
     MainWindow();
@@ -63,12 +64,13 @@ private:
     QPushButton*    editShapeButton;
     QPushButton*    deleteShapeButton;
 
-    /* Right-side (general) */
+    /* Right-side */
     QLabel*         shapeIDLabel;
     QLabel*         shapeIDValueLabel;
     QLabel*         shapeTypeLabel;
     QLabel*         shapeTypeValueLabel;
     QLabel*         shapeDimensionLabels[shapeDimensionLabelCount];
+    QLabel*         shapeDescriptionLabels[shapeDescriptionLabelCount];
     bool            isText;
 
     /* Right side (non-text) */

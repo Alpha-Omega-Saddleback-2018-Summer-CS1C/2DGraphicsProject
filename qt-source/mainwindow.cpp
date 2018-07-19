@@ -136,6 +136,14 @@ MainWindow::MainWindow()
         rightSideLayout->addWidget(shapeDimensionLabels[i], (i / 2) + 2, i % 2);
     }
 
+    for(int i = 0; i < shapeDescriptionLabelCount / 2; ++i)
+    {
+        shapeDescriptionLabels[i] = new QLabel;
+        shapeDescriptionLabels[i + 1] = new QLabel;
+        rightSideLayout->addWidget(shapeDescriptionLabels[i], i, 4, 1, 1);
+        rightSideLayout->addWidget(shapeDescriptionLabels[i + 1], i, 5, 1, 3);
+    }
+
     /* Layout */
     mainLayout = new QGridLayout;
     mainLayout->addWidget(renderArea, 0, 0, 1, 2, Qt::AlignHCenter);
@@ -288,6 +296,9 @@ MainWindow::~MainWindow()
 
     for(int i = 0; i < shapeDimensionLabelCount; ++i)
         delete shapeDimensionLabels[i];
+
+    for(int i = 0; i < shapeDescriptionLabelCount; ++i)
+        delete shapeDescriptionLabels[i];
 }
 
 void MainWindow::shapeChanged()
