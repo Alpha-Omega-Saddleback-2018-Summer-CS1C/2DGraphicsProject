@@ -25,10 +25,10 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include "renderarea.h"
-#include "usermanager.h"
-#include "shape.h"
 #include "custom_vector.h"
+#include "renderarea.h"
+#include "shape.h"
+#include "usermanager.h"
 #include "userparser.h"
 
 /* Forward decleration */
@@ -36,6 +36,7 @@ class QPushButton;
 class QComboBox;
 class QLabel;
 class QGridLayout;
+class Login;
 
 class MainWindow : public QWidget
 {
@@ -49,7 +50,7 @@ public:
     MainWindow();
     ~MainWindow();
 
-    void passParams(Vector<Shape*>& shapes, User& user);
+    void passParams(Login* login, Vector<Shape*>& shapes, Vector<User>& users, User& user);
 
 private slots:
     void updateShapeInfo();
@@ -68,6 +69,7 @@ private:
     QPushButton*    editShapeButton;
     QPushButton*    deleteShapeButton;
     QPushButton*    userManagerButton;
+    QPushButton*    logoutButton;
 
     /* Right-side */
     QLabel*         shapeHeaderLabels[shapeHeaderLabelCount];
@@ -75,9 +77,11 @@ private:
     QLabel*         shapeDescriptionLabels[shapeDescriptionLabelCount];
     bool            isText;
 
-    Vector<Shape*> shapeVector;
-    User currentUser;
+    Login* loginWindow;
     UserManager* userManager;
+    Vector<Shape*> shapeVector;
+    Vector<User> userVector;
+    User currentUser;
 };
 
 #endif // MAINWINDOW_H

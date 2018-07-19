@@ -25,6 +25,7 @@
 #define DELETEUSER_H
 
 #include <QDialog>
+#include "custom_vector.h"
 #include "userparser.h"
 
 namespace Ui {
@@ -39,8 +40,12 @@ public:
     explicit DeleteUser(QWidget *parent = 0);
     ~DeleteUser();
 
+    void passParams(Vector<User>& users, User user);
+
 private:
     Ui::DeleteUser *ui;
+    Vector<User> userVector;
+    User currentUser;
 };
 
 #endif // DELETEUSER_H

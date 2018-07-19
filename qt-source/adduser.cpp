@@ -36,6 +36,12 @@ AddUser::~AddUser()
     delete ui;
 }
 
+void AddUser::passParams(Vector<User>& users, User user)
+{
+    userVector = users;
+    currentUser = user;
+}
+
 void AddUser::on_createNewUserButton_clicked()
 {
     QString newUser = ui->input_newUser->text();

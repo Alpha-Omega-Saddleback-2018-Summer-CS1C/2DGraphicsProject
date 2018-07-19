@@ -26,6 +26,7 @@
 
 #include <QDialog>
 #include "adduser.h"
+#include "custom_vector.h"
 #include "userparser.h"
 
 namespace Ui {
@@ -40,6 +41,8 @@ public:
     explicit UserManager(QWidget *parent = 0);
     ~UserManager();
 
+    void passParams(Vector<User>& users, User& user);
+
 private slots:
     void on_addUserButton_clicked();
 
@@ -51,6 +54,8 @@ private:
     Ui::UserManager *ui;
     AddUser *adduser;
 
+    Vector<User> userVector;
+    User currentUser;
 };
 
 #endif // USERMANAGER_H

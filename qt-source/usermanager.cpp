@@ -29,12 +29,19 @@ UserManager::UserManager(QWidget *parent) :
     ui(new Ui::UserManager)
 {
     ui->setupUi(this);
+    adduser = nullptr;
 }
 
 UserManager::~UserManager()
 {
     delete ui;
-    delete adduser;
+    if(adduser) delete adduser;
+}
+
+void UserManager::passParams(Vector<User>& users, User& user)
+{
+    userVector = users;
+    currentUser = user;
 }
 
 void UserManager::on_addUserButton_clicked()

@@ -25,6 +25,7 @@
 #define LOGIN_H
 
 #include <QMainWindow>
+#include "mainwindow.h"
 #include "custom_vector.h"
 #include "shape.h"
 #include "userparser.h"
@@ -46,9 +47,12 @@ public:
 private slots:
     void on_loginButton_clicked();
     void openMainWindow();
+    void closeMainWindow();
 
 private:
     Ui::Login* ui;
+    MainWindow* mainWindow;
+
     Vector<Shape*> shapeVector;
     Vector<User> userVector;
 };

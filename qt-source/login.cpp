@@ -23,11 +23,8 @@
 
 #include "login.h"
 #include "ui_login.h"
-#include "mainwindow.h"
 
 #include <QMessageBox>
-
-MainWindow* gMainWindow = nullptr;
 
 Login::Login(QWidget* parent) :
     QMainWindow(parent),
@@ -75,8 +72,18 @@ void Login::on_loginButton_clicked()
 void Login::openMainWindow()
 {
     User user;
-    gMainWindow = new MainWindow;
-    gMainWindow->show();
-    gMainWindow->passParams(shapeVector, user);
-    this->close();
+    mainWindow = new MainWindow;
+    mainWindow->show();
+    mainWindow->passParams(this, shapeVector, userVector, user);
+    this->hide();
+}
+
+void Login::closeMainWindow()
+{
+    mainWindow->close();
+    delete mainWindow;
+
+    ui->input_username->clear();
+    ui->input_password->clear();
+    this->show();
 }

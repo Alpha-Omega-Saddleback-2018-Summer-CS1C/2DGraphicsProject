@@ -22,6 +22,7 @@
  */
 
 #include <QtWidgets>
+#include "login.h"
 #include "mainwindow.h"
 #include "parser.h"
 #include "textbox.h"
@@ -136,6 +137,7 @@ QString getTextStringTrimmed(const QString& str)
 MainWindow::MainWindow()
 {
     renderArea = new RenderArea;
+    userManager = nullptr;
 
     /* Left-side */
     selectedShapeLabel = new QLabel("Selected Shape:");
@@ -144,6 +146,7 @@ MainWindow::MainWindow()
     editShapeButton = new QPushButton("Edit Shape", this);
     deleteShapeButton = new QPushButton("Delete Shape", this);
     userManagerButton = new QPushButton("User Manager", this);
+    logoutButton = new QPushButton("Logout", this);
 
     leftSideLayout = new QGridLayout;
     leftSideLayout->addWidget(selectedShapeLabel, 0, 0, 1, 1);
@@ -152,6 +155,7 @@ MainWindow::MainWindow()
     leftSideLayout->addWidget(editShapeButton, 2, 0, 1, 3);
     leftSideLayout->addWidget(deleteShapeButton, 3, 0, 1, 3);
     leftSideLayout->addWidget(userManagerButton, 4, 0, 1, 3);
+    leftSideLayout->addWidget(logoutButton, 5, 0, 1, 3);
     leftSideLayout->setContentsMargins(100, 10, 100, 10);
 
     /* Right-side */
@@ -198,10 +202,14 @@ MainWindow::MainWindow()
     setMaximumSize(1100, 800);
 }
 
-void MainWindow::passParams(Vector<Shape*>& shapes, User& user)
+void MainWindow::passParams(Login* login, Vector<Shape*>& shapes, Vector<User>& users, User& user)
 {
+    loginWindow = login;
     shapeVector = shapes;
+    userVector = users;
     currentUser = user;
+
+    connect(logoutButton, SIGNAL(clicked(bool)), loginWindow, SLOT(closeMainWindow()));
 
     renderArea->addShapeVector(shapes);
     for(Vector<Shape*>::iterator it = shapeVector.begin(); it != shapeVector.end(); ++it)
@@ -211,12 +219,14 @@ void MainWindow::passParams(Vector<Shape*>& shapes, User& user)
 MainWindow::~MainWindow()
 {
     delete renderArea;
+    delete userManager;
 
     delete selectedShapeLabel;
     delete shapeComboBox;
     delete addShapeButton;
     delete editShapeButton;
     delete deleteShapeButton;
+    delete logoutButton;
 
     for(int i = 0; i < shapeHeaderLabelCount; ++i)
         delete shapeHeaderLabels[i];
@@ -303,12 +313,17 @@ void MainWindow::updateShapeInfo()
             shapeDescriptionLabels[13]->setText("");
         }
     }
-
-    /* Fixes */
 }
 
 void MainWindow::createUserManager()
 {
+    if(userManager)
+    {
+        userManager->close();
+        delete userManager;
+    }
+
     userManager = new UserManager();
+    userManager->passParams(userVector, currentUser);
     userManager->show();
 }
