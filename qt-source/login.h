@@ -40,7 +40,7 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-    void addShapes(Vector<Shape*>* shapes);
+    void addShapes(Vector<Shape*>& shapes);
 
 private slots:
     void on_loginButton_clicked();
@@ -51,7 +51,7 @@ signals:
 
 private:
     Ui::Login* ui;
-    Vector<Shape*>* shapeVector; // Does not need deletion
+    Vector<Shape*> shapeVector;
 };
 
 #endif // LOGIN_H

@@ -42,7 +42,7 @@ Login::~Login()
     delete ui;
 }
 
-void Login::addShapes(Vector<Shape*>* shapes)
+void Login::addShapes(Vector<Shape*>& shapes)
 {
     shapeVector = shapes;
 }

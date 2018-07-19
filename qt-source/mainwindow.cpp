@@ -133,7 +133,7 @@ MainWindow::MainWindow()
     for(int i = 0; i < shapeDimensionLabelCount; ++i)
     {
         shapeDimensionLabels[i] = new QLabel;
-        rightSideLayout->addWidget(shapeDimensionLabels[i], i / 2, i % 2);
+        rightSideLayout->addWidget(shapeDimensionLabels[i], (i / 2) + 2, i % 2);
     }
 
     /* Layout */
@@ -148,21 +148,24 @@ MainWindow::MainWindow()
     setMaximumSize(1100, 800);
 }
 
-void MainWindow::addShapes(Vector<Shape*>* shapes)
+void MainWindow::addShapes(Vector<Shape*>& shapes)
 {
-    renderArea->addShapeVector(shapes);
     shapeVector = shapes;
-    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
-    {
-        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
-    }
 
-    Shape* shape = (*shapeVector)[0];
+    renderArea->addShapeVector(shapes);
+    for(Vector<Shape*>::iterator it = shapeVector.begin(); it != shapeVector.end(); ++it)
+        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
+
+    Shape* shape = shapeVector[0];
+    Vector<QString> dimensionLabels = shape->dimensionLabels();
 
     shapeIDValueLabel = new QLabel(QString::number(shape->getID()));
     shapeTypeValueLabel = new QLabel(shape->getTypeAsQString());
     rightSideLayout->addWidget(shapeIDValueLabel, 0, 1, 1, 2);
     rightSideLayout->addWidget(shapeTypeValueLabel, 1, 1, 1, 2);
+
+    for(int i = 0; i < dimensionLabels.size(); ++i)
+        shapeDimensionLabels[i]->setText(dimensionLabels[i]);
 
     if(shape->getType() == TEXTBOX)
     {

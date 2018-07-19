@@ -45,7 +45,7 @@ public:
     MainWindow();
     ~MainWindow();
 
-    void addShapes(Vector<Shape*>* shapes);
+    void addShapes(Vector<Shape*>& shapes);
 
 private slots:
     void shapeChanged();
@@ -103,7 +103,7 @@ private:
     QLabel*         textFontWeightLabel;
     QLabel*         textFontWeightValueLabel;
 
-    Vector<Shape*>* shapeVector;
+    Vector<Shape*> shapeVector;
 };
 
 #endif // MAINWINDOW_H

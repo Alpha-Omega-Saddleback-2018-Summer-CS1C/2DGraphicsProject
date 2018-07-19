@@ -86,6 +86,8 @@ public:
         mReservedSize = vec.mReservedSize;
         for(int i = 0; i < mReservedSize; ++i)
             mArray[i] = vec.mArray[i];
+
+        return *this;
     }
 
     /* Move assignment */
@@ -100,6 +102,8 @@ public:
         vec.mArray = nullptr;
         vec.mSize = 0;
         vec.mReservedSize = 0;
+
+        return *this;
     }
 
     /* Access operator */
