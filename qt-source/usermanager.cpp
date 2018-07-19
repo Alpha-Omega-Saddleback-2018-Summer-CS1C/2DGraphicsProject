@@ -15,7 +15,7 @@ UserManager::~UserManager()
 
 void UserManager::on_addUserButton_clicked()
 {
-    //go to add user
+   // probably wrong emit requestNewAddUser();
 }
 
 void UserManager::on_editUserButton_clicked()
