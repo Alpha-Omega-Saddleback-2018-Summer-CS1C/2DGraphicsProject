@@ -25,9 +25,10 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
-#include "custom_vector.h"
 #include "renderarea.h"
+#include "usermanager.h"
 #include "shape.h"
+#include "custom_vector.h"
 
 /* Forward decleration */
 class QPushButton;
@@ -51,6 +52,7 @@ public:
 
 private slots:
     void shapeChanged();
+    void createUserManager();
 
 private:
     RenderArea*     renderArea;
@@ -64,6 +66,7 @@ private:
     QPushButton*    addShapeButton;
     QPushButton*    editShapeButton;
     QPushButton*    deleteShapeButton;
+    QPushButton*    userManagerButton;
 
     /* Right-side */
     QLabel*         shapeHeaderLabels[shapeHeaderLabelCount];
@@ -104,6 +107,7 @@ private:
     QLabel*         textFontWeightValueLabel;
 
     Vector<Shape*> shapeVector;
+    UserManager* userManager;
 };
 
 #endif // MAINWINDOW_H

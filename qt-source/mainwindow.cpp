@@ -103,6 +103,7 @@ MainWindow::MainWindow()
     addShapeButton = new QPushButton("Add Shape", this);
     editShapeButton = new QPushButton("Edit Shape", this);
     deleteShapeButton = new QPushButton("Delete Shape", this);
+    userManagerButton = new QPushButton("User Manager", this);
 
     leftSideLayout = new QGridLayout;
     leftSideLayout->addWidget(selectedShapeLabel, 0, 0, 1, 1);
@@ -110,6 +111,7 @@ MainWindow::MainWindow()
     leftSideLayout->addWidget(addShapeButton, 1, 0, 1, 3);
     leftSideLayout->addWidget(editShapeButton, 2, 0, 1, 3);
     leftSideLayout->addWidget(deleteShapeButton, 3, 0, 1, 3);
+    leftSideLayout->addWidget(userManagerButton, 4, 0, 1, 3);
     leftSideLayout->setContentsMargins(100, 10, 100, 10);
 
     /* Right-side */
@@ -144,6 +146,8 @@ MainWindow::MainWindow()
     mainLayout->addWidget(renderArea, 0, 0, 1, 2, Qt::AlignHCenter);
     mainLayout->addLayout(leftSideLayout, 1, 0, 1, 1);
     mainLayout->addLayout(rightSideLayout, 1, 1, 1, 1);
+
+    connect(userManagerButton, SIGNAL(clicked()), this, SLOT(createUserManager()));
 
     setLayout(mainLayout);
     setWindowTitle("Basic Drawing");
@@ -267,4 +271,10 @@ MainWindow::~MainWindow()
 void MainWindow::shapeChanged()
 {
 
+}
+
+void MainWindow::createUserManager()
+{
+    userManager = new UserManager();
+    userManager->show();
 }
