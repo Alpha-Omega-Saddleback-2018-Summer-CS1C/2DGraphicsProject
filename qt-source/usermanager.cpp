@@ -6,16 +6,19 @@ UserManager::UserManager(QWidget *parent) :
     ui(new Ui::UserManager)
 {
     ui->setupUi(this);
+
 }
 
 UserManager::~UserManager()
 {
     delete ui;
+    delete adduser;
 }
 
 void UserManager::on_addUserButton_clicked()
 {
-   // probably wrong emit requestNewAddUser();
+   adduser = new AddUser;
+   adduser->show();
 }
 
 void UserManager::on_editUserButton_clicked()

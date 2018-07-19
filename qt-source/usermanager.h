@@ -2,6 +2,7 @@
 #define USERMANAGER_H
 
 #include <QDialog>
+#include "adduser.h"
 
 namespace Ui {
 class UserManager;
@@ -24,6 +25,8 @@ private slots:
 
 private:
     Ui::UserManager *ui;
+    AddUser *adduser;
+
 };
 
 #endif // USERMANAGER_H
