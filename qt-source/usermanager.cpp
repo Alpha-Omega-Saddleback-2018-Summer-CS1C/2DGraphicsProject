@@ -6,9 +6,6 @@ UserManager::UserManager(QWidget *parent) :
     ui(new Ui::UserManager)
 {
     ui->setupUi(this);
-
-
-
 }
 
 UserManager::~UserManager()

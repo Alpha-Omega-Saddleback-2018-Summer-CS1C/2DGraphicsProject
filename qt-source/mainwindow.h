@@ -51,7 +51,7 @@ public:
     void addShapes(Vector<Shape*>& shapes);
 
 private slots:
-    void shapeChanged();
+    void updateShapeInfo();
     void createUserManager();
 
 private:

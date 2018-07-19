@@ -586,7 +586,7 @@ void Parser::setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, co
             (value == "Courier") ||
             (value == "Helvetica") ||
             (value == "Times"))
-            mShapeInfo.textColor = QString::fromStdString(value);
+            mShapeInfo.textFontFamily = QString::fromStdString(value);
         else
             mErrorList.push_back("Unexpected value. Try \"Courier Sans MS\", \"Courier\", \"Helvetica\", or \"Times\" (Line: " +
                 std::to_string(lineNumber) + " \"" + line + "\")");

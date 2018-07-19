@@ -81,7 +81,7 @@ Vector<QString> Polygon::dimensionLabels()
     }
     else
     {
-        for(int i = 0; i < 5; ++i)
+        for(int i = 0; i < pointCount; ++i)
         {
             ret.push_back("Point " + QString::number(i + 1) + ":");
             ret.push_back("(" + QString::number(mPoints[i].x()) + ", " + QString::number(mPoints[i].y()) + ")");

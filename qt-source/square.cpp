@@ -46,7 +46,7 @@ double Square::area()
 Vector<QString> Square::dimensionLabels()
 {
     Vector<QString> ret;
-    ret.push_back("Upper-Left Corner:");
+    ret.push_back("Position:");
     ret.push_back("(" + QString::number(mPosition.x()) + ", " + QString::number(mPosition.y()) + ")");
     ret.push_back("Side:");
     ret.push_back(QString::number(mSide));
