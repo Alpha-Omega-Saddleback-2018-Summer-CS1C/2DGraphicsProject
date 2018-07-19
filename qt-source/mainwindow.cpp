@@ -192,7 +192,7 @@ void MainWindow::addShapes(Vector<Shape*>& shapes)
         shapeDescriptionLabels[3]->setText(getQColorAsQString(textBox->getBrush().color()));
         shapeDescriptionLabels[5]->setText("");
         shapeDescriptionLabels[7]->setText(QString::number(textBox->getFont().pointSize()));
-        shapeDescriptionLabels[9]->setText("");
+        shapeDescriptionLabels[9]->setText(textBox->getFont().family());
         shapeDescriptionLabels[11]->setText("");
         shapeDescriptionLabels[13]->setText("");
     }
@@ -227,36 +227,6 @@ MainWindow::~MainWindow()
     delete addShapeButton;
     delete editShapeButton;
     delete deleteShapeButton;
-
-    delete penColorLabel;
-    delete penColorValueLabel;
-    delete penWidthLabel;
-    delete penWidthValueLabel;
-    delete penStyleLabel;
-    delete penStyleValueLabel;
-    delete penCapStyleLabel;
-    delete penCapStyleValueLabel;
-    delete penJoinStyleLabel;
-    delete penJoinStyleValueLabel;
-    delete brushColorLabel;
-    delete brushColorValueLabel;
-    delete brushStyleLabel;
-    delete brushStyleValueLabel;
-
-    delete textStringLabel;
-    delete textStringValueLabel;
-    delete textColorLabel;
-    delete textColorValueLabel;
-    delete textAlignmentLabel;
-    delete textAlignmentValueLabel;
-    delete textPointSizeLabel;
-    delete textPointSizeValueLabel;
-    delete textFontFamilyLabel;
-    delete textFontFamilyValueLabel;
-    delete textFontStyleLabel;
-    delete textFontStyleValueLabel;
-    delete textFontWeightLabel;
-    delete textFontWeightValueLabel;
 
     for(int i = 0; i < shapeHeaderLabelCount; ++i)
         delete shapeHeaderLabels[i];
