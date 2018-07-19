@@ -52,7 +52,7 @@ BrushStyle: HorPattern
 
 ShapeId: 6
 ShapeType: Ellipse
-ShapeDimensions: 520, 200, 170, 100
+ShapeDimensions: 520, 200, 75, 100
 PenColor: black
 PenWidth: 12
 PenStyle: SolidLine
@@ -63,7 +63,7 @@ BrushStyle: NoBrush
 
 ShapeId: 7
 ShapeType: Circle
-ShapeDimensions: 750, 150, 200
+ShapeDimensions: 750, 150, 50
 PenColor: black
 PenWidth: 12
 PenStyle: SolidLine

@@ -261,14 +261,13 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         font.setStyle(static_cast<QFont::Style>(mShapeInfo.textFontStyle));
         font.setWeight(mShapeInfo.textFontWeight);
 
-
         text->setID(mShapeInfo.shapeID);
         text->setPosition(mShapeInfo.shapeDimensions[0], mShapeInfo.shapeDimensions[1]);
         text->setDimensions(mShapeInfo.shapeDimensions[2], mShapeInfo.shapeDimensions[3]);
         text->setText(mShapeInfo.textString);
         text->setAlignment(static_cast<Qt::AlignmentFlag>(mShapeInfo.textAlignment));
-        text->setFont(font);
         text->setPen(pen);
+        text->setFont(font);
 
         shapeVector.push_back(text);
     }

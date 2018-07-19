@@ -39,6 +39,7 @@ class MainWindow : public QWidget
 {
     Q_OBJECT
 
+    static const int shapeHeaderLabelCount = 4;
     static const int shapeDimensionLabelCount = 10;
     static const int shapeDescriptionLabelCount = 14;
 
@@ -65,10 +66,7 @@ private:
     QPushButton*    deleteShapeButton;
 
     /* Right-side */
-    QLabel*         shapeIDLabel;
-    QLabel*         shapeIDValueLabel;
-    QLabel*         shapeTypeLabel;
-    QLabel*         shapeTypeValueLabel;
+    QLabel*         shapeHeaderLabels[shapeHeaderLabelCount];
     QLabel*         shapeDimensionLabels[shapeDimensionLabelCount];
     QLabel*         shapeDescriptionLabels[shapeDescriptionLabelCount];
     bool            isText;
