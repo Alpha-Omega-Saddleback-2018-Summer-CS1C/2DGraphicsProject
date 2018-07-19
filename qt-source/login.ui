@@ -85,46 +85,50 @@
     <widget class="QWidget" name="">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>40</y>
-       <width>205</width>
-       <height>57</height>
+       <x>74</x>
+       <y>42</y>
+       <width>139</width>
+       <height>53</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <layout class="QHBoxLayout" name="username">
-        <item>
-         <widget class="QLabel" name="label_username">
-          <property name="text">
-           <string>username</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="input_username"/>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="input_username"/>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="password">
-        <item>
-         <widget class="QLabel" name="label_password">
-          <property name="text">
-           <string>password</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="input_password">
-          <property name="echoMode">
-           <enum>QLineEdit::Password</enum>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QLineEdit" name="input_password">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QLabel" name="label_username">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>57</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Username</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_password">
+     <property name="geometry">
+      <rect>
+       <x>11</x>
+       <y>74</y>
+       <width>55</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Password</string>
+     </property>
     </widget>
    </widget>
   </widget>
