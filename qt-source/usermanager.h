@@ -50,6 +50,7 @@ private slots:
 
     void on_deleteUserManager_clicked();
 
+
 private:
     Ui::UserManager *ui;
     AddUser *adduser;
