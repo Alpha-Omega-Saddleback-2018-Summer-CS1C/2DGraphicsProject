@@ -256,6 +256,13 @@ void MainWindow::createUserManager()
 
 void MainWindow::deleteShape()
 {
+    if(shapeVector->size() == 0)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "There are no shapes to delete!", QMessageBox::Ok);
+        return;
+    }
+
     int offset = shapeComboBox->currentIndex();
     int clickedButton = QMessageBox::question(this, "Shape Manager",
         "Are you sure you want to delete this shape?", QMessageBox::Ok | QMessageBox::Cancel);
@@ -271,6 +278,20 @@ void MainWindow::deleteShape()
 
 void MainWindow::updateShapeInfo()
 {
+    if(shapeVector->size() == 0)
+    {
+        shapeHeaderLabels[1]->setText("--");
+        shapeHeaderLabels[3]->setText("--");
+
+        for(int i = 0; i < shapeDimensionLabelCount; ++i)
+            shapeDimensionLabels[i]->setText("");
+
+        for(int i = 0; i < shapeDescriptionLabelCount / 2; ++i)
+            shapeDescriptionLabels[2 * i + 1]->setText("--");
+
+        return;
+    }
+
     Shape* shape = (*shapeVector)[shapeComboBox->currentIndex()];
     Vector<QString> dimensionLabels = shape->dimensionLabels();
     int i = 0;
@@ -304,7 +325,7 @@ void MainWindow::updateShapeInfo()
         shapeDescriptionLabels[7]->setText(QString::number(textBox->getFont().pointSize()));
         shapeDescriptionLabels[9]->setText(textBox->getFont().family());
         shapeDescriptionLabels[11]->setText(getFontStyleAsQString(textBox->getFont().style()));
-        shapeDescriptionLabels[13]->setText("");
+        shapeDescriptionLabels[13]->setText(getFontWeightAsQString(textBox->getFont().weight()));
     }
     else
     {
