@@ -63,6 +63,11 @@
       <height>178</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Terminal</family>
+     </font>
+    </property>
     <property name="title">
      <string>2D Graphics Project</string>
     </property>
@@ -78,6 +83,11 @@
        <height>28</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+      </font>
+     </property>
      <property name="text">
       <string>Login</string>
      </property>
@@ -88,7 +98,7 @@
        <x>74</x>
        <y>42</y>
        <width>139</width>
-       <height>53</height>
+       <height>59</height>
       </rect>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
@@ -113,6 +123,11 @@
        <height>16</height>
       </rect>
      </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+      </font>
+     </property>
      <property name="text">
       <string>Username</string>
      </property>
@@ -125,6 +140,11 @@
        <width>55</width>
        <height>16</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+      </font>
      </property>
      <property name="text">
       <string>Password</string>
