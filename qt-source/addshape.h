@@ -34,10 +34,14 @@ class QPushButton;
 class QLineEdit;
 class QComboBox;
 class QLabel;
+class QSpinBox;
 
 class AddShape : public QWidget
 {
     Q_OBJECT
+
+    const int shapeDescriptionCount = 7;
+
 public:
     explicit AddShape(QWidget *parent = nullptr);
     ~AddShape();
@@ -47,13 +51,24 @@ public:
 signals:
 
 public slots:
+    void addShape();
+    void shapeTypeChanged();
+
+private:
+    bool verifyShape();
 
 private:
     QGridLayout*        mainLayout;
 
     QLabel*             shapeHeaderLabel[2];
-    QLineEdit*          shapeIDTextEdit;
+    QComboBox*          shapeIDComboBox;
     QComboBox*          shapeTypeComboBox;
+
+    QLabel*             shapeDescriptionLabel[7];
+    QComboBox*          shapeDescriptionComboBox[7];
+    QSpinBox*           penWidthSpinBox;
+    QSpinBox*           fontSizeSpinBox;
+    QLineEdit*          textStringLineEdit;
 
     QPushButton*        addShapeButton;
     QPushButton*        cancelButton;

@@ -139,6 +139,7 @@ MainWindow::MainWindow()
 {
     renderArea = new RenderArea;
     userManager = nullptr;
+    addShape = nullptr;
 
     /* Left-side */
     selectedShapeLabel = new QLabel("Selected Shape:");
