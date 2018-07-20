@@ -13,60 +13,6 @@
   <property name="windowTitle">
    <string>User Manager</string>
   </property>
-  <widget class="QPushButton" name="addUserButton">
-   <property name="geometry">
-    <rect>
-     <x>32</x>
-     <y>102</y>
-     <width>321</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>Add User</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="editUserButton">
-   <property name="geometry">
-    <rect>
-     <x>32</x>
-     <y>137</y>
-     <width>321</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>Edit User</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="deleteUserManager">
-   <property name="geometry">
-    <rect>
-     <x>32</x>
-     <y>172</y>
-     <width>321</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Times New Roman</family>
-    </font>
-   </property>
-   <property name="text">
-    <string>Delete User</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -85,6 +31,57 @@
    <property name="text">
     <string>Admin Functions</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>341</width>
+     <height>129</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QComboBox" name="userComboBox"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="deleteUserManager">
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Delete User</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="addUserButton">
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Add User</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="editUserButton">
+      <property name="font">
+       <font>
+        <family>Times New Roman</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Edit User</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

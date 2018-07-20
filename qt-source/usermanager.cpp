@@ -42,6 +42,10 @@ void UserManager::passParams(Vector<User>* users, User* user)
 {
     userVector = users;
     currentUser = user;
+
+    for(Vector<User>::iterator it = userVector->begin(); it != userVector->end(); ++it)
+        ui->userComboBox->addItem(it->mUsername);
+
 }
 
 void UserManager::on_addUserButton_clicked()
@@ -60,3 +64,4 @@ void UserManager::on_deleteUserManager_clicked()
 {
     //go to delete user
 }
+
