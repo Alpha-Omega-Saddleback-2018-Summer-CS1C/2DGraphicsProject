@@ -25,6 +25,7 @@
 #define MAINWINDOW_H
 
 #include <QWidget>
+#include "addshape.h"
 #include "custom_vector.h"
 #include "renderarea.h"
 #include "shape.h"
@@ -53,6 +54,7 @@ public:
     void passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user);
 
 private slots:
+    void createAddShape();
     void createUserManager();
     void deleteShape();
     void updateShapeInfo();
@@ -80,6 +82,8 @@ private:
 
     Login* loginWindow;
     UserManager* userManager;
+    AddShape* addShape;
+
     Vector<Shape*>* shapeVector; // Does not require deletion
     Vector<User>* userVector; // Does not require deletion
     User* currentUser; // Does not require deletion

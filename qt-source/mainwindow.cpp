@@ -196,6 +196,7 @@ MainWindow::MainWindow()
     connect(userManagerButton, SIGNAL(clicked(bool)), this, SLOT(createUserManager()));
     connect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
     connect(deleteShapeButton, SIGNAL(clicked(bool)), this, SLOT(deleteShape()));
+    connect(addShapeButton, SIGNAL(clicked(bool)), this, SLOT(createAddShape()));
 
     setLayout(mainLayout);
     setWindowTitle("2D Graphics Project Program");
@@ -239,6 +240,26 @@ MainWindow::~MainWindow()
 
     for(int i = 0; i < shapeDescriptionLabelCount; ++i)
         delete shapeDescriptionLabels[i];
+}
+
+void MainWindow::createAddShape()
+{
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
+    if(addShape)
+    {
+        addShape->close();
+        delete addShape;
+    }
+
+    addShape = new AddShape();
+    addShape->passParams(shapeVector);
+    addShape->show();
 }
 
 void MainWindow::createUserManager()

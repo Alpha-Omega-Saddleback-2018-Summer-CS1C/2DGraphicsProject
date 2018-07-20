@@ -30,8 +30,8 @@
 
 // Forward decleration
 class QGridLayout;
-class QButton;
-class QPlainTextEdit;
+class QPushButton;
+class QLineEdit;
 class QComboBox;
 class QLabel;
 
@@ -40,6 +40,7 @@ class AddShape : public QWidget
     Q_OBJECT
 public:
     explicit AddShape(QWidget *parent = nullptr);
+    ~AddShape();
 
     void passParams(Vector<Shape*>* shapes);
 
@@ -48,14 +49,14 @@ signals:
 public slots:
 
 private:
-    QGridLayout* mainLayout;
+    QGridLayout*        mainLayout;
 
-    QLabel*             shapeHeaderLabel;
-    QPlainTextEdit*     shapeIDTextEdit;
+    QLabel*             shapeHeaderLabel[2];
+    QLineEdit*          shapeIDTextEdit;
     QComboBox*          shapeTypeComboBox;
 
-    QButton* addShapeButton;
-    QButton* cancelButton;
+    QPushButton*        addShapeButton;
+    QPushButton*        cancelButton;
 
     Vector<Shape*>* shapeVector;
 };
