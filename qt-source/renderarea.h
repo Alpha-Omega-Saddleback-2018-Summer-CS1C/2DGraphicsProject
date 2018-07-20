@@ -33,7 +33,7 @@ class RenderArea : public QWidget
 {
 public:
     RenderArea(QWidget* parent = 0);
-    void addShapeVector(Vector<Shape*>& shapes);
+    void addShapeVector(Vector<Shape*>* shapes);
 
 public slots:
 
@@ -41,7 +41,7 @@ protected:
     void paintEvent(QPaintEvent* event) override;
 
 private:
-    Vector<Shape*> shapeVector;
+    Vector<Shape*>* shapeVector;
 };
 
 #endif // RENDERAREA_H

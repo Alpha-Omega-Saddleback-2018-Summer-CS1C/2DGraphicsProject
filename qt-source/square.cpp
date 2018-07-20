@@ -32,12 +32,6 @@ Square::Square(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Square::~Square()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double Square::area()
 {
     return (double)(mSide * mSide);

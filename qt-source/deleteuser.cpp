@@ -36,7 +36,7 @@ DeleteUser::~DeleteUser()
     delete ui;
 }
 
-void DeleteUser::passParams(Vector<User>& users, User user)
+void DeleteUser::passParams(Vector<User>* users, User* user)
 {
     userVector = users;
     currentUser = user;

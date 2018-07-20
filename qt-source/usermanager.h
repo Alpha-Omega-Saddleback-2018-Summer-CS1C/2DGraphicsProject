@@ -41,7 +41,7 @@ public:
     explicit UserManager(QWidget *parent = 0);
     ~UserManager();
 
-    void passParams(Vector<User>& users, User& user);
+    void passParams(Vector<User>* users, User* user);
 
 private slots:
     void on_addUserButton_clicked();
@@ -54,8 +54,8 @@ private:
     Ui::UserManager *ui;
     AddUser *adduser;
 
-    Vector<User> userVector;
-    User currentUser;
+    Vector<User>* userVector; // Does not require deletion
+    User* currentUser; // Does not require deletion
 };
 
 #endif // USERMANAGER_H

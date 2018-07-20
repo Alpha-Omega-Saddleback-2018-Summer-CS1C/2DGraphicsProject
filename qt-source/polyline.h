@@ -33,7 +33,7 @@ class Polyline : public Shape
 {
 public:
     Polyline(QPaintDevice* paintDevice = nullptr, int id = -1);
-    ~Polyline();
+    ~Polyline() {}
 
     /* Adds a point to this shape */
     void addPoint(const QPoint& point);

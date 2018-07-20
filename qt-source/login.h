@@ -42,7 +42,7 @@ public:
     explicit Login(QWidget *parent = nullptr);
     ~Login();
 
-    void passParams(Vector<Shape*>& shapes, Vector<User>& users);
+    void passParams(Vector<Shape*>* shapes, Vector<User>* users);
 
 private slots:
     void on_loginButton_clicked();
@@ -53,8 +53,9 @@ private:
     Ui::Login* ui;
     MainWindow* mainWindow;
 
-    Vector<Shape*> shapeVector;
-    Vector<User> userVector;
+    Vector<Shape*>* shapeVector; // Does not require deletion
+    Vector<User>* userVector; // Does not require deletion
+    User currentUser;
 };
 
 #endif // LOGIN_H

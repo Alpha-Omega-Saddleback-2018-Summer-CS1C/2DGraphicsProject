@@ -40,15 +40,15 @@ public:
     explicit AddUser(QWidget *parent = 0);
     ~AddUser();
 
-    void passParams(Vector<User>& users, User user);
+    void passParams(Vector<User>* users, User* user);
 
 private slots:
     void on_createNewUserButton_clicked();
 
 private:
     Ui::AddUser *ui;
-    Vector<User> userVector;
-    User currentUser;
+    Vector<User>* userVector;
+    User* currentUser;
 };
 
 #endif // ADDUSER_H

@@ -40,12 +40,12 @@ public:
     explicit DeleteUser(QWidget *parent = 0);
     ~DeleteUser();
 
-    void passParams(Vector<User>& users, User user);
+    void passParams(Vector<User>* users, User* user);
 
 private:
     Ui::DeleteUser *ui;
-    Vector<User> userVector;
-    User currentUser;
+    Vector<User>* userVector; // Does not require deletion
+    User* currentUser; // Does not require deletion
 };
 
 #endif // DELETEUSER_H

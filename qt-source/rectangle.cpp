@@ -32,12 +32,6 @@ Rectangle::Rectangle(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Rectangle::~Rectangle()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double Rectangle::area()
 {
     return (double)(mWidth * mHeight);

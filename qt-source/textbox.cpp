@@ -32,12 +32,6 @@ TextBox::TextBox(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-TextBox::~TextBox()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double TextBox::area()
 {
     return (double)(mWidth * mHeight);

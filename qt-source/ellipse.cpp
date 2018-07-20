@@ -32,12 +32,6 @@ Ellipse::Ellipse(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Ellipse::~Ellipse()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double Ellipse::area()
 {
     return (M_PI * mRadiusX * mRadiusY);

@@ -50,11 +50,12 @@ public:
     MainWindow();
     ~MainWindow();
 
-    void passParams(Login* login, Vector<Shape*>& shapes, Vector<User>& users, User& user);
+    void passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user);
 
 private slots:
-    void updateShapeInfo();
     void createUserManager();
+    void deleteShape();
+    void updateShapeInfo();
 
 private:
     RenderArea*     renderArea;
@@ -79,9 +80,9 @@ private:
 
     Login* loginWindow;
     UserManager* userManager;
-    Vector<Shape*> shapeVector;
-    Vector<User> userVector;
-    User currentUser;
+    Vector<Shape*>* shapeVector; // Does not require deletion
+    Vector<User>* userVector; // Does not require deletion
+    User* currentUser; // Does not require deletion
 };
 
 #endif // MAINWINDOW_H

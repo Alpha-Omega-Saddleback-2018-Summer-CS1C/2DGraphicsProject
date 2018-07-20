@@ -38,7 +38,7 @@ Login::~Login()
     delete ui;
 }
 
-void Login::passParams(Vector<Shape*>& shapes, Vector<User>& users)
+void Login::passParams(Vector<Shape*>* shapes, Vector<User>* users)
 {
     shapeVector = shapes;
     userVector = users;
@@ -50,11 +50,12 @@ void Login::on_loginButton_clicked()
     QString password = ui->input_password->text();
     bool loginSuccess = false;
 
-    for(Vector<User>::iterator it = userVector.begin(); it != userVector.end(); ++it)
+    for(Vector<User>::iterator it = userVector->begin(); it != userVector->end(); ++it)
     {
         if(username == it->mUsername && password == it->mPassword)
         {
             loginSuccess = true;
+            currentUser = *it;
             break;
         }
     }
@@ -71,10 +72,9 @@ void Login::on_loginButton_clicked()
 
 void Login::openMainWindow()
 {
-    User user;
     mainWindow = new MainWindow;
     mainWindow->show();
-    mainWindow->passParams(this, shapeVector, userVector, user);
+    mainWindow->passParams(this, shapeVector, userVector, &currentUser);
     this->hide();
 }
 

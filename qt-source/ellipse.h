@@ -32,7 +32,7 @@ class Ellipse: public Shape
 {
  	public:
         Ellipse(QPaintDevice* paintDevice = nullptr, int id = -1); //ID, Position X, Y, Radius
-        ~Ellipse();
+        ~Ellipse() {}
 		
 		double area() override; // Return the area of the ciricle
         Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels

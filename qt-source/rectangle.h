@@ -33,7 +33,7 @@ class Rectangle : public Shape
 {
 public:
     Rectangle(QPaintDevice* paintDevice = nullptr, int id = -1);
-    ~Rectangle();
+    ~Rectangle() {}
 
     /* Returns the area of this shape */
     double area() override;

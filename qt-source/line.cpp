@@ -32,12 +32,6 @@ Line::Line(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Line::~Line()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double Line::area()
 {
     return 0.0;

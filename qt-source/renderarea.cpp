@@ -32,7 +32,7 @@ RenderArea::RenderArea(QWidget* parent)
     setAutoFillBackground(true);
 }
 
-void RenderArea::addShapeVector(Vector<Shape*>& shapes)
+void RenderArea::addShapeVector(Vector<Shape*>* shapes)
 {
     shapeVector = shapes;
     update();
@@ -40,7 +40,7 @@ void RenderArea::addShapeVector(Vector<Shape*>& shapes)
 
 void RenderArea::paintEvent(QPaintEvent* /* event */)
 {
-    for(Vector<Shape*>::iterator it = shapeVector.begin(); it != shapeVector.end(); ++it)
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
     {
         (*it)->getPainter().begin(this);
         (*it)->getPainter().setRenderHint(QPainter::Antialiasing, true);

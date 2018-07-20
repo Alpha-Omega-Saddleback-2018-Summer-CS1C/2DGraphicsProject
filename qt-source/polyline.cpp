@@ -32,12 +32,6 @@ Polyline::Polyline(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Polyline::~Polyline()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 void Polyline::addPoint(const QPoint& point)
 {
     mPoints.push_back(point);

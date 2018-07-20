@@ -38,7 +38,7 @@ UserManager::~UserManager()
     if(adduser) delete adduser;
 }
 
-void UserManager::passParams(Vector<User>& users, User& user)
+void UserManager::passParams(Vector<User>* users, User* user)
 {
     userVector = users;
     currentUser = user;
@@ -47,6 +47,7 @@ void UserManager::passParams(Vector<User>& users, User& user)
 void UserManager::on_addUserButton_clicked()
 {
    adduser = new AddUser;
+   adduser->passParams(userVector, currentUser);
    adduser->show();
 }
 

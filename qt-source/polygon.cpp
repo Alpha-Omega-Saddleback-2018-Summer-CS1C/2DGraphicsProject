@@ -33,12 +33,6 @@ Polygon::Polygon(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Polygon::~Polygon()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 void Polygon::addPoint(const QPoint& point)
 {
     mPoints.push_back(point);

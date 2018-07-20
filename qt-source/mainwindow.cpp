@@ -21,12 +21,13 @@
     Defines a main window
  */
 
+#include <string>
+#include <QMessageBox>
 #include <QtWidgets>
 #include "login.h"
 #include "mainwindow.h"
 #include "parser.h"
 #include "textbox.h"
-#include <string>
 
 /*
  *  Helper functions
@@ -151,21 +152,20 @@ MainWindow::MainWindow()
     leftSideLayout = new QGridLayout;
     leftSideLayout->addWidget(selectedShapeLabel, 0, 0, 1, 1);
     leftSideLayout->addWidget(shapeComboBox, 0, 1, 1, 2);
-    leftSideLayout->addWidget(addShapeButton, 1, 0, 1, 3);
-    leftSideLayout->addWidget(editShapeButton, 2, 0, 1, 3);
-    leftSideLayout->addWidget(deleteShapeButton, 3, 0, 1, 3);
-    leftSideLayout->addWidget(userManagerButton, 4, 0, 1, 3);
-    leftSideLayout->addWidget(logoutButton, 5, 0, 1, 3);
+    leftSideLayout->addWidget(addShapeButton, 1, 1, 1, 2);
+    leftSideLayout->addWidget(editShapeButton, 2, 1, 1, 2);
+    leftSideLayout->addWidget(deleteShapeButton, 3, 1, 1, 2);
+    leftSideLayout->addWidget(userManagerButton, 4, 1, 1, 1);
+    leftSideLayout->addWidget(logoutButton, 4, 2, 1, 1);
     leftSideLayout->setContentsMargins(100, 10, 100, 10);
 
     /* Right-side */
-    rightSideLayout = new QGridLayout;
-
     shapeHeaderLabels[0] = new QLabel("Shape ID:");
     shapeHeaderLabels[1] = new QLabel;
     shapeHeaderLabels[2] = new QLabel("Shape Type:");
     shapeHeaderLabels[3] = new QLabel;
 
+    rightSideLayout = new QGridLayout;
     rightSideLayout->addWidget(shapeHeaderLabels[0], 0, 0, 1, 1);
     rightSideLayout->addWidget(shapeHeaderLabels[1], 0, 1, 1, 2);
     rightSideLayout->addWidget(shapeHeaderLabels[2], 1, 0, 1, 1);
@@ -195,6 +195,7 @@ MainWindow::MainWindow()
 
     connect(userManagerButton, SIGNAL(clicked(bool)), this, SLOT(createUserManager()));
     connect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
+    connect(deleteShapeButton, SIGNAL(clicked(bool)), this, SLOT(deleteShape()));
 
     setLayout(mainLayout);
     setWindowTitle("2D Graphics Project Program");
@@ -202,7 +203,7 @@ MainWindow::MainWindow()
     setMaximumSize(1100, 800);
 }
 
-void MainWindow::passParams(Login* login, Vector<Shape*>& shapes, Vector<User>& users, User& user)
+void MainWindow::passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user)
 {
     loginWindow = login;
     shapeVector = shapes;
@@ -212,7 +213,7 @@ void MainWindow::passParams(Login* login, Vector<Shape*>& shapes, Vector<User>& 
     connect(logoutButton, SIGNAL(clicked(bool)), loginWindow, SLOT(closeMainWindow()));
 
     renderArea->addShapeVector(shapes);
-    for(Vector<Shape*>::iterator it = shapeVector.begin(); it != shapeVector.end(); ++it)
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
         shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
 }
 
@@ -226,6 +227,8 @@ MainWindow::~MainWindow()
     delete addShapeButton;
     delete editShapeButton;
     delete deleteShapeButton;
+
+    delete userManagerButton;
     delete logoutButton;
 
     for(int i = 0; i < shapeHeaderLabelCount; ++i)
@@ -238,9 +241,37 @@ MainWindow::~MainWindow()
         delete shapeDescriptionLabels[i];
 }
 
+void MainWindow::createUserManager()
+{
+    if(userManager)
+    {
+        userManager->close();
+        delete userManager;
+    }
+
+    userManager = new UserManager();
+    userManager->passParams(userVector, currentUser);
+    userManager->show();
+}
+
+void MainWindow::deleteShape()
+{
+    int offset = shapeComboBox->currentIndex();
+    int clickedButton = QMessageBox::question(this, "Shape Manager",
+        "Are you sure you want to delete this shape?", QMessageBox::Ok | QMessageBox::Cancel);
+
+    if(clickedButton == QMessageBox::Ok)
+    {
+        Vector<Shape*>::iterator it = shapeVector->begin() + offset;
+        delete (*it);
+        shapeVector->erase(it);
+        shapeComboBox->removeItem(offset);
+    }
+}
+
 void MainWindow::updateShapeInfo()
 {
-    Shape* shape = shapeVector[shapeComboBox->currentIndex()];
+    Shape* shape = (*shapeVector)[shapeComboBox->currentIndex()];
     Vector<QString> dimensionLabels = shape->dimensionLabels();
     int i = 0;
 
@@ -313,17 +344,4 @@ void MainWindow::updateShapeInfo()
             shapeDescriptionLabels[13]->setText("");
         }
     }
-}
-
-void MainWindow::createUserManager()
-{
-    if(userManager)
-    {
-        userManager->close();
-        delete userManager;
-    }
-
-    userManager = new UserManager();
-    userManager->passParams(userVector, currentUser);
-    userManager->show();
 }

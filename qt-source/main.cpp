@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     Login w;
-    w.passParams(shapeVector, userVector);
+    w.passParams(&shapeVector, &userVector);
     w.show();
 
     return a.exec();

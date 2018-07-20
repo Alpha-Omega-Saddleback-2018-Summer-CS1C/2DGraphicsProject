@@ -32,12 +32,6 @@ Circle::Circle(QPaintDevice* paintDevice, int id)
         mPainter.begin(paintDevice);
 }
 
-Circle::~Circle()
-{
-    if(mPainter.device() != 0)
-        mPainter.end();
-}
-
 double Circle::area()
 {
 	return (double)(M_PI * radius * radius);
