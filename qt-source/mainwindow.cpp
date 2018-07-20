@@ -243,6 +243,13 @@ MainWindow::~MainWindow()
 
 void MainWindow::createUserManager()
 {
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
     if(userManager)
     {
         userManager->close();
@@ -256,6 +263,13 @@ void MainWindow::createUserManager()
 
 void MainWindow::deleteShape()
 {
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
     if(shapeVector->size() == 0)
     {
         QMessageBox::information(this, "Shape Manager",
