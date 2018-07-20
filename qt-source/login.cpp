@@ -23,6 +23,8 @@
 
 #include "login.h"
 #include "ui_login.h"
+#include <QBitmap>
+#include <QPixmap>
 
 #include <QMessageBox>
 
@@ -31,6 +33,15 @@ Login::Login(QWidget* parent) :
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+
+    //custom image
+    //QLabel topLevelLabel;
+    QPixmap pixmap("alphaOmega.png");
+    ui->alphaOmegaPic->setPixmap(pixmap);
+    ui->alphaOmegaPic->setMask(pixmap.mask());
+    ui->alphaOmegaPic->setScaledContents(true);
+    ui->alphaOmegaPic->show();
+    //ui->verticalLayout->addItem(pixmap);
 }
 
 Login::~Login()
