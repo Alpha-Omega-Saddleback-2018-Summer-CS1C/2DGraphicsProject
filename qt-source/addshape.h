@@ -34,6 +34,7 @@ class QPushButton;
 class QLineEdit;
 class QComboBox;
 class QLabel;
+class QTableWidget;
 
 class AddShape : public QWidget
 {
@@ -63,6 +64,9 @@ private:
     QLabel*             shapeHeaderLabel[2];
     QComboBox*          shapeIDComboBox;
     QComboBox*          shapeTypeComboBox;
+
+    QTableWidget*       shapeDimensionTable;
+    int                 shapeDimensionTableRowCount;
 
     QLabel*             shapeDimensionLabel[4];
     QLineEdit*          shapeDimensionLineEdit[4];

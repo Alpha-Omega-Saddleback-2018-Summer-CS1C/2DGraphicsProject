@@ -54,6 +54,9 @@ AddShape::AddShape(QWidget *parent)
     mainLayout->addWidget(cancelButton, 8, 0, 1, 1);
     mainLayout->addWidget(addShapeButton, 8, 5, 1, 1);
 
+    shapeDimensionTable = new QTableWidget(5, 4, this);
+    mainLayout->addWidget(shapeDimensionTable, 2, 0, 5, 2);
+
     for(int i = 0; i < shapeDimensionCount; ++i)
     {
         shapeDimensionLabel[i] = new QLabel;
@@ -102,6 +105,8 @@ AddShape::~AddShape()
     delete shapeHeaderLabel[1];
     delete shapeIDComboBox;
     delete shapeTypeComboBox;
+
+    delete shapeDimensionTable;
 
     for(int i = 0; i < shapeDimensionCount; ++i)
     {
@@ -271,14 +276,18 @@ void AddShape::shapeTypeChanged()
 
     if(type == "Polyline" || type == "Polygon")
     {
+        shapeDimensionTable->show();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->hide();
             shapeDimensionLineEdit[i]->hide();
         }
+
+
     }
     else if(type == "Rectangle" || type == "Textbox")
     {
+        shapeDimensionTable->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -292,6 +301,7 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Line")
     {
+        shapeDimensionTable->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -306,6 +316,7 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Ellipse")
     {
+        shapeDimensionTable->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -320,6 +331,10 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Circle")
     {
+        shapeDimensionTable->hide();
+        shapeDimensionLabel[3]->hide();
+        shapeDimensionLineEdit[3]->hide();
+
         for(int i = 0; i < shapeDimensionCount - 1; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -330,22 +345,19 @@ void AddShape::shapeTypeChanged()
         shapeDimensionLabel[0]->setText("X:");
         shapeDimensionLabel[1]->setText("Y:");
         shapeDimensionLabel[2]->setText("Radius:");
-
-        shapeDimensionLabel[3]->hide();
-        shapeDimensionLineEdit[3]->hide();
-
     }
     else // Square
     {
+        shapeDimensionTable->hide();
+        shapeDimensionLabel[3]->hide();
+        shapeDimensionLineEdit[3]->hide();
+
         for(int i = 0; i < shapeDimensionCount - 1; ++i)
         {
             shapeDimensionLabel[i]->show();
             shapeDimensionLineEdit[i]->show();
             shapeDimensionLineEdit[i]->clear();
         }
-
-        shapeDimensionLabel[3]->hide();
-        shapeDimensionLineEdit[3]->hide();
 
         shapeDimensionLabel[0]->setText("X:");
         shapeDimensionLabel[1]->setText("Y:");
