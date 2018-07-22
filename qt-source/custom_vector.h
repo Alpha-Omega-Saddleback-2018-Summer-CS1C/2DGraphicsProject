@@ -29,6 +29,8 @@
 template<typename T>
 class Vector
 {
+    static const int DEFAULT_SIZE = 8;
+
 public:
 
     /* Type aliasing */
@@ -242,8 +244,20 @@ private:
     T*  mArray;
     int mSize;
     int mReservedSize;
-
-    static const int DEFAULT_SIZE = 8;
 };
+
+template<typename It, typename T, typename Cmp>
+It custom_find(It first, It last, const T& value, Cmp func)
+{
+    while(first != last)
+    {
+        if(func(first, value))
+            return first;
+        ++first;
+    }
+
+    return last;
+}
+
 
 #endif // CUSTOM_VECTOR_H

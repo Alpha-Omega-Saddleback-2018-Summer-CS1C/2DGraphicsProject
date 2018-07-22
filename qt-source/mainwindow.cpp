@@ -241,6 +241,10 @@ MainWindow::~MainWindow()
 
     for(int i = 0; i < shapeDescriptionLabelCount; ++i)
         delete shapeDescriptionLabels[i];
+
+    delete leftSideLayout;
+    delete rightSideLayout;
+    delete mainLayout;
 }
 
 void MainWindow::createAddShape()

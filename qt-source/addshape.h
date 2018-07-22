@@ -34,13 +34,13 @@ class QPushButton;
 class QLineEdit;
 class QComboBox;
 class QLabel;
-class QSpinBox;
 
 class AddShape : public QWidget
 {
     Q_OBJECT
 
-    const int shapeDescriptionCount = 7;
+    static const int shapeDimensionCount = 4;
+    static const int shapeDescriptionCount = 7;
 
 public:
     explicit AddShape(QWidget *parent = nullptr);
@@ -64,10 +64,13 @@ private:
     QComboBox*          shapeIDComboBox;
     QComboBox*          shapeTypeComboBox;
 
+    QLabel*             shapeDimensionLabel[4];
+    QLineEdit*          shapeDimensionLineEdit[4];
+
     QLabel*             shapeDescriptionLabel[7];
     QComboBox*          shapeDescriptionComboBox[7];
-    QSpinBox*           penWidthSpinBox;
-    QSpinBox*           fontSizeSpinBox;
+    QComboBox*          penWidthComboBox;
+    QComboBox*          fontSizeComboBox;
     QLineEdit*          textStringLineEdit;
 
     QPushButton*        addShapeButton;
