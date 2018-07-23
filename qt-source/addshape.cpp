@@ -51,11 +51,40 @@ AddShape::AddShape(QWidget *parent)
     mainLayout->addWidget(shapeIDComboBox, 0, 1, 1, 1);
     mainLayout->addWidget(shapeHeaderLabel[1], 1, 0, 1, 1);
     mainLayout->addWidget(shapeTypeComboBox, 1, 1, 1, 1);
-    mainLayout->addWidget(cancelButton, 8, 0, 1, 1);
-    mainLayout->addWidget(addShapeButton, 8, 5, 1, 1);
+    mainLayout->addWidget(cancelButton, 7, 0, 1, 1);
+    mainLayout->addWidget(addShapeButton, 7, 5, 1, 1);
 
-    shapeDimensionTable = new QTableWidget(5, 4, this);
-    mainLayout->addWidget(shapeDimensionTable, 2, 0, 5, 2);
+    shapeDimensionTableScrollArea = new QScrollArea;
+    shapeDimensionTable = new QWidget(shapeDimensionTableScrollArea);
+    shapeDimensionTableLayout = new QGridLayout(shapeDimensionTable);
+    QLabel* tableHeader[3];
+
+    for(int i = 0; i <3; ++i)
+        tableHeader[i] = new QLabel(shapeDimensionTable);
+
+    tableHeader[0]->setText("Point");
+    tableHeader[1]->setText("X");
+    tableHeader[2]->setText("Y");
+    shapeDimensionTableLabels.push_back(tableHeader[0]);
+    shapeDimensionTableLabels.push_back(tableHeader[1]);
+    shapeDimensionTableLabels.push_back(tableHeader[2]);
+    shapeDimensionTableLayout->addWidget(tableHeader[0], 0, 0, 1, 1);
+    shapeDimensionTableLayout->addWidget(tableHeader[1], 0, 1, 1, 1);
+    shapeDimensionTableLayout->addWidget(tableHeader[2], 0, 2, 1, 1);
+    shapeDimensionTableLayout->setColumnMinimumWidth(0, 20);
+    shapeDimensionTableLayout->setAlignment(Qt::AlignTop);
+
+    shapeDimensionTable->setLayout(shapeDimensionTableLayout);
+    shapeDimensionTableScrollArea->setWidget(shapeDimensionTable);
+    shapeDimensionTableScrollArea->setWidgetResizable(true);
+    shapeDimensionTableScrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    shapeDimensionTableScrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    mainLayout->addWidget(shapeDimensionTableScrollArea, 2, 0, 4, 3);
+
+    shapeDimensionTableButton[0] = new QPushButton("Add Point");
+    shapeDimensionTableButton[1] = new QPushButton("Remove Point");
+    mainLayout->addWidget(shapeDimensionTableButton[0], 6, 0, 1, 1);
+    mainLayout->addWidget(shapeDimensionTableButton[1], 6, 2, 1, 1);
 
     for(int i = 0; i < shapeDimensionCount; ++i)
     {
@@ -91,43 +120,20 @@ AddShape::AddShape(QWidget *parent)
     connect(shapeTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(shapeTypeChanged()));
     connect(addShapeButton, SIGNAL(clicked(bool)), this, SLOT(addShape()));
     connect(cancelButton, SIGNAL(clicked(bool)), this, SLOT(close()));
+    connect(shapeDimensionTableButton[0], SIGNAL(clicked(bool)), this, SLOT(addDimensionPoint()));
+    connect(shapeDimensionTableButton[1], SIGNAL(clicked(bool)), this, SLOT(removeDimensionPoint()));
 
     setLayout(mainLayout);
     setWindowTitle("Shape Manager");
-    setMinimumSize(600, 350);
-    setMaximumSize(600, 350);
+    setMinimumSize(650, 350);
+    setMaximumSize(650, 350);
     shapeTypeChanged();
 }
 
 AddShape::~AddShape()
 {
-    delete shapeHeaderLabel[0];
-    delete shapeHeaderLabel[1];
-    delete shapeIDComboBox;
-    delete shapeTypeComboBox;
-
-    delete shapeDimensionTable;
-
-    for(int i = 0; i < shapeDimensionCount; ++i)
-    {
-        delete shapeDimensionLabel[i];
-        delete shapeDimensionLineEdit[i];
-    }
-
-    for(int i = 0; i < shapeDescriptionCount; ++i)
-    {
-        delete shapeDescriptionLabel[i];
-        delete shapeDescriptionComboBox[i];
-    }
-
-    delete penWidthComboBox;
-    delete fontSizeComboBox;
-    delete textStringLineEdit;
-
-    delete addShapeButton;
-    delete cancelButton;
-
     delete mainLayout;
+    delete shapeDimensionTableLayout;
 }
 
 void AddShape::passParams(Vector<Shape*>* shapes)
@@ -137,12 +143,46 @@ void AddShape::passParams(Vector<Shape*>* shapes)
     for(int i = 1; i < 100; ++i)
     {
         if(custom_find(shapeVector->begin(), shapeVector->end(), i,
-                [](Vector<Shape*>::iterator it, int id)
-                {
-                    return (*it)->getID() == id;
-                }
-            ) ==  shapeVector->end())
+            [](Vector<Shape*>::iterator it, int id)
+            {
+                return (*it)->getID() == id;
+            }) ==  shapeVector->end())
             shapeIDComboBox->addItem(QString::number(i));
+    }
+}
+
+void AddShape::addDimensionPoint()
+{
+    int row = shapeDimensionTableLineEdits.size() / 2 + 1;
+    QLabel* label = new QLabel(QString::number(row));
+    QLineEdit* lineEditX = new QLineEdit;
+    QLineEdit* lineEditY = new QLineEdit;
+    lineEditX->setMaximumWidth(50);
+    lineEditY->setMaximumWidth(50);
+
+    shapeDimensionTableLabels.push_back(label);
+    shapeDimensionTableLineEdits.push_back(lineEditX);
+    shapeDimensionTableLineEdits.push_back(lineEditY);
+    shapeDimensionTableLayout->addWidget(label, row, 0, 1, 1);
+    shapeDimensionTableLayout->addWidget(lineEditX, row, 1, 1, 1);
+    shapeDimensionTableLayout->addWidget(lineEditY, row, 2, 1, 1);
+}
+
+void AddShape::removeDimensionPoint()
+{
+    int row = shapeDimensionTableLineEdits.size() / 2;
+    if(row < 3)
+    {
+
+    }
+    else
+    {
+        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLabels.end() - 1));
+        shapeDimensionTableLabels.pop_back();
+        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLineEdits.end() - 1));
+        shapeDimensionTableLineEdits.pop_back();
+        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLineEdits.end() - 1));
+        shapeDimensionTableLineEdits.pop_back();
     }
 }
 
@@ -276,18 +316,37 @@ void AddShape::shapeTypeChanged()
 
     if(type == "Polyline" || type == "Polygon")
     {
-        shapeDimensionTable->show();
+        shapeDimensionTableScrollArea->show();
+        shapeDimensionTableButton[0]->show();
+        shapeDimensionTableButton[1]->show();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->hide();
             shapeDimensionLineEdit[i]->hide();
         }
 
+        QLabel* label[2];
+        for(int i = 0; i < 2; ++i)
+        {
+            label[i] = new QLabel(QString::number(i + 1), shapeDimensionTable);
+            shapeDimensionTableLabels.push_back(label[i]);
+            shapeDimensionTableLayout->addWidget(label[i], i + 1, 0, 1, 1);
+        }
 
+        QLineEdit* lineEdit[4];
+        for(int i = 0; i < 4; ++i)
+        {
+            lineEdit[i] = new QLineEdit(shapeDimensionTable);
+            lineEdit[i]->setMaximumWidth(50);
+            shapeDimensionTableLineEdits.push_back(lineEdit[i]);
+            shapeDimensionTableLayout->addWidget(lineEdit[i], (i / 2) + 1, (i % 2) + 1, 1, 1);
+        }
     }
     else if(type == "Rectangle" || type == "Textbox")
     {
-        shapeDimensionTable->hide();
+        shapeDimensionTableScrollArea->hide();
+        shapeDimensionTableButton[0]->hide();
+        shapeDimensionTableButton[1]->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -301,7 +360,9 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Line")
     {
-        shapeDimensionTable->hide();
+        shapeDimensionTableScrollArea->hide();
+        shapeDimensionTableButton[0]->hide();
+        shapeDimensionTableButton[1]->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -316,7 +377,9 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Ellipse")
     {
-        shapeDimensionTable->hide();
+        shapeDimensionTableScrollArea->hide();
+        shapeDimensionTableButton[0]->hide();
+        shapeDimensionTableButton[1]->hide();
         for(int i = 0; i < shapeDimensionCount; ++i)
         {
             shapeDimensionLabel[i]->show();
@@ -331,7 +394,9 @@ void AddShape::shapeTypeChanged()
     }
     else if(type == "Circle")
     {
-        shapeDimensionTable->hide();
+        shapeDimensionTableScrollArea->hide();
+        shapeDimensionTableButton[0]->hide();
+        shapeDimensionTableButton[1]->hide();
         shapeDimensionLabel[3]->hide();
         shapeDimensionLineEdit[3]->hide();
 
@@ -348,7 +413,9 @@ void AddShape::shapeTypeChanged()
     }
     else // Square
     {
-        shapeDimensionTable->hide();
+        shapeDimensionTableScrollArea->hide();
+        shapeDimensionTableButton[0]->hide();
+        shapeDimensionTableButton[1]->hide();
         shapeDimensionLabel[3]->hide();
         shapeDimensionLineEdit[3]->hide();
 

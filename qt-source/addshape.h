@@ -34,7 +34,7 @@ class QPushButton;
 class QLineEdit;
 class QComboBox;
 class QLabel;
-class QTableWidget;
+class QScrollArea;
 
 class AddShape : public QWidget
 {
@@ -52,6 +52,8 @@ public:
 signals:
 
 public slots:
+    void addDimensionPoint();
+    void removeDimensionPoint();
     void addShape();
     void shapeTypeChanged();
 
@@ -65,8 +67,12 @@ private:
     QComboBox*          shapeIDComboBox;
     QComboBox*          shapeTypeComboBox;
 
-    QTableWidget*       shapeDimensionTable;
-    int                 shapeDimensionTableRowCount;
+    QWidget*            shapeDimensionTable;
+    QScrollArea*        shapeDimensionTableScrollArea;
+    QGridLayout*        shapeDimensionTableLayout;
+    Vector<QLabel*>     shapeDimensionTableLabels;
+    Vector<QLineEdit*>  shapeDimensionTableLineEdits;
+    QPushButton*        shapeDimensionTableButton[2];
 
     QLabel*             shapeDimensionLabel[4];
     QLineEdit*          shapeDimensionLineEdit[4];
@@ -80,7 +86,7 @@ private:
     QPushButton*        addShapeButton;
     QPushButton*        cancelButton;
 
-    Vector<Shape*>* shapeVector;
+    Vector<Shape*>*     shapeVector;
 };
 
 #endif // ADDSHAPE_H
