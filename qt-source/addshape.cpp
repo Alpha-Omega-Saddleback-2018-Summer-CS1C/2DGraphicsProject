@@ -95,6 +95,7 @@ Qt::AlignmentFlag getTextAlignmentFromQString(const QString& alignment)
     else /* Center */               return Qt::AlignCenter;
 }
 
+/* Returns true if the string is a number */
 bool isNumber(const QString& str)
 {
     for(int i = 0; i < str.length(); ++i)
@@ -491,6 +492,8 @@ void AddShape::addShape()
 
         shapeVector->push_back(text);
     }
+
+    close();
 }
 
 void AddShape::removeDimensionPoint()
