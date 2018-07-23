@@ -24,7 +24,6 @@
 #ifndef POLYGON_H
 #define POLYGON_H
 
-
 #include <QPaintDevice>
 #include <QPoint>
 #include "shape.h"

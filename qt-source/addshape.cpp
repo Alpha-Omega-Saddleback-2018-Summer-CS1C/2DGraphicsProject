@@ -21,9 +21,94 @@
     Defines an "add shape" widget
  */
 
+#include <iostream>
 #include <QtWidgets>
 #include "addshape.h"
-#include <iostream>
+#include "circle.h"
+#include "ellipse.h"
+#include "line.h"
+#include "polygon.h"
+#include "polyline.h"
+#include "rectangle.h"
+#include "square.h"
+#include "textbox.h"
+
+/* Returns brush style from a QString */
+Qt::BrushStyle getBrushStyleFromQString(const QString& style)
+{
+    if(style == "None")                     return Qt::NoBrush;
+    else if(style == "Solid")               return Qt::SolidPattern;
+    else if(style == "Horizontal Lines")    return Qt::HorPattern;
+    else /* Vertical Lines */               return Qt::VerPattern;
+}
+
+/* Returns font weight from a  QString */
+QFont::Style getFontStyleFromQString(const QString& style)
+{
+    if(style == "Normal")       return QFont::StyleNormal;
+    else if(style == "Italic")  return QFont::StyleItalic;
+    else /* Oblique */          return QFont::StyleOblique;
+}
+
+/* Returns font style from a QString */
+int getFontWeightFromQString(const QString& weight)
+{
+    if(weight == "Thin")            return QFont::Thin;
+    else if(weight == "Light")      return QFont::Light;
+    else if(weight == "Normal")     return QFont::Normal;
+    else /* Bold */                 return QFont::Bold;
+}
+
+/* Returns pen cap style from a QString */
+Qt::PenCapStyle getPenCapStyleFromQString(const QString& style)
+{
+    if(style == "Square")       return Qt::SquareCap;
+    else if(style == "Flat")    return Qt::FlatCap;
+    else /* Bold */             return Qt::RoundCap;
+}
+
+/* Returns pen join style from a QString */
+Qt::PenJoinStyle getPenJoinStyleFromQString(const QString& style)
+{
+    if(style == "Miter")        return Qt::MiterJoin;
+    else if(style == "Bevel")   return Qt::BevelJoin;
+    else /* Round */            return Qt::RoundJoin;
+}
+
+/* Returns PenStyle from a QString */
+Qt::PenStyle getPenStyleFromQString(const QString& style)
+{
+    if(style == "Solid")                return Qt::SolidLine;
+    else if(style == "Dashed")          return Qt::DashLine;
+    else if(style == "Dotted")          return Qt::DotLine;
+    else if(style == "Dashed/Dotted")   return Qt::DashDotLine;
+    else /* Dashed/Dotted/Dotted */     return Qt::DashDotDotLine;
+}
+
+/* Returns brush style from a QString */
+Qt::AlignmentFlag getTextAlignmentFromQString(const QString& alignment)
+{
+    if(alignment == "Left")         return Qt::AlignLeft;
+    else if(alignment == "Right")   return Qt::AlignRight;
+    else if(alignment == "Top")     return Qt::AlignTop;
+    else if(alignment == "Bottom")  return Qt::AlignBottom;
+    else /* Center */               return Qt::AlignCenter;
+}
+
+bool isNumber(const QString& str)
+{
+    for(int i = 0; i < str.length(); ++i)
+    {
+        if(!str[i].isDigit())
+            return false;
+    }
+
+    return true;
+}
+
+/*
+ *  Class definitions
+ */
 
 AddShape::AddShape(QWidget *parent)
     : QWidget(parent)
@@ -168,27 +253,270 @@ void AddShape::addDimensionPoint()
     shapeDimensionTableLayout->addWidget(lineEditY, row, 2, 1, 1);
 }
 
+void AddShape::addShape()
+{
+    QString type = shapeTypeComboBox->currentText();
+
+    if(type == "Line")
+    {
+        Line* line = new Line;
+        QPen pen;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()) ||
+            !isNumber(shapeDimensionLineEdit[3]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        line->setID(shapeIDComboBox->currentText().toInt());
+        line->setPoints(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt(),
+            shapeDimensionLineEdit[2]->text().toInt(), shapeDimensionLineEdit[3]->text().toInt());
+        line->setPen(pen);
+
+        shapeVector->push_back(line);
+    }
+    else if(type == "Polyline")
+    {
+        /*
+        Polyline* polyline = new Polyline();
+        QPen pen;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()) ||
+            !isNumber(shapeDimensionLineEdit[3]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        polyline->setID(shapeIDComboBox->currentText().toInt());
+        polyline->setPen(pen);
+
+        for(int i = 0; i < shapeDimensionTableLineEdits.size() / 2; ++i)
+        {
+            QLineEdit* lineEditX = shapeDimensionTableLineEdits[2 * i];
+            QLineEdit* lineEditY = shapeDimensionTableLineEdits[2 * i + 1];
+
+            if(!isNumber(lineEditX->text()) || !isNumber(lineEditY->text()))
+            {
+                QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+                return;
+            }
+
+            polyline->addPoint({ lineEditX, lineEditY });
+        }
+
+        shapeVector->push_back(polyline);
+        */
+    }
+    else if(type == "Polygon")
+    {
+
+    }
+    else if(type == "Rectangle")
+    {
+        /*
+        Rectangle* rect = new Rectangle();
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        brush.setColor(QColor(shapeDescriptionComboBox[5]->currentText()));
+        brush.setStyle(getBrushStyleFromQString(shapeDescriptionComboBox[6]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()) ||
+            !isNumber(shapeDimensionLineEdit[3]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        rect->setID(shapeIDComboBox->currentText().toInt());
+        rect->setPosition(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt());
+        rect->setDimensions(shapeDimensionLineEdit[2]->text().toInt(), shapeDimensionLineEdit[3]->text().toInt());
+        rect->setPen(pen);
+        rect->setBrush(brush);
+
+        shapeVector->push_back(rect);
+        */
+    }
+    else if(type == "Square")
+    {
+        Square* square = new Square();
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        brush.setColor(QColor(shapeDescriptionComboBox[5]->currentText()));
+        brush.setStyle(getBrushStyleFromQString(shapeDescriptionComboBox[6]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        square->setID(shapeIDComboBox->currentText().toInt());
+        square->setPosition(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt());
+        square->setSide(shapeDimensionLineEdit[2]->text().toInt());
+        square->setPen(pen);
+        square->setBrush(brush);
+
+        shapeVector->push_back(square);
+    }
+    else if(type == "Ellipse")
+    {
+        /*
+        Ellipse* ellipse = new Ellipse();
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        brush.setColor(QColor(shapeDescriptionComboBox[5]->currentText()));
+        brush.setStyle(getBrushStyleFromQString(shapeDescriptionComboBox[6]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()) ||
+            !isNumber(shapeDimensionLineEdit[3]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        ellipse->setID(shapeIDComboBox->currentText().toInt());
+        ellipse->setPosition(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt());
+        ellipse->setRadii(shapeDimensionLineEdit[2]->text().toInt(), shapeDimensionLineEdit[3]->text().toInt());
+        ellipse->setPen(pen);
+        ellipse->setBrush(brush);
+
+        shapeVector->push_back(ellipse);
+        */
+    }
+    else if(type == "Circle")
+    {
+        Circle* circle = new Circle();
+        QPen pen;
+        QBrush brush;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
+        pen.setWidth(penWidthComboBox->currentText().toInt());
+        pen.setStyle(getPenStyleFromQString(shapeDescriptionComboBox[2]->currentText()));
+        pen.setCapStyle(getPenCapStyleFromQString(shapeDescriptionComboBox[3]->currentText()));
+        pen.setJoinStyle(getPenJoinStyleFromQString(shapeDescriptionComboBox[4]->currentText()));
+
+        brush.setColor(QColor(shapeDescriptionComboBox[5]->currentText()));
+        brush.setStyle(getBrushStyleFromQString(shapeDescriptionComboBox[6]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        circle->setID(shapeIDComboBox->currentText().toInt());
+        circle->setPosition(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt());
+        circle->setRadius(shapeDimensionLineEdit[2]->text().toInt());
+        circle->setPen(pen);
+        circle->setBrush(brush);
+
+        shapeVector->push_back(circle);
+    }
+    else // Textbox
+    {
+        TextBox* text = new TextBox();
+        QPen pen;
+        QFont font;
+
+        pen.setColor(QColor(shapeDescriptionComboBox[1]->currentText()));
+
+        font.setPointSize(fontSizeComboBox->currentText().toInt());
+        font.setFamily(shapeDescriptionComboBox[4]->currentText());
+        font.setStyle(getFontStyleFromQString(shapeDescriptionComboBox[5]->currentText()));
+        font.setWeight(getFontWeightFromQString(shapeDescriptionComboBox[6]->currentText()));
+
+        if(!isNumber(shapeDimensionLineEdit[0]->text()) ||
+            !isNumber(shapeDimensionLineEdit[1]->text()) ||
+            !isNumber(shapeDimensionLineEdit[2]->text()) ||
+            !isNumber(shapeDimensionLineEdit[3]->text()))
+        {
+            QMessageBox::information(this, "Action Denied", "Non-numberical input detected!", QMessageBox::Ok);
+            return;
+        }
+
+        text->setID(shapeIDComboBox->currentText().toInt());
+        text->setPosition(shapeDimensionLineEdit[0]->text().toInt(), shapeDimensionLineEdit[1]->text().toInt());
+        text->setDimensions(shapeDimensionLineEdit[2]->text().toInt(), shapeDimensionLineEdit[3]->text().toInt());
+        text->setText(textStringLineEdit->text());
+        text->setAlignment(getTextAlignmentFromQString(shapeDescriptionComboBox[2]->currentText()));
+        text->setPen(pen);
+        text->setFont(font);
+
+        shapeVector->push_back(text);
+    }
+}
+
 void AddShape::removeDimensionPoint()
 {
     int row = shapeDimensionTableLineEdits.size() / 2;
     if(row < 3)
     {
-
+        QMessageBox::information(this, "Action Denied", "This shape requires a minimum of two points", QMessageBox::Ok);
     }
     else
     {
-        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLabels.end() - 1));
+        Vector<QLabel*>::iterator lastLabel = shapeDimensionTableLabels.end() - 1;
+        Vector<QLineEdit*>::iterator lastLineEdit = shapeDimensionTableLineEdits.end() - 1;
+
+        shapeDimensionTableLayout->removeWidget(*lastLabel);
+        shapeDimensionTableLayout->removeWidget(*lastLineEdit);
+        shapeDimensionTableLayout->removeWidget(*(lastLineEdit - 1));
+
+        delete *lastLabel;
+        delete *lastLineEdit;
+        delete *(lastLineEdit - 1);
+
         shapeDimensionTableLabels.pop_back();
-        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLineEdits.end() - 1));
         shapeDimensionTableLineEdits.pop_back();
-        shapeDimensionTableLayout->removeWidget(*(shapeDimensionTableLineEdits.end() - 1));
         shapeDimensionTableLineEdits.pop_back();
     }
-}
-
-void AddShape::addShape()
-{
-
 }
 
 void AddShape::shapeTypeChanged()

@@ -26,8 +26,8 @@
 
 #include <QPaintDevice>
 #include <QPoint>
-#include "shape.h"
 #include "custom_vector.h"
+#include "shape.h"
 
 class Rectangle : public Shape
 {

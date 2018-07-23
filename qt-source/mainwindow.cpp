@@ -107,7 +107,7 @@ QString getPenStyleAsQString(Qt::PenStyle style)
 }
 
 /* Returns brush style as a QString */
-QString getTextAlignmentAsQString(int alignment)
+QString getTextAlignmentAsQString(Qt::AlignmentFlag alignment)
 {
     if(alignment == Qt::AlignLeft)          return QString("Left");
     else if(alignment == Qt::AlignRight)    return QString("Right");
