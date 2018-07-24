@@ -33,7 +33,7 @@
 class TextBox : public Shape
 {
 public:
-    TextBox(QPaintDevice* paintDevice = nullptr, int id = -1);
+    TextBox();
     ~TextBox() {}
 
     /* Returns the area of this shape */

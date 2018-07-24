@@ -21,17 +21,18 @@
     Defines an "add shape" widget
  */
 
-#include <iostream>
-#include <QtWidgets>
-#include "addshape.h"
+#include "polyline.h"
+#include "rectangle.h"
 #include "circle.h"
 #include "ellipse.h"
 #include "line.h"
 #include "polygon.h"
-#include "polyline.h"
-#include "rectangle.h"
+
 #include "square.h"
 #include "textbox.h"
+
+#include <QtWidgets>
+#include "addshape.h"
 
 /* Returns brush style from a QString */
 Qt::BrushStyle getBrushStyleFromQString(const QString& style)
@@ -98,6 +99,9 @@ Qt::AlignmentFlag getTextAlignmentFromQString(const QString& alignment)
 /* Returns true if the string is a number */
 bool isNumber(const QString& str)
 {
+    if(str.isEmpty())
+        return false;
+
     for(int i = 0; i < str.length(); ++i)
     {
         if(!str[i].isDigit())
@@ -332,10 +336,11 @@ void AddShape::addShape()
     }
     else if(type == "Rectangle")
     {
-        /*
-        Rectangle* rect = new Rectangle();
+        Rectangle x;
         QPen pen;
         QBrush brush;
+
+        /*
 
         pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
         pen.setWidth(penWidthComboBox->currentText().toInt());
@@ -761,9 +766,4 @@ void AddShape::shapeTypeChanged()
         shapeDimensionLabel[1]->setText("Y:");
         shapeDimensionLabel[2]->setText("Side:");
     }
-}
-
-bool AddShape::verifyShape()
-{
-    return true;
 }

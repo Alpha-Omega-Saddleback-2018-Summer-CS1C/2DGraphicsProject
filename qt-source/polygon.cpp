@@ -24,13 +24,10 @@
 #include "polygon.h"
 #include "math.h"
 
-Polygon::Polygon(QPaintDevice* paintDevice, int id)
+Polygon::Polygon()
 {
-    mID = id;
-	mType = POLYGON;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
+    mID = -1;
+    mType = POLYGON;
 }
 
 void Polygon::addPoint(const QPoint& point)

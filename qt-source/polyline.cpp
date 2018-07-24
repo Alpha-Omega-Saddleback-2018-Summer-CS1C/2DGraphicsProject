@@ -23,13 +23,10 @@
 
 #include "polyline.h"
 
-Polyline::Polyline(QPaintDevice* paintDevice, int id)
+Polyline::Polyline()
 {
-    mID = id;
-	mType = POLYLINE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
+    mID = -1;
+    mType = POLYLINE;
 }
 
 void Polyline::addPoint(const QPoint& point)

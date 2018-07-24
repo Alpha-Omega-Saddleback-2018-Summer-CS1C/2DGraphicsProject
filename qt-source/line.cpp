@@ -23,13 +23,10 @@
 
 #include "line.h"
 
-Line::Line(QPaintDevice* paintDevice, int id)
+Line::Line()
 {
-    mID = id;
-	mType = LINE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
+    mID = -1;
+    mType = LINE;
 }
 
 double Line::area()

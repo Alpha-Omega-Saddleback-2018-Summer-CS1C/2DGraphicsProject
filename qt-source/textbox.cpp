@@ -23,13 +23,10 @@
 
 #include "textbox.h"
 
-TextBox::TextBox(QPaintDevice* paintDevice, int id)
+TextBox::TextBox()
 {
-    mID = id;
+    mID = -1;
 	mType = TEXTBOX;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
 }
 
 double TextBox::area()

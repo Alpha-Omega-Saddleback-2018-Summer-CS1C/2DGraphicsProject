@@ -39,4 +39,4 @@ std::string trim_leading_ending(const std::string& str);
 /* Trims whitespace in the entire string */
 std::string trim_whitespace(const std::string& str);
 
-#endif
+#endif // STRING_UTIL_H

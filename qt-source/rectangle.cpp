@@ -23,13 +23,10 @@
 
 #include "rectangle.h"
 
-Rectangle::Rectangle(QPaintDevice* paintDevice, int id)
+Rectangle::Rectangle()
 {
-    mID = id;
+    mID = -1;
 	mType = RECTANGLE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
 }
 
 double Rectangle::area()

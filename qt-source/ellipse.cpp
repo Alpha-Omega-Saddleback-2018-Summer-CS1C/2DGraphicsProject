@@ -23,13 +23,10 @@
 #include "ellipse.h"
 #include "math.h"
 
-Ellipse::Ellipse(QPaintDevice* paintDevice, int id)
+Ellipse::Ellipse()
 {
-	mID = id;
+    mID = -1;
 	mType = ELLIPSE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
 }
 
 double Ellipse::area()

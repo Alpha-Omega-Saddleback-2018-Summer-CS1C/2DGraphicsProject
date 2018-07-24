@@ -23,13 +23,10 @@
 #include "circle.h"
 #include "math.h"
 
-Circle::Circle(QPaintDevice* paintDevice, int id)
+Circle::Circle()
 {
-	mID = id;
+    mID = -1;
 	mType = CIRCLE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
 }
 
 double Circle::area()

@@ -58,9 +58,6 @@ public slots:
     void shapeTypeChanged();
 
 private:
-    bool verifyShape();
-
-private:
     QGridLayout*        mainLayout;
 
     QLabel*             shapeHeaderLabel[2];

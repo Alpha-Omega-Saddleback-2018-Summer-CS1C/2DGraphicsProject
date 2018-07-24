@@ -32,16 +32,8 @@
 
 #include <QString>
 
-#include "circle.h"
 #include "custom_vector.h"
-#include "ellipse.h"
-#include "line.h"
-#include "polyline.h"
-#include "polygon.h"
-#include "rectangle.h"
-#include "textbox.h"
 #include "shape.h"
-#include "square.h"
 #include "string_util.h"
 
 /* Parser manager */

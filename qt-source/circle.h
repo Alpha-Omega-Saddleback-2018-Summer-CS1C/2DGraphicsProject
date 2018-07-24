@@ -30,7 +30,7 @@
 class Circle: public Shape
 {
 public:
-    Circle(QPaintDevice* paintDevice = nullptr, int id = -1); //ID, Position X, Y, Radius
+    Circle();
     ~Circle() {}
 
     double area() override; // Return the area of the ciricle

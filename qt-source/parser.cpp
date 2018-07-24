@@ -21,7 +21,15 @@
     Reads input file and creates shapes
  */
 
+#include "circle.h"
+#include "ellipse.h"
+#include "line.h"
 #include "parser.h"
+#include "polyline.h"
+#include "polygon.h"
+#include "rectangle.h"
+#include "textbox.h"
+#include "square.h"
 
 void Parser::close()
 {

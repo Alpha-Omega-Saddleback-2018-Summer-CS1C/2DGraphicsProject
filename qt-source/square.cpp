@@ -23,13 +23,10 @@
 
 #include "square.h"
 
-Square::Square(QPaintDevice* paintDevice, int id)
+Square::Square()
 {
-    mID = id;
+    mID = -1;
 	mType = SQUARE;
-
-    if(paintDevice != nullptr)
-        mPainter.begin(paintDevice);
 }
 
 double Square::area()
