@@ -21,18 +21,25 @@
     Defines login window
  */
 
+<<<<<<< HEAD
 #include <QBitmap>
 #include <QMessageBox>
 #include <QPixmap>
-
+#include "contact.h"
+#include "mainwindow.h"
 #include "login.h"
 #include "ui_login.h"
+=======
+contact* contactWindow = nullptr;
+MainWindow* gMainWindow = nullptr;
+>>>>>>> master+contact-window
 
 Login::Login(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
+<<<<<<< HEAD
 
     //custom image
     //QLabel topLevelLabel;
@@ -42,6 +49,10 @@ Login::Login(QWidget* parent) :
     ui->alphaOmegaPic->setScaledContents(true);
     ui->alphaOmegaPic->show();
     //ui->verticalLayout->addItem(pixmap);
+=======
+    connect(this, SIGNAL(requestNewMainWindow()), this, SLOT(openMainWindow()));
+    connect(this, SIGNAL(requestContactWindow()), this, SLOT(openContactWindow()));
+>>>>>>> master+contact-window
 }
 
 Login::~Login()
@@ -89,6 +100,7 @@ void Login::openMainWindow()
     this->hide();
 }
 
+<<<<<<< HEAD
 void Login::closeMainWindow()
 {
     mainWindow->close();
@@ -97,4 +109,16 @@ void Login::closeMainWindow()
     ui->input_username->clear();
     ui->input_password->clear();
     this->show();
+=======
+void Login::on_Contact_clicked()
+{
+    emit requestContactWindow();
+}
+
+void Login::openContactWindow()
+{
+    contactWindow = new contact(this);  // 'this' specifies object to return to (login) from contact window
+    contactWindow->show();
+    this->hide();
+>>>>>>> master+contact-window
 }
