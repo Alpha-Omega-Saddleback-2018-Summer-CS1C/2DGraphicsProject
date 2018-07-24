@@ -21,7 +21,6 @@
     Defines login window
  */
 
-<<<<<<< HEAD
 #include <QBitmap>
 #include <QMessageBox>
 #include <QPixmap>
@@ -29,30 +28,23 @@
 #include "mainwindow.h"
 #include "login.h"
 #include "ui_login.h"
-=======
+
 contact* contactWindow = nullptr;
 MainWindow* gMainWindow = nullptr;
->>>>>>> master+contact-window
 
 Login::Login(QWidget* parent) :
     QMainWindow(parent),
     ui(new Ui::Login)
 {
     ui->setupUi(this);
-<<<<<<< HEAD
 
-    //custom image
-    //QLabel topLevelLabel;
     QPixmap pixmap("alphaOmega.png");
     ui->alphaOmegaPic->setPixmap(pixmap);
     ui->alphaOmegaPic->setMask(pixmap.mask());
     ui->alphaOmegaPic->setScaledContents(true);
     ui->alphaOmegaPic->show();
-    //ui->verticalLayout->addItem(pixmap);
-=======
-    connect(this, SIGNAL(requestNewMainWindow()), this, SLOT(openMainWindow()));
-    connect(this, SIGNAL(requestContactWindow()), this, SLOT(openContactWindow()));
->>>>>>> master+contact-window
+
+    connect(ui->contactButton, SIGNAL(clicked(bool)), this, SLOT(openContactWindow()));
 }
 
 Login::~Login()
@@ -92,6 +84,13 @@ void Login::on_loginButton_clicked()
     }
 }
 
+void Login::openContactWindow()
+{
+    contactWindow = new contact(this);
+    contactWindow->show();
+    this->hide();
+}
+
 void Login::openMainWindow()
 {
     mainWindow = new MainWindow;
@@ -100,7 +99,6 @@ void Login::openMainWindow()
     this->hide();
 }
 
-<<<<<<< HEAD
 void Login::closeMainWindow()
 {
     mainWindow->close();
@@ -109,16 +107,4 @@ void Login::closeMainWindow()
     ui->input_username->clear();
     ui->input_password->clear();
     this->show();
-=======
-void Login::on_Contact_clicked()
-{
-    emit requestContactWindow();
-}
-
-void Login::openContactWindow()
-{
-    contactWindow = new contact(this);  // 'this' specifies object to return to (login) from contact window
-    contactWindow->show();
-    this->hide();
->>>>>>> master+contact-window
 }

@@ -48,6 +48,7 @@ public:
 
 private slots:
     void on_loginButton_clicked();
+    void openContactWindow();
     void openMainWindow();
     void closeMainWindow();
 
