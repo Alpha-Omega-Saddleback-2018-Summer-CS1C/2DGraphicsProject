@@ -37,10 +37,7 @@ bool UserParser::loadFile(const std::string& filePath)
     mInputFile.open(filePath);
     mInputFilePath = filePath;
 
-    if(mInputFile.is_open())
-        return true;
-    else
-        return false;
+    return mInputFile.is_open();
 }
 
 bool UserParser::parse(Vector<User>& userVector)

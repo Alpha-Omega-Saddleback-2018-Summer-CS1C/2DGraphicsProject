@@ -77,7 +77,7 @@ QString Shape::getTypeAsQString() const
     else if(mType == SQUARE)     return QString("Square");
     else if(mType == CIRCLE)     return QString("Circle");
     else if(mType == ELLIPSE)    return QString("Ellipse");
-    else /* mType == TEXTBOX */  return QString("Textbox");
+    else /* mType == TEXTBOX */  return QString("Text");
 }
 
 void Shape::setBrush(const QBrush& brush)
