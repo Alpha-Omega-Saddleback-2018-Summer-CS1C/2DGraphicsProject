@@ -23,6 +23,8 @@
 
 #include "line.h"
 
+using namespace shape;
+
 Line::Line()
 {
     mID = -1;

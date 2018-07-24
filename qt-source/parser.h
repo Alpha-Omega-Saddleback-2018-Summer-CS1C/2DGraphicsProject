@@ -29,12 +29,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
 #include <QString>
-
 #include "custom_vector.h"
 #include "shape.h"
 #include "string_util.h"
+
+using shape::Shape;
 
 /* Parser manager */
 class Parser

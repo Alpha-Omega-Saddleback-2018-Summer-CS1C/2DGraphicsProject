@@ -32,6 +32,8 @@
 #include "usermanager.h"
 #include "userparser.h"
 
+using shape::Shape;
+
 /* Forward decleration */
 class QPushButton;
 class QComboBox;

@@ -28,22 +28,25 @@
 #include "shape.h"
 #include "custom_vector.h"
 
-class Ellipse: public Shape
+namespace shape
 {
-public:
-    Ellipse();
-    ~Ellipse() {}
+    class Ellipse: public Shape
+    {
+    public:
+        Ellipse();
+        ~Ellipse() {}
 
-    double area() override; // Return the area of the ciricle
-    Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
-    void draw() override; // Draw the circle
-    void move(const QPoint& offset) override; // Translates the circle by a given offset
-    double perimeter() override; // return the circumference of the ciricle
-    void setRadii(int rx, int ry); // set the radius of the ciricle
-    void setPosition(int x, int y); // Set the position of the circle
+        double area() override; // Return the area of the ciricle
+        Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
+        void draw() override; // Draw the circle
+        void move(const QPoint& offset) override; // Translates the circle by a given offset
+        double perimeter() override; // return the circumference of the ciricle
+        void setRadii(int rx, int ry); // set the radius of the ciricle
+        void setPosition(int x, int y); // Set the position of the circle
 
-private:
-    QPoint mPosition;
-    int mRadiusX, mRadiusY;
-};
+    private:
+        QPoint mPosition;
+        int mRadiusX, mRadiusY;
+    };
+}
 #endif // ELLIPSE_H

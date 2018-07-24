@@ -23,6 +23,8 @@
 
 #include "textbox.h"
 
+using namespace shape;
+
 TextBox::TextBox()
 {
     mID = -1;

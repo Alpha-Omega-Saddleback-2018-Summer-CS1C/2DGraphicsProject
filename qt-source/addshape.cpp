@@ -21,18 +21,16 @@
     Defines an "add shape" widget
  */
 
-#include "polyline.h"
-#include "rectangle.h"
+#include <QtWidgets>
+#include "addshape.h"
 #include "circle.h"
 #include "ellipse.h"
 #include "line.h"
 #include "polygon.h"
-
+#include "polyline.h"
+#include "rectangle.h"
 #include "square.h"
 #include "textbox.h"
-
-#include <QtWidgets>
-#include "addshape.h"
 
 /* Returns brush style from a QString */
 Qt::BrushStyle getBrushStyleFromQString(const QString& style)
@@ -264,7 +262,7 @@ void AddShape::addShape()
 
     if(type == "Line")
     {
-        Line* line = new Line;
+        shape::Line* line = new shape::Line;
         QPen pen;
 
         pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
@@ -291,8 +289,7 @@ void AddShape::addShape()
     }
     else if(type == "Polyline")
     {
-        /*
-        Polyline* polyline = new Polyline();
+        shape::Polyline* polyline = new shape::Polyline;
         QPen pen;
 
         pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
@@ -324,11 +321,10 @@ void AddShape::addShape()
                 return;
             }
 
-            polyline->addPoint({ lineEditX, lineEditY });
+            polyline->addPoint({ lineEditX->text().toInt(), lineEditY->text().toInt() });
         }
 
         shapeVector->push_back(polyline);
-        */
     }
     else if(type == "Polygon")
     {
@@ -336,11 +332,9 @@ void AddShape::addShape()
     }
     else if(type == "Rectangle")
     {
-        Rectangle x;
+        shape::Rectangle* rect = new shape::Rectangle;
         QPen pen;
         QBrush brush;
-
-        /*
 
         pen.setColor(QColor(shapeDescriptionComboBox[0]->currentText()));
         pen.setWidth(penWidthComboBox->currentText().toInt());
@@ -367,11 +361,10 @@ void AddShape::addShape()
         rect->setBrush(brush);
 
         shapeVector->push_back(rect);
-        */
     }
     else if(type == "Square")
     {
-        Square* square = new Square();
+        shape::Square* square = new shape::Square;
         QPen pen;
         QBrush brush;
 
@@ -402,8 +395,7 @@ void AddShape::addShape()
     }
     else if(type == "Ellipse")
     {
-        /*
-        Ellipse* ellipse = new Ellipse();
+        shape::Ellipse* ellipse = new shape::Ellipse;
         QPen pen;
         QBrush brush;
 
@@ -432,11 +424,10 @@ void AddShape::addShape()
         ellipse->setBrush(brush);
 
         shapeVector->push_back(ellipse);
-        */
     }
     else if(type == "Circle")
     {
-        Circle* circle = new Circle();
+        shape::Circle* circle = new shape::Circle();
         QPen pen;
         QBrush brush;
 
@@ -467,7 +458,7 @@ void AddShape::addShape()
     }
     else // Textbox
     {
-        TextBox* text = new TextBox();
+        shape::TextBox* text = new shape::TextBox();
         QPen pen;
         QFont font;
 

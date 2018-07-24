@@ -29,38 +29,41 @@
 #include "custom_vector.h"
 #include "shape.h"
 
-class Polyline : public Shape
+namespace shape
 {
-public:
-    Polyline();
-    ~Polyline() {}
+    class Polyline : public Shape
+    {
+    public:
+        Polyline();
+        ~Polyline() {}
 
-    /* Adds a point to this shape */
-    void addPoint(const QPoint& point);
+        /* Adds a point to this shape */
+        void addPoint(const QPoint& point);
 
-    /* Returns the area of this shape */
-    double area() override;
+        /* Returns the area of this shape */
+        double area() override;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    Vector<QString> dimensionLabels() override;
+        /* Returns the dimensions of this shape for use in QLabels */
+        Vector<QString> dimensionLabels() override;
 
-    /* Draws this shape */
-    void draw() override;
+        /* Draws this shape */
+        void draw() override;
 
-    /* Translates this shape by a given offset */
-    void move(const QPoint& offset) override;
+        /* Translates this shape by a given offset */
+        void move(const QPoint& offset) override;
 
-    /* Returns the perimeter of this this shape */
-    double perimeter() override;
+        /* Returns the perimeter of this this shape */
+        double perimeter() override;
 
-    /* Sets all the points of this shape */
-    void setPointData(int* pointData, int pointCount);
+        /* Sets all the points of this shape */
+        void setPointData(int* pointData, int pointCount);
 
-    /* Sets a point of this shape */
-    void setPoint(int index, const QPoint& point);
+        /* Sets a point of this shape */
+        void setPoint(int index, const QPoint& point);
 
-private:
-    Vector<QPoint> mPoints;
-};
+    private:
+        Vector<QPoint> mPoints;
+    };
+}
 
 #endif // POLYLINE_H

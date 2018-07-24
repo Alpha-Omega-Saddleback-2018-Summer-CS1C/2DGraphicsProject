@@ -24,6 +24,8 @@
 #include "polygon.h"
 #include "math.h"
 
+using namespace shape;
+
 Polygon::Polygon()
 {
     mID = -1;

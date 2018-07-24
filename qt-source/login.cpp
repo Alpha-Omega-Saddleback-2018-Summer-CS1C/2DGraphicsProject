@@ -21,12 +21,12 @@
     Defines login window
  */
 
-#include "login.h"
-#include "ui_login.h"
 #include <QBitmap>
+#include <QMessageBox>
 #include <QPixmap>
 
-#include <QMessageBox>
+#include "login.h"
+#include "ui_login.h"
 
 Login::Login(QWidget* parent) :
     QMainWindow(parent),

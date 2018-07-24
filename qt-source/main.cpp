@@ -30,6 +30,8 @@
 #include "shape.h"
 #include "userparser.h"
 
+using namespace shape;
+
 const std::string shapeFile = "shapes.txt";
 const std::string userFile = "users.txt";
 

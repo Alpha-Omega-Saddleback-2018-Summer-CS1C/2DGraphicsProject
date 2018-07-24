@@ -30,59 +30,62 @@
 #include "shape.h"
 #include "custom_vector.h"
 
-class TextBox : public Shape
+namespace shape
 {
-public:
-    TextBox();
-    ~TextBox() {}
+    class TextBox : public Shape
+    {
+    public:
+        TextBox();
+        ~TextBox() {}
 
-    /* Returns the area of this shape */
-    double area() override;
+        /* Returns the area of this shape */
+        double area() override;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    Vector<QString> dimensionLabels() override;
+        /* Returns the dimensions of this shape for use in QLabels */
+        Vector<QString> dimensionLabels() override;
 
-    /* Draws this shape */
-    void draw() override;
+        /* Draws this shape */
+        void draw() override;
 
-    /* Returns the QFont of the text box */
-    QFont& getFont();
+        /* Returns the QFont of the text box */
+        QFont& getFont();
 
-    /* Returns the alignment of the text box */
-    Qt::AlignmentFlag getAlignment() const;
+        /* Returns the alignment of the text box */
+        Qt::AlignmentFlag getAlignment() const;
 
-    /* Returns the text string */
-    QString getText() const;
+        /* Returns the text string */
+        QString getText() const;
 
-    /* Translates this shape by a given offset */
-    void move(const QPoint& offset) override;
+        /* Translates this shape by a given offset */
+        void move(const QPoint& offset) override;
 
-    /* Returns the perimeter of this this shape */
-    double perimeter() override;
+        /* Returns the perimeter of this this shape */
+        double perimeter() override;
 
-    /* Sets the alignment of the text */
-    void setAlignment(Qt::AlignmentFlag flags);
+        /* Sets the alignment of the text */
+        void setAlignment(Qt::AlignmentFlag flags);
 
-    /* Sets the dimension of this shape */
-    void setDimensions(int w, int h);
+        /* Sets the dimension of this shape */
+        void setDimensions(int w, int h);
 
-    /* Sets the QFont type to change how the shape is drawn */
-    void setFont(const QFont& font);
+        /* Sets the QFont type to change how the shape is drawn */
+        void setFont(const QFont& font);
 
-    /* Sets the position of this shape */
-    void setPosition(int x, int y);
+        /* Sets the position of this shape */
+        void setPosition(int x, int y);
 
-    /* Sets the QPen type to change how the shape is drawn */
-    void setText(const QString& text);
+        /* Sets the QPen type to change how the shape is drawn */
+        void setText(const QString& text);
 
-private:
-    QPoint mPosition;
-    int mWidth;
-    int mHeight;
+    private:
+        QPoint mPosition;
+        int mWidth;
+        int mHeight;
 
-    QFont mFont;
-    QString mText;
-    Qt::AlignmentFlag mAlignmentFlags;
-};
+        QFont mFont;
+        QString mText;
+        Qt::AlignmentFlag mAlignmentFlags;
+    };
+}
 
 #endif // TEXTBOX_H

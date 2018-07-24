@@ -29,6 +29,8 @@
 #include "custom_vector.h"
 #include "shape.h"
 
+using shape::Shape;
+
 class RenderArea : public QWidget
 {
 public:

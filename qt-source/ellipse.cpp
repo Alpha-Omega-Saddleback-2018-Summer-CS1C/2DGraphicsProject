@@ -23,6 +23,8 @@
 #include "ellipse.h"
 #include "math.h"
 
+using namespace shape;
+
 Ellipse::Ellipse()
 {
     mID = -1;

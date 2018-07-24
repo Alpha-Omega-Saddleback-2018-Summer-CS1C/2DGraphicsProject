@@ -23,6 +23,8 @@
 
 #include "polyline.h"
 
+using namespace shape;
+
 Polyline::Polyline()
 {
     mID = -1;

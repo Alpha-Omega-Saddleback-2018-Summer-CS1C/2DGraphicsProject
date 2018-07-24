@@ -345,9 +345,9 @@ void MainWindow::updateShapeInfo()
     shapeHeaderLabels[1]->setText(QString::number(shape->getID()));
     shapeHeaderLabels[3]->setText(shape->getTypeAsQString());
 
-    if(shape->getType() == TEXTBOX)
+    if(shape->getType() == Shape::TEXTBOX)
     {
-        TextBox* textBox = dynamic_cast<TextBox*>(shape);
+        shape::TextBox* textBox = dynamic_cast<shape::TextBox*>(shape);
 
         /* Labels */
         shapeDescriptionLabels[0]->setText("Text:");
@@ -376,7 +376,7 @@ void MainWindow::updateShapeInfo()
         shapeDescriptionLabels[6]->setText("Pen Cap Style:");
         shapeDescriptionLabels[8]->setText("Pen Join Style:");
 
-        if(shape->getType() != LINE && shape->getType() != POLYLINE)
+        if(shape->getType() != Shape::LINE && shape->getType() != Shape::POLYLINE)
         {
             shapeDescriptionLabels[10]->setText("Brush Color:");
             shapeDescriptionLabels[12]->setText("Brush Style:");
@@ -394,7 +394,7 @@ void MainWindow::updateShapeInfo()
         shapeDescriptionLabels[7]->setText(getPenCapStyleAsQString(shape->getPen().capStyle()));
         shapeDescriptionLabels[9]->setText(getPenJoinStyleAsQString(shape->getPen().joinStyle()));
 
-        if(shape->getType() != LINE && shape->getType() != POLYLINE)
+        if(shape->getType() != Shape::LINE && shape->getType() != Shape::POLYLINE)
         {
             shapeDescriptionLabels[11]->setText(getQColorAsQString(shape->getBrush().color()));
             shapeDescriptionLabels[13]->setText(getBrushStyleAsQString(shape->getBrush().style()));

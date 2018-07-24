@@ -27,22 +27,25 @@
 #include <QPoint>
 #include "shape.h"
 
-class Circle: public Shape
+namespace shape
 {
-public:
-    Circle();
-    ~Circle() {}
+    class Circle: public Shape
+    {
+    public:
+        Circle();
+        ~Circle() {}
 
-    double area() override; // Return the area of the ciricle
-    Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
-    void draw() override; // Draw the circle
-    void move(const QPoint& offset) override; // Translates the circle by a given offset
-    double perimeter() override; // return the circumference of the ciricle
-    void setRadius(int r); // set the radius of the ciricle
-    void setPosition(int x, int y); // Set the position of the circle
+        double area() override; // Return the area of the ciricle
+        Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
+        void draw() override; // Draw the circle
+        void move(const QPoint& offset) override; // Translates the circle by a given offset
+        double perimeter() override; // return the circumference of the ciricle
+        void setRadius(int r); // set the radius of the ciricle
+        void setPosition(int x, int y); // Set the position of the circle
 
-private:
-    QPoint mPosition;
-    int radius;
-};
+    private:
+        QPoint mPosition;
+        int radius;
+    };
+}
 #endif // CIRCLE_H

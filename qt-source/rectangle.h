@@ -29,37 +29,40 @@
 #include "custom_vector.h"
 #include "shape.h"
 
-class Rectangle : public Shape
+namespace shape
 {
-public:
-    Rectangle();
-    ~Rectangle() {}
+    class Rectangle : public Shape
+    {
+    public:
+        Rectangle();
+        ~Rectangle() {}
 
-    /* Returns the area of this shape */
-    double area() override;
+        /* Returns the area of this shape */
+        double area() override;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    Vector<QString> dimensionLabels() override;
+        /* Returns the dimensions of this shape for use in QLabels */
+        Vector<QString> dimensionLabels() override;
 
-    /* Draws this shape */
-    void draw() override;
+        /* Draws this shape */
+        void draw() override;
 
-    /* Translates this shape by a given offset */
-    void move(const QPoint& offset) override;
+        /* Translates this shape by a given offset */
+        void move(const QPoint& offset) override;
 
-    /* Returns the perimeter of this this shape */
-    double perimeter() override;
+        /* Returns the perimeter of this this shape */
+        double perimeter() override;
 
-    /* Sets the dimension of this shape */
-    void setDimensions(int w, int h);
+        /* Sets the dimension of this shape */
+        void setDimensions(int w, int h);
 
-    /* Sets the position of this shape */
-    void setPosition(int x, int y);
+        /* Sets the position of this shape */
+        void setPosition(int x, int y);
 
-private:
-    QPoint mPosition;
-    int mWidth;
-    int mHeight;
-};
+    private:
+        QPoint mPosition;
+        int mWidth;
+        int mHeight;
+    };
+}
 
 #endif // RECTANGLE_H

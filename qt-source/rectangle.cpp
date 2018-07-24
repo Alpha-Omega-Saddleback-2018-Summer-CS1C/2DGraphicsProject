@@ -23,6 +23,8 @@
 
 #include "rectangle.h"
 
+using namespace shape;
+
 Rectangle::Rectangle()
 {
     mID = -1;

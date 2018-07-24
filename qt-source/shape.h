@@ -30,78 +30,81 @@
 #include <QString>
 #include "custom_vector.h"
 
-enum ShapeType
+namespace shape
 {
-	LINE = 0,
-	POLYLINE,
-	POLYGON,
-	RECTANGLE,
-	SQUARE,
-	CIRCLE,
-	ELLIPSE,
-	TEXTBOX
-};
+    class Shape
+    {
+    public:
 
-class Shape
-{
-public:
+        enum ShapeType
+        {
+            LINE = 0,
+            POLYLINE,
+            POLYGON,
+            RECTANGLE,
+            SQUARE,
+            CIRCLE,
+            ELLIPSE,
+            TEXTBOX
+        };
 
-    virtual ~Shape() {}
+        virtual ~Shape() {}
 
-    /* Compares ID's */
-    bool operator==(const Shape& shape) const;
-    bool operator>(const Shape& shape) const;
-    bool operator<(const Shape& shape) const;
+        /* Compares ID's */
+        bool operator==(const Shape& shape) const;
+        bool operator>(const Shape& shape) const;
+        bool operator<(const Shape& shape) const;
 
-    /* Returns the area of the shape */
-    virtual double area() = 0;
+        /* Returns the area of the shape */
+        virtual double area() = 0;
 
-    /* Draws this shape */
-    virtual void draw() = 0;
+        /* Draws this shape */
+        virtual void draw() = 0;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    virtual Vector<QString> dimensionLabels() = 0;
+        /* Returns the dimensions of this shape for use in QLabels */
+        virtual Vector<QString> dimensionLabels() = 0;
 
-    /* Returns the QBrush */
-    QBrush& getBrush();
+        /* Returns the QBrush */
+        QBrush& getBrush();
 
-    /* Returns the Shape ID */
-    int getID() const;
+        /* Returns the Shape ID */
+        int getID() const;
 
-    /* Returns the QPainter */
-    QPainter& getPainter();
+        /* Returns the QPainter */
+        QPainter& getPainter();
 
-    /* Returns the QPen */
-    QPen& getPen();
+        /* Returns the QPen */
+        QPen& getPen();
 
-    /* Returns the Shape type */
-    ShapeType getType() const;
+        /* Returns the Shape type */
+        ShapeType getType() const;
 
-    /* Returns the Shape type as a QString */
-    QString getTypeAsQString() const;
+        /* Returns the Shape type as a QString */
+        QString getTypeAsQString() const;
 
-    /* Translates this shape by a given offset */
-    virtual void move(const QPoint& offset) = 0;
+        /* Translates this shape by a given offset */
+        virtual void move(const QPoint& offset) = 0;
 
-    /* Returns the perimeter of the shape */
-    virtual double perimeter() = 0;
+        /* Returns the perimeter of the shape */
+        virtual double perimeter() = 0;
 
-    /* Sets the QBrush type */
-    void setBrush(const QBrush& brush);
+        /* Sets the QBrush type */
+        void setBrush(const QBrush& brush);
 
-    /* Sets the Shape ID */
-    void setID(int id);
+        /* Sets the Shape ID */
+        void setID(int id);
 
-    /* Sets the QPen type */
-    void setPen(const QPen& pen);
+        /* Sets the QPen type */
+        void setPen(const QPen& pen);
 
-protected:
-    int 		mID;
-	ShapeType 	mType;
+    protected:
+        int 		mID;
+        ShapeType 	mType;
 
-    QPainter    mPainter;
-    QPen        mPen;
-    QBrush      mBrush;
-};
+        QPainter    mPainter;
+        QPen        mPen;
+        QBrush      mBrush;
+    };
+}
 
 #endif // SHAPE_H

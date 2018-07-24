@@ -23,6 +23,8 @@
 
 #include "shape.h"
 
+using namespace shape;
+
 bool Shape::operator==(const Shape& shape) const
 {
     return mID == shape.mID;
@@ -61,7 +63,7 @@ QPen& Shape::getPen()
     return mPen;
 }
 
-ShapeType Shape::getType() const
+Shape::ShapeType Shape::getType() const
 {
     return mType;
 }

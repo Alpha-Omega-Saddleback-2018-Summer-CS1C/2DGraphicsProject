@@ -23,6 +23,8 @@
 #include "circle.h"
 #include "math.h"
 
+using namespace shape;
+
 Circle::Circle()
 {
     mID = -1;

@@ -29,33 +29,36 @@
 #include <QPoint>
 #include "shape.h"
 
-class Line : public Shape
+namespace shape
 {
-public:
-    Line();
-    ~Line() {}
+    class Line : public Shape
+    {
+    public:
+        Line();
+        ~Line() {}
 
-    /* Returns the area of this shape */
-    double area() override;
+        /* Returns the area of this shape */
+        double area() override;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    Vector<QString> dimensionLabels() override;
+        /* Returns the dimensions of this shape for use in QLabels */
+        Vector<QString> dimensionLabels() override;
 
-    /* Draws this shape */
-    void draw() override;
+        /* Draws this shape */
+        void draw() override;
 
-    /* Translates this shape by a given offset */
-    void move(const QPoint& offset) override;
+        /* Translates this shape by a given offset */
+        void move(const QPoint& offset) override;
 
-    /* Returns the perimeter of this this shape */
-    double perimeter() override;
+        /* Returns the perimeter of this this shape */
+        double perimeter() override;
 
-    /* Sets the points of this line */
-    void setPoints(int x1, int y1, int x2, int y2);
+        /* Sets the points of this line */
+        void setPoints(int x1, int y1, int x2, int y2);
 
-private:
-    QPoint mPoint1;
-    QPoint mPoint2;
-};
+    private:
+        QPoint mPoint1;
+        QPoint mPoint2;
+    };
+}
 
 #endif // LINE_H

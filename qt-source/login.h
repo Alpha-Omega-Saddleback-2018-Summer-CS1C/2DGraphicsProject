@@ -30,6 +30,8 @@
 #include "shape.h"
 #include "userparser.h"
 
+using shape::Shape;
+
 namespace Ui {
 class Login;
 }

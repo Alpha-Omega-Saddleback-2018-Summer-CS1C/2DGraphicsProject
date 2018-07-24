@@ -31,6 +31,8 @@
 #include "textbox.h"
 #include "square.h"
 
+using namespace shape;
+
 void Parser::close()
 {
     if(mInputFile.is_open())

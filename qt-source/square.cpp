@@ -23,6 +23,8 @@
 
 #include "square.h"
 
+using namespace shape;
+
 Square::Square()
 {
     mID = -1;

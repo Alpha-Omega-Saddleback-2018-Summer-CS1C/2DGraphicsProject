@@ -29,41 +29,44 @@
 #include "shape.h"
 #include "custom_vector.h"
 
-class Square : public Shape
+namespace shape
 {
-public:
-    Square();
-    ~Square() {}
+    class Square : public Shape
+    {
+    public:
+        Square();
+        ~Square() {}
 
-    /* Returns the area of this shape */
-    double area() override;
+        /* Returns the area of this shape */
+        double area() override;
 
-    /* Returns the dimensions of this shape for use in QLabels */
-    Vector<QString> dimensionLabels() override;
+        /* Returns the dimensions of this shape for use in QLabels */
+        Vector<QString> dimensionLabels() override;
 
-    /* Draws this shape */
-    void draw() override;
+        /* Draws this shape */
+        void draw() override;
 
-    /* Translates this shape by a given offset */
-    void move(const QPoint& offset) override;
+        /* Translates this shape by a given offset */
+        void move(const QPoint& offset) override;
 
-    /* Returns the perimeter of this this shape */
-    double perimeter() override;
+        /* Returns the perimeter of this this shape */
+        double perimeter() override;
 
-    /* Sets the dimension of this shape */
-    void setDimensions(int side);
+        /* Sets the dimension of this shape */
+        void setDimensions(int side);
 
-    /* Sets the position of this shape */
-    void setPosition(int x, int y);
+        /* Sets the position of this shape */
+        void setPosition(int x, int y);
 
-    /* Sets the side length of this shape */
-    void setSide(int side);
+        /* Sets the side length of this shape */
+        void setSide(int side);
 
-private:
-    int mID;
-    QPoint mPosition;
-    int mSide;
-};
+    private:
+        int mID;
+        QPoint mPosition;
+        int mSide;
+    };
+}
 
 #endif // SQUARE_H
 

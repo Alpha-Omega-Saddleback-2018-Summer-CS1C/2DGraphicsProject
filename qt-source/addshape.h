@@ -26,6 +26,7 @@
 
 #include <QWidget>
 #include "custom_vector.h"
+#include "shape.h"
 
 // Forward decleration
 class QGridLayout;
@@ -34,7 +35,8 @@ class QLineEdit;
 class QComboBox;
 class QLabel;
 class QScrollArea;
-class Shape;
+
+using shape::Shape;
 
 class AddShape : public QWidget
 {
