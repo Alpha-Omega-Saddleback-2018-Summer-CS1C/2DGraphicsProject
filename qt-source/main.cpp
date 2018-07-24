@@ -81,9 +81,16 @@ int main(int argc, char *argv[])
     if(a.exec())
         return 1;
 
-    serializer.loadFile(shapeFile);
-    serializer.save(shapeVector);
-    serializer.close();
+    if(!serializer.loadFile(shapeFile))
+    {
+        std::cout << "Could not save \"" << shapeFile << "\"" << std::endl;
+    }
+    else
+    {
+        serializer.save(shapeVector);
+        serializer.close();
+        std::cout << "File \"" << shapeFile << "\" saved successfully" << std::endl;
+    }
 
     return 0;
 }
