@@ -45,10 +45,12 @@ public:
 private slots:
     void on_loginButton_clicked();
     void openMainWindow();
+    void openContactWindow();
+    void on_Contact_clicked();
 
 signals:
     void requestNewMainWindow();
-
+    void requestContactWindow();
 private:
     Ui::Login* ui;
     Vector<Shape*> shapeVector;

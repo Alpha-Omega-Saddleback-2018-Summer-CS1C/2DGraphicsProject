@@ -24,9 +24,11 @@
 #include "login.h"
 #include "ui_login.h"
 #include "mainwindow.h"
-
+#include "contact.h"
+//#include "ui_contact.h" // ///////////////////////
 #include <QMessageBox>
 
+contact* contactWindow = nullptr;
 MainWindow* gMainWindow = nullptr;
 
 Login::Login(QWidget* parent) :
@@ -35,6 +37,7 @@ Login::Login(QWidget* parent) :
 {
     ui->setupUi(this);
     connect(this, SIGNAL(requestNewMainWindow()), this, SLOT(openMainWindow()));
+    connect(this, SIGNAL(requestContactWindow()), this, SLOT(openContactWindow()));
 }
 
 Login::~Login()
@@ -67,5 +70,17 @@ void Login::openMainWindow()
     gMainWindow = new MainWindow;
     gMainWindow->show();
     gMainWindow->addShapes(shapeVector);
+    this->hide();
+}
+
+void Login::on_Contact_clicked()
+{
+    emit requestContactWindow();
+}
+
+void Login::openContactWindow()
+{
+    contactWindow = new contact(this);  // 'this' specifies object to return to (login) from contact window
+    contactWindow->show();
     this->hide();
 }
