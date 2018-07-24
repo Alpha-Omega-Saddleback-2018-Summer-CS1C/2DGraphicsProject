@@ -52,6 +52,18 @@ void Line::draw()
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawLine(mPoint1, mPoint2);
+    mPainter.drawText(mPoint1.x(), mPoint1.y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+}
+
+Vector<int> Line::getDimensions()
+{
+    Vector<int> ret;
+    ret.push_back(mPoint1.x());
+    ret.push_back(mPoint1.y());
+    ret.push_back(mPoint2.x());
+    ret.push_back(mPoint2.y());
+
+    return ret;
 }
 
 void Line::move(const QPoint& offset)

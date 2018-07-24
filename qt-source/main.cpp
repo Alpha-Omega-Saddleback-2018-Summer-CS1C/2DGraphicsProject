@@ -27,6 +27,7 @@
 #include "login.h"
 #include "parser.h"
 #include "custom_vector.h"
+#include "serializer.h"
 #include "shape.h"
 #include "userparser.h"
 
@@ -39,12 +40,9 @@ int main(int argc, char *argv[])
 {
     Parser shapeParser;
     UserParser userParser;
+    Serializer serializer;
     Vector<Shape*> shapeVector;
     Vector<User> userVector;
-
-    //
-    // Parser
-    //
 
     if(!shapeParser.loadFile(shapeFile))
     {
@@ -75,15 +73,18 @@ int main(int argc, char *argv[])
     shapeParser.close();
     userParser.close();
 
-    //
-    // QApplication
-    //
-
     QApplication a(argc, argv);
     Login w;
     w.passParams(&shapeVector, &userVector);
     w.show();
 
-    return a.exec();
+    if(a.exec())
+        return 1;
+
+    serializer.loadFile(shapeFile);
+    serializer.save(shapeVector);
+    serializer.close();
+
+    return 0;
 }
 

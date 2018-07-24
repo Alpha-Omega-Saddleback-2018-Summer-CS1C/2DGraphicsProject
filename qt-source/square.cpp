@@ -52,6 +52,19 @@ void Square::draw()
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawRect(mPosition.x(), mPosition.y(), mSide, mSide);
+    mPainter.drawText(mPosition.x(), mPosition.y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 20, 50, 20, Qt::AlignCenter, "P: " + QString::number((int)perimeter()));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 40, 50, 20, Qt::AlignCenter, "A: " + QString::number((int)area()));
+}
+
+Vector<int> Square::getDimensions()
+{
+    Vector<int> ret;
+    ret.push_back(mPosition.x());
+    ret.push_back(mPosition.y());
+    ret.push_back(mSide);
+
+    return ret;
 }
 
 void Square::move(const QPoint& offset)

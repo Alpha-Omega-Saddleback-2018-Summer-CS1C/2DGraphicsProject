@@ -41,6 +41,11 @@ double Polyline::area()
     return 0.0;
 }
 
+void Polyline::clearPoints()
+{
+    mPoints.clear();
+}
+
 Vector<QString> Polyline::dimensionLabels()
 {
     Vector<QString> ret;
@@ -76,6 +81,20 @@ void Polyline::draw()
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawPolyline(&mPoints[0], mPoints.size());
+    mPainter.drawText(mPoints[0].x(), mPoints[0].y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+}
+
+Vector<int> Polyline::getDimensions()
+{
+    Vector<int> ret;
+
+    for(int i = 0; i < mPoints.size(); ++i)
+    {
+        ret.push_back(mPoints[i].x());
+        ret.push_back(mPoints[i].y());
+    }
+
+    return ret;
 }
 
 void Polyline::move(const QPoint& offset)

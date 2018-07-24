@@ -37,6 +37,7 @@ namespace shape
 
         double area() override; // Return the area of the ciricle
         Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
+        Vector<int> getDimensions() override; // Returns the dimensions of this shape as a vector
         void draw() override; // Draw the circle
         void move(const QPoint& offset) override; // Translates the circle by a given offset
         double perimeter() override; // return the circumference of the ciricle

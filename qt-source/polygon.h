@@ -43,11 +43,17 @@ namespace shape
         /* Returns the area of this shape */
         double area() override;
 
+        /* Clears all points of the shape */
+        void clearPoints();
+
         /* Returns the dimensions of this shape for use in QLabels */
         Vector<QString> dimensionLabels() override;
 
         /* Draws this shape */
         void draw() override;
+
+        /* Returns the dimensions of this shape as a vector */
+        Vector<int> getDimensions() override;
 
         /* Translates this shape by a given offset */
         void move(const QPoint& offset) override;

@@ -46,6 +46,9 @@ namespace shape
         /* Draws this shape */
         void draw() override;
 
+        /* Returns the dimensions of this shape as a vector */
+        Vector<int> getDimensions() override;
+
         /* Translates this shape by a given offset */
         void move(const QPoint& offset) override;
 
@@ -62,7 +65,6 @@ namespace shape
         void setSide(int side);
 
     private:
-        int mID;
         QPoint mPosition;
         int mSide;
     };

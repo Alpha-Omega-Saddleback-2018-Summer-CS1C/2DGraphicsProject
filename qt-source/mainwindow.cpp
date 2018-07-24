@@ -29,117 +29,12 @@
 #include "parser.h"
 #include "textbox.h"
 
-/*
- *  Helper functions
- */
-
-/* Returns brush style as a QString */
-QString getBrushStyleAsQString(Qt::BrushStyle style)
-{
-    if(style == Qt::NoBrush)            return QString("None");
-    else if(style == Qt::SolidPattern)  return QString("Solid");
-    else if(style == Qt::HorPattern)    return QString("Horizontal Lines");
-    else if(style == Qt::VerPattern)    return QString("Vertical Lines");
-    else                                return QString("--");
-}
-
-/* Returns font weight as a QString */
-QString getFontStyleAsQString(QFont::Style style)
-{
-    if(style == QFont::StyleNormal)         return QString("Normal");
-    else if(style == QFont::StyleItalic)    return QString("Italic");
-    else if(style == QFont::StyleOblique)   return QString("Oblique");
-    else                                    return QString("--");
-}
-
-/* Returns font style as a QString */
-QString getFontWeightAsQString(int weight)
-{
-    if(weight == QFont::Thin)           return QString("Thin");
-    else if(weight == QFont::Light)     return QString("Light");
-    else if(weight == QFont::Normal)    return QString("Normal");
-    else if(weight == QFont::Bold)      return QString("Bold");
-    else                                return QString("--");
-}
-
-/* Returns QColor as a QString */
-static QString getQColorAsQString(QColor color)
-{
-    if(color == QColor("white"))            return QString("White");
-    else if(color == QColor("black"))       return QString("Black");
-    else if(color == QColor("red"))         return QString("Red");
-    else if(color == QColor("green"))       return QString("Green");
-    else if(color == QColor("blue"))        return QString("Blue");
-    else if(color == QColor("cyan"))        return QString("Cyan");
-    else if(color == QColor("magenta"))     return QString("Magenta");
-    else if(color == QColor("yellow"))      return QString("Yellow");
-    else if(color == QColor("gray"))        return QString("Gray");
-    else                                    return QString("--");
-}
-
-/* Returns pen cap style as a QString */
-QString getPenCapStyleAsQString(Qt::PenCapStyle style)
-{
-    if(style == Qt::SquareCap)          return QString("Square");
-    else if(style == Qt::FlatCap)       return QString("Flat");
-    else if(style == Qt::RoundCap)      return QString("Round");
-    else                                return QString("--");
-}
-
-/* Returns pen join style as a QString */
-QString getPenJoinStyleAsQString(Qt::PenJoinStyle style)
-{
-    if(style == Qt::MiterJoin)          return QString("Miter");
-    else if(style == Qt::BevelJoin)     return QString("Bevel");
-    else if(style == Qt::RoundJoin)     return QString("Round");
-    else                                return QString("--");
-}
-
-/* Returns PenStyle as a QString */
-QString getPenStyleAsQString(Qt::PenStyle style)
-{
-    if(style == Qt::SolidLine)              return QString("Solid");
-    else if(style == Qt::DashLine)          return QString("Dashed");
-    else if(style == Qt::DotLine)           return QString("Dotted");
-    else if(style == Qt::DashDotLine)       return QString("Dashed/Dotted");
-    else if(style == Qt::DashDotDotLine)    return QString("Dashed/Dotted/Dotted");
-    else                                    return QString("--");
-}
-
-/* Returns brush style as a QString */
-QString getTextAlignmentAsQString(Qt::AlignmentFlag alignment)
-{
-    if(alignment == Qt::AlignLeft)          return QString("Left");
-    else if(alignment == Qt::AlignRight)    return QString("Right");
-    else if(alignment == Qt::AlignTop)      return QString("Top");
-    else if(alignment == Qt::AlignBottom)   return QString("Bottom");
-    else if(alignment == Qt::AlignCenter)   return QString("Center");
-    else                                    return QString("--");
-}
-
-/* Trims the QString if necessary */
-QString getTextStringTrimmed(const QString& str)
-{
-    if(str.length() > 30)
-    {
-        std::string tmp = str.toUtf8().constData();
-        tmp = tmp.substr(0, 27);
-        tmp += "...";
-        return QString(tmp.c_str());
-    }
-
-    return QString(str);
-}
-
-/*
- *  Class definitions
- */
-
 MainWindow::MainWindow()
 {
     renderArea = new RenderArea;
     userManager = nullptr;
     addShape = nullptr;
+    editShape = nullptr;
 
     /* Left-side */
     selectedShapeLabel = new QLabel("Selected Shape:");
@@ -196,8 +91,9 @@ MainWindow::MainWindow()
 
     connect(userManagerButton, SIGNAL(clicked(bool)), this, SLOT(createUserManager()));
     connect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
-    connect(deleteShapeButton, SIGNAL(clicked(bool)), this, SLOT(deleteShape()));
     connect(addShapeButton, SIGNAL(clicked(bool)), this, SLOT(createAddShape()));
+    connect(editShapeButton, SIGNAL(clicked(bool)), this, SLOT(createEditShape()));
+    connect(deleteShapeButton, SIGNAL(clicked(bool)), this, SLOT(deleteShape()));
 
     setLayout(mainLayout);
     setWindowTitle("2D Graphics Project Program");
@@ -205,42 +101,10 @@ MainWindow::MainWindow()
     setMaximumSize(1100, 800);
 }
 
-void MainWindow::passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user)
-{
-    loginWindow = login;
-    shapeVector = shapes;
-    userVector = users;
-    currentUser = user;
-
-    connect(logoutButton, SIGNAL(clicked(bool)), loginWindow, SLOT(closeMainWindow()));
-
-    renderArea->addShapeVector(shapes);
-    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
-        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
-}
-
 MainWindow::~MainWindow()
 {
-    delete renderArea;
     delete userManager;
-
-    delete selectedShapeLabel;
-    delete shapeComboBox;
-    delete addShapeButton;
-    delete editShapeButton;
-    delete deleteShapeButton;
-
-    delete userManagerButton;
-    delete logoutButton;
-
-    for(int i = 0; i < shapeHeaderLabelCount; ++i)
-        delete shapeHeaderLabels[i];
-
-    for(int i = 0; i < shapeDimensionLabelCount; ++i)
-        delete shapeDimensionLabels[i];
-
-    for(int i = 0; i < shapeDescriptionLabelCount; ++i)
-        delete shapeDescriptionLabels[i];
+    delete addShape;
 
     delete leftSideLayout;
     delete rightSideLayout;
@@ -263,8 +127,35 @@ void MainWindow::createAddShape()
     }
 
     addShape = new AddShape();
-    addShape->passParams(shapeVector);
+    addShape->passParams(shapeVector, this);
     addShape->show();
+}
+
+void MainWindow::createEditShape()
+{
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
+    if(shapeVector->size() == 0)
+    {
+        QMessageBox::information(this, "Shape Manager",
+                "There are no shapes to edit!", QMessageBox::Ok);
+        return;
+    }
+
+    if(editShape)
+    {
+        editShape->close();
+        delete editShape;
+    }
+
+    editShape = new EditShape();
+    editShape->passParams((*shapeVector)[shapeComboBox->currentIndex()], this);
+    editShape->show();
 }
 
 void MainWindow::createUserManager()
@@ -314,6 +205,20 @@ void MainWindow::deleteShape()
         shapeVector->erase(it);
         shapeComboBox->removeItem(offset);
     }
+}
+
+void MainWindow::passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user)
+{
+    loginWindow = login;
+    shapeVector = shapes;
+    userVector = users;
+    currentUser = user;
+
+    connect(logoutButton, SIGNAL(clicked(bool)), loginWindow, SLOT(closeMainWindow()));
+
+    renderArea->addShapeVector(shapes);
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
+        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
 }
 
 void MainWindow::updateShapeInfo()
@@ -405,4 +310,16 @@ void MainWindow::updateShapeInfo()
             shapeDescriptionLabels[13]->setText("");
         }
     }
+}
+
+void MainWindow::updateShapeList()
+{
+    disconnect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
+    shapeComboBox->clear();
+
+    for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
+        shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
+
+    updateShapeInfo();
+    connect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
 }

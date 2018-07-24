@@ -21,8 +21,8 @@
     Defines an "add shape" widget
  */
 
-#ifndef ADDSHAPE_H
-#define ADDSHAPE_H
+#ifndef EDITSHAPE_H
+#define EDITSHAPE_H
 
 #include <QWidget>
 #include "custom_vector.h"
@@ -39,7 +39,7 @@ class MainWindow;
 
 using shape::Shape;
 
-class AddShape : public QWidget
+class EditShape : public QWidget
 {
     Q_OBJECT
 
@@ -47,25 +47,22 @@ class AddShape : public QWidget
     static const int shapeDescriptionCount = 7;
 
 public:
-    explicit AddShape(QWidget *parent = nullptr);
-    ~AddShape();
+    explicit EditShape(QWidget *parent = nullptr);
+    ~EditShape();
 
-    void passParams(Vector<Shape*>* shapes, MainWindow* mainWindow);
+    void passParams(Shape* shape, MainWindow* mainWindow);
 
 signals:
 
 public slots:
     void addDimensionPoint();
-    void addShape();
+    void editShape();
     void removeDimensionPoint();
-    void shapeTypeChanged();
 
 private:
     QGridLayout*        mainLayout;
 
-    QLabel*             shapeHeaderLabel[2];
-    QComboBox*          shapeIDComboBox;
-    QComboBox*          shapeTypeComboBox;
+    QLabel*             shapeHeaderLabel[4];
 
     QWidget*            shapeDimensionTable;
     QScrollArea*        shapeDimensionTableScrollArea;
@@ -84,10 +81,10 @@ private:
     QComboBox*          fontSizeComboBox;
     QLineEdit*          textStringLineEdit;
 
-    QPushButton*        addShapeButton;
+    QPushButton*        editShapeButton;
     QPushButton*        cancelButton;
 
-    Vector<Shape*>*     shapeVector;
+    Shape*              selectedShape;
     MainWindow*         mainWindow;
 };
 

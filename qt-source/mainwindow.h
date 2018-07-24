@@ -26,6 +26,7 @@
 
 #include <QWidget>
 #include "addshape.h"
+#include "editShape.h"
 #include "custom_vector.h"
 #include "renderarea.h"
 #include "shape.h"
@@ -54,9 +55,11 @@ public:
     ~MainWindow();
 
     void passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user);
+    void updateShapeList();
 
 private slots:
     void createAddShape();
+    void createEditShape();
     void createUserManager();
     void deleteShape();
     void updateShapeInfo();
@@ -85,6 +88,7 @@ private:
     Login* loginWindow;
     UserManager* userManager;
     AddShape* addShape;
+    EditShape* editShape;
 
     Vector<Shape*>* shapeVector; // Does not require deletion
     Vector<User>* userVector; // Does not require deletion

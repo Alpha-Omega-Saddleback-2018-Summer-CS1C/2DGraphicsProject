@@ -109,7 +109,7 @@ private:
 
 public:
     Parser() {}
-    ~Parser() { close();}
+    ~Parser() { close(); }
 
     /* Closes the input file if it is open */
     void close();

@@ -54,6 +54,11 @@ double Polygon::area()
     return sum / 2;
 }
 
+void Polygon::clearPoints()
+{
+    mPoints.clear();
+}
+
 Vector<QString> Polygon::dimensionLabels()
 {
     Vector<QString> ret;
@@ -89,12 +94,28 @@ void Polygon::draw()
     mPainter.setPen(mPen);
     mPainter.setBrush(mBrush);
     mPainter.drawPolygon(&mPoints[0], mPoints.size());
+    mPainter.drawText(mPoints[0].x(), mPoints[0].y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+    mPainter.drawText(mPoints[0].x(), mPoints[0].y() + 20, 50, 20, Qt::AlignCenter, "P: " + QString::number((int)perimeter()));
+    mPainter.drawText(mPoints[0].x(), mPoints[0].y() + 40, 50, 20, Qt::AlignCenter, "A: " + QString::number((int)area()));
 }
 
 void Polygon::move(const QPoint& offset)
 {
     for(Vector<QPoint>::iterator it = mPoints.begin(); it != mPoints.end(); ++it)
         *it += offset;
+}
+
+Vector<int> Polygon::getDimensions()
+{
+    Vector<int> ret;
+
+    for(int i = 0; i < mPoints.size(); ++i)
+    {
+        ret.push_back(mPoints[i].x());
+        ret.push_back(mPoints[i].y());
+    }
+
+    return ret;
 }
 
 double Polygon::perimeter()

@@ -52,8 +52,22 @@ Vector<QString> TextBox::dimensionLabels()
 void TextBox::draw()
 {
     mPainter.setPen(mPen);
-    mPainter.setBrush(mBrush);
+    mPainter.setFont(mFont);
     mPainter.drawText(mPosition.x(), mPosition.y(), mWidth, mHeight, mAlignmentFlags, mText);
+
+    mPainter.setFont(QFont());
+    mPainter.drawText(mPosition.x(), mPosition.y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+}
+
+Vector<int> TextBox::getDimensions()
+{
+    Vector<int> ret;
+    ret.push_back(mPosition.x());
+    ret.push_back(mPosition.y());
+    ret.push_back(mWidth);
+    ret.push_back(mHeight);
+
+    return ret;
 }
 
 QFont& TextBox::getFont()

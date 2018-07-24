@@ -44,6 +44,9 @@ namespace shape
         /* Returns the dimensions of this shape for use in QLabels */
         Vector<QString> dimensionLabels() override;
 
+        /* Returns the dimensions of this shape as a vector */
+        Vector<int> getDimensions() override;
+
         /* Draws this shape */
         void draw() override;
 
