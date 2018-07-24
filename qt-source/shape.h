@@ -67,6 +67,9 @@ namespace shape
         /* Returns the QBrush */
         QBrush& getBrush();
 
+        /* Returns the dimensions of this shape as a vector */
+        virtual Vector<int> getDimensions() = 0;
+
         /* Returns the Shape ID */
         int getID() const;
 
@@ -106,5 +109,60 @@ namespace shape
         QBrush      mBrush;
     };
 }
+
+/*
+ *  Helper functions
+ */
+
+/* Returns brush style as a QString */
+QString getBrushStyleAsQString(Qt::BrushStyle style);
+
+/* Returns brush style from a QString */
+Qt::BrushStyle getBrushStyleFromQString(const QString& style);
+
+/* Returns font weight as a QString */
+QString getFontStyleAsQString(QFont::Style style);
+
+/* Returns font weight from a  QString */
+QFont::Style getFontStyleFromQString(const QString& style);
+
+/* Returns font style as a QString */
+QString getFontWeightAsQString(int weight);
+
+/* Returns font style from a QString */
+int getFontWeightFromQString(const QString& weight);
+
+/* Returns pen cap style as a QString */
+QString getPenCapStyleAsQString(Qt::PenCapStyle style);
+
+/* Returns pen cap style from a QString */
+Qt::PenCapStyle getPenCapStyleFromQString(const QString& style);
+
+/* Returns pen join style as a QString */
+QString getPenJoinStyleAsQString(Qt::PenJoinStyle style);
+
+/* Returns pen join style from a QString */
+Qt::PenJoinStyle getPenJoinStyleFromQString(const QString& style);
+
+/* Returns PenStyle as a QString */
+QString getPenStyleAsQString(Qt::PenStyle style);
+
+/* Returns PenStyle from a QString */
+Qt::PenStyle getPenStyleFromQString(const QString& style);
+
+/* Returns QColor as a QString */
+QString getQColorAsQString(QColor color);
+
+/* Returns brush style as a QString */
+QString getTextAlignmentAsQString(Qt::AlignmentFlag alignment);
+
+/* Returns brush style from a QString */
+Qt::AlignmentFlag getTextAlignmentFromQString(const QString& alignment);
+
+/* Trims the QString if necessary */
+QString getTextStringTrimmed(const QString& str);
+
+/* Returns true if the string is a number */
+bool isNumber(const QString& str);
 
 #endif // SHAPE_H

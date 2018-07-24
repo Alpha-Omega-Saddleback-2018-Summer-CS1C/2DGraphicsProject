@@ -140,6 +140,12 @@ public:
         return mReservedSize;
     }
 
+    /* Sets the number of elements to 0, effectively clearing the vector */
+    void clear()
+    {
+        mSize = 0;
+    }
+
     /* Returns an iterator to the element beyond the last element */
     iterator end()
     {

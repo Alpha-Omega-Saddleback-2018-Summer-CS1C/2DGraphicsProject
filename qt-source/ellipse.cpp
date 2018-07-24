@@ -36,13 +36,6 @@ double Ellipse::area()
     return (M_PI * mRadiusX * mRadiusY);
 }
 
-void Ellipse::draw()
-{
-    mPainter.setPen(mPen);
-    mPainter.setBrush(mBrush);
-    mPainter.drawEllipse(mPosition, mRadiusX, mRadiusY);
-}
-
 Vector<QString> Ellipse::dimensionLabels()
 {
     Vector<QString> ret;
@@ -52,6 +45,27 @@ Vector<QString> Ellipse::dimensionLabels()
     ret.push_back(QString::number(mRadiusX));
     ret.push_back("RadiusY:");
     ret.push_back(QString::number(mRadiusY));
+
+    return ret;
+}
+
+void Ellipse::draw()
+{
+    mPainter.setPen(mPen);
+    mPainter.setBrush(mBrush);
+    mPainter.drawEllipse(mPosition, mRadiusX, mRadiusY);
+    mPainter.drawText(mPosition.x(), mPosition.y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 20, 50, 20, Qt::AlignCenter, "P: " + QString::number((int)perimeter()));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 40, 50, 20, Qt::AlignCenter, "A: " + QString::number((int)area()));
+}
+
+Vector<int> Ellipse::getDimensions()
+{
+    Vector<int> ret;
+    ret.push_back(mPosition.x());
+    ret.push_back(mPosition.y());
+    ret.push_back(mRadiusX);
+    ret.push_back(mRadiusY);
 
     return ret;
 }
