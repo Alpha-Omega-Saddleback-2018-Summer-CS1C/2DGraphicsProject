@@ -18,41 +18,40 @@
 /*
     File: adduser.h
 
-    Defines the "Add User" window
+    Defines the "Edit User" window
  */
 
-#ifndef ADDUSER_H
-#define ADDUSER_H
+#ifndef EDITUSER_H
+#define EDITUSER_H
 
 #include <QDialog>
 #include "custom_vector.h"
 #include "userparser.h"
 
 class UserManager;
-class Login;
 
 namespace Ui {
-class AddUser;
+class EditUser;
 }
 
-class AddUser : public QDialog
+class EditUser : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit AddUser(QWidget *parent = 0);
-    ~AddUser();
+    explicit EditUser(QWidget *parent = 0);
+    ~EditUser();
 
-    void passParams(Vector<User>* users, UserManager* parentWindow, Login* login);
+    void passParams(Vector<User>* users, User* user, UserManager* parentWindow);
 
 private slots:
-    void on_createNewUserButton_clicked();
+    void on_saveUserButton_clicked();
 
 private:
-    Ui::AddUser*    ui;
-    Vector<User>*   userVector;
-    UserManager*    userManager;
-    Login*          loginWindow;
+    Ui::EditUser *ui;
+    Vector<User>* userVector;
+    User* currentUser;
+    UserManager* userManager;
 };
 
 #endif // ADDUSER_H

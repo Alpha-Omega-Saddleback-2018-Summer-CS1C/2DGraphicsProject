@@ -97,6 +97,7 @@ bool Parser::parse(Vector<Shape*>& shapeVector)
         return false;
     }
 
+    selection_sort(shapeVector.begin(), shapeVector.end(), [](Shape* s1, Shape* s2) { return s1->getID() > s2->getID(); });
     return true;
 }
 

@@ -267,7 +267,7 @@ void EditShape::passParams(Shape* shape, MainWindow* parentWindow)
             shapeDescriptionComboBox[6]->addItem("Vertical Lines");
 
             shapeDescriptionComboBox[5]->setCurrentText(getQColorAsQString(selectedShape->getBrush().color()));
-            shapeDescriptionComboBox[6]->setCurrentText(getQColorAsQString(selectedShape->getBrush().style()));
+            shapeDescriptionComboBox[6]->setCurrentText(getBrushStyleAsQString(selectedShape->getBrush().style()));
         }
     }
 

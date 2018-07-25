@@ -52,10 +52,21 @@ Login::~Login()
     delete ui;
 }
 
-void Login::passParams(Vector<Shape*>* shapes, Vector<User>* users)
+void Login::closeMainWindow()
 {
-    shapeVector = shapes;
-    userVector = users;
+    mainWindow->close();
+    ui->input_username->clear();
+    ui->input_password->clear();
+    this->show();
+
+    if(userVector->size() == 0)
+    {
+        QMessageBox::information(this, "Login", "No users found. You will be logged in as a default user with administrative priviliges.");
+
+        User temp;
+        temp.mIsAdmin = true;
+        openMainWindow();
+    }
 }
 
 void Login::on_loginButton_clicked()
@@ -80,7 +91,7 @@ void Login::on_loginButton_clicked()
     }
     else
     {
-        QMessageBox::warning(this, "Invalid Sign In", "Incorrect username or password!");
+        QMessageBox::warning(this, "Invalid Credentials", "Incorrect username or password!");
     }
 }
 
@@ -99,12 +110,17 @@ void Login::openMainWindow()
     this->hide();
 }
 
-void Login::closeMainWindow()
+void Login::passParams(Vector<Shape*>* shapes, Vector<User>* users)
 {
-    mainWindow->close();
-    delete mainWindow;
+    shapeVector = shapes;
+    userVector = users;
 
-    ui->input_username->clear();
-    ui->input_password->clear();
-    this->show();
+    if(userVector->size() == 0)
+    {
+        QMessageBox::information(this, "Login", "No users found. You will be logged in as a default user with administrative privileges.");
+
+        User temp;
+        temp.mIsAdmin = true;
+        openMainWindow();
+    }
 }

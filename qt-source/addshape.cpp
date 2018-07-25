@@ -432,6 +432,7 @@ void AddShape::addShape()
         shapeVector->push_back(text);
     }
 
+    selection_sort(shapeVector->begin(), shapeVector->end(), [](Shape* s1, Shape* s2) { return s1->getID() > s2->getID(); });
     mainWindow->updateShapeList();
     close();
 }

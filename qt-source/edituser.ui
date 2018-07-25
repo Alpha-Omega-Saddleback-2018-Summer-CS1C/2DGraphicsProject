@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>AddUser</class>
- <widget class="QDialog" name="AddUser">
+ <class>EditUser</class>
+ <widget class="QDialog" name="EditUser">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>456</width>
-    <height>204</height>
+    <height>190</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Add User</string>
+   <string>Edit User</string>
   </property>
   <widget class="QWidget" name="formLayoutWidget">
    <property name="geometry">
@@ -19,7 +19,7 @@
      <x>30</x>
      <y>20</y>
      <width>401</width>
-     <height>112</height>
+     <height>122</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -38,9 +38,6 @@
        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
       </property>
      </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="input_newUser"/>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="label_2">
@@ -70,35 +67,26 @@
       </property>
      </widget>
     </item>
+    <item row="2" column="1">
+     <widget class="QLabel" name="usernameLabel">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
-  <widget class="QPushButton" name="createNewUserButton">
+  <widget class="QPushButton" name="saveUserButton">
    <property name="geometry">
     <rect>
      <x>250</x>
-     <y>160</y>
+     <y>140</y>
      <width>181</width>
      <height>28</height>
     </rect>
    </property>
    <property name="text">
-    <string>Create New User</string>
-   </property>
-  </widget>
-  <widget class="QCheckBox" name="checkBox">
-   <property name="geometry">
-    <rect>
-     <x>55</x>
-     <y>140</y>
-     <width>101</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::RightToLeft</enum>
-   </property>
-   <property name="text">
-    <string>Administator</string>
+    <string>Save User</string>
    </property>
   </widget>
  </widget>

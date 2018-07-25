@@ -252,6 +252,14 @@ private:
     int mReservedSize;
 };
 
+template<typename T>
+void custom_swap(T& a, T& b)
+{
+    T c = a;
+    a = b;
+    b = c;
+}
+
 template<typename It, typename T, typename Cmp>
 It custom_find(It first, It last, const T& value, Cmp func)
 {
@@ -265,5 +273,21 @@ It custom_find(It first, It last, const T& value, Cmp func)
     return last;
 }
 
+template<typename It, typename Cmp>
+void selection_sort(It first, It last, Cmp func)
+{
+    for(It it1 = first ; it1 != last; ++it1)
+    {
+        It it2 = it1;
+
+        for(It it3 = it1; it3 != last; ++it3)
+        {
+            if(func(*it2, *it3))
+                it2 = it3;
+        }
+
+        custom_swap(*it1, *it2);
+    }
+}
 
 #endif // CUSTOM_VECTOR_H

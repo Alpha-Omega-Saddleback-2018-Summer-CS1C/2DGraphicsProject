@@ -23,6 +23,7 @@
 
 #include <QtWidgets>
 #include "adduser.h"
+#include "login.h"
 #include "ui_adduser.h"
 #include "usermanager.h"
 
@@ -38,15 +39,16 @@ AddUser::~AddUser()
     delete ui;
 }
 
-void AddUser::passParams(Vector<User>* users, User* user, UserManager* parentWindow)
+void AddUser::passParams(Vector<User>* users, UserManager* parentWindow, Login* login)
 {
     userVector = users;
-    currentUser = user;
     userManager = parentWindow;
+    loginWindow = login;
 }
 
 void AddUser::on_createNewUserButton_clicked()
 {
+
     QString newUser = ui->input_newUser->text();
     QString password1 = ui->input_password1->text();
     QString password2 = ui->input_password2->text();
@@ -64,12 +66,28 @@ void AddUser::on_createNewUserButton_clicked()
         return;
     }
 
+    if(userVector->size() == 0 && !ui->checkBox->isChecked())
+    {
+        QMessageBox::information(this, "Action Denied", "Cannot create a guest user before a administrator user is created", QMessageBox::Ok);
+        return;
+    }
+
     User user;
     user.mUsername = newUser;
     user.mPassword = password1;
     user.mIsAdmin = ui->checkBox->isChecked();
 
     userVector->push_back(user);
+
+    if(userVector->size() == 1)
+    {
+        QMessageBox::information(this, "Logout Notice", "User created. You will be logged out of the default user profile.", QMessageBox::Ok);
+        close();
+        userManager->close();
+        loginWindow->closeMainWindow();
+        return;
+    }
+
     userManager->updateUserList();
     close();
 }

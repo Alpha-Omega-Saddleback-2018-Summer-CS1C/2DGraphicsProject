@@ -30,6 +30,7 @@
 #include "serializer.h"
 #include "shape.h"
 #include "userparser.h"
+#include "userserializer.h"
 
 using namespace shape;
 
@@ -41,6 +42,7 @@ int main(int argc, char *argv[])
     Parser shapeParser;
     UserParser userParser;
     Serializer serializer;
+    UserSerializer userSerializer;
     Vector<Shape*> shapeVector;
     Vector<User> userVector;
 
@@ -90,6 +92,17 @@ int main(int argc, char *argv[])
         serializer.save(shapeVector);
         serializer.close();
         std::cout << "File \"" << shapeFile << "\" saved successfully" << std::endl;
+    }
+
+    if(!userSerializer.loadFile(userFile))
+    {
+        std::cout << "Could not save \"" << userFile << "\"" << std::endl;
+    }
+    else
+    {
+        userSerializer.save(userVector);
+        userSerializer.close();
+        std::cout << "File \"" << userFile << "\" saved successfully" << std::endl;
     }
 
     return 0;

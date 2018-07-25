@@ -26,6 +26,7 @@
 
 #include <QDialog>
 #include "adduser.h"
+#include "edituser.h"
 #include "custom_vector.h"
 #include "userparser.h"
 
@@ -53,7 +54,8 @@ private slots:
 
 private:
     Ui::UserManager *ui;
-    AddUser *adduser;
+    AddUser*    adduser;
+    EditUser*   edituser;
 
     Vector<User>* userVector; // Does not require deletion
     User* currentUser; // Does not require deletion

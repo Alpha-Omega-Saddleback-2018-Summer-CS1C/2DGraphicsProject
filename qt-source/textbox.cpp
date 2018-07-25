@@ -57,6 +57,8 @@ void TextBox::draw()
 
     mPainter.setFont(QFont());
     mPainter.drawText(mPosition.x(), mPosition.y(), 20, 20, Qt::AlignCenter, QString::number(mID));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 20, 50, 20, Qt::AlignCenter, "P: " + QString::number((int)perimeter()));
+    mPainter.drawText(mPosition.x(), mPosition.y() + 40, 50, 20, Qt::AlignCenter, "A: " + QString::number((int)area()));
 }
 
 Vector<int> TextBox::getDimensions()

@@ -307,6 +307,8 @@ void MainWindow::updateShapeInfo()
 
 void MainWindow::updateShapeList()
 {
+    int offset = shapeComboBox->currentIndex();
+
     disconnect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
     shapeComboBox->clear();
 
@@ -315,4 +317,9 @@ void MainWindow::updateShapeList()
 
     updateShapeInfo();
     connect(shapeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateShapeInfo()));
+
+    if(offset != shapeVector->size() - 1)
+        shapeComboBox->setCurrentIndex(offset);
+    else
+        shapeComboBox->setCurrentIndex(shapeVector->size() - 1);
 }

@@ -46,11 +46,13 @@ public:
 
     void passParams(Vector<Shape*>* shapes, Vector<User>* users);
 
+public slots:
+    void closeMainWindow();
+
 private slots:
     void on_loginButton_clicked();
     void openContactWindow();
     void openMainWindow();
-    void closeMainWindow();
 
 private:
     Ui::Login* ui;

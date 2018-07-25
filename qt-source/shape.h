@@ -110,6 +110,35 @@ namespace shape
     };
 }
 
+template<typename S>
+bool compare_shape_area(S shape1, S shape2)
+{
+    return shape1->area() < shape2->area();
+}
+
+template<typename S>
+bool compare_shape_perimeter(S shape1, S shape2)
+{
+    return shape1->perimeter() < shape2->perimeter();
+}
+
+template<typename It>
+void selection_sort(It first, It last, bool (*func)(shape::Shape*, shape::Shape*))
+{
+    for(It it1 = first ; it1 != last; ++it1)
+    {
+        It it2 = it1;
+
+        for(It it3 = it1; it3 != last; ++it3)
+        {
+            if(func(*it2, *it3))
+                it2 = it3;
+        }
+
+        custom_swap(*it1, *it2);
+    }
+}
+
 /*
  *  Helper functions
  */

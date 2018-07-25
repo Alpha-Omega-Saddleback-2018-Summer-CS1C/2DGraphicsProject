@@ -24,6 +24,7 @@
 #include <QtWidgets>
 #include "usermanager.h"
 #include "ui_usermanager.h"
+#include "login.h"
 
 UserManager::UserManager(QWidget *parent) :
     QDialog(parent),
@@ -31,12 +32,14 @@ UserManager::UserManager(QWidget *parent) :
 {
     ui->setupUi(this);
     adduser = nullptr;
+    edituser = nullptr;
 }
 
 UserManager::~UserManager()
 {
     delete ui;
     if(adduser) delete adduser;
+    if(edituser) delete edituser;
 }
 
 void UserManager::on_addUserButton_clicked()
@@ -52,35 +55,54 @@ void UserManager::on_addUserButton_clicked()
         delete adduser;
 
     adduser = new AddUser;
-    adduser->passParams(userVector, currentUser, this);
+    adduser->passParams(userVector, this, loginWindow);
     adduser->show();
 }
 
 void UserManager::on_editUserButton_clicked()
 {   
-    User& selectedUser = (*userVector)[ui->userComboBox->currentIndex()];
+    if(userVector->size() == 0)
+    {
+        QMessageBox::information(this, "Edit User", "No users to edit!", QMessageBox::Ok);
+        return;
+    }
+
+
+    int offset = ui->userComboBox->currentIndex();
+    User selectedUser = (*userVector)[offset];
 
     if(!currentUser->mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
     {
-        QMessageBox::information(this, "Edit User",
-                "Non-administrators can only edit their own user profile!", QMessageBox::Ok);
+        QMessageBox::information(this, "Edit User", "Non-administrators can only edit their own user profile!", QMessageBox::Ok);
         return;
     }
 
     if(selectedUser.mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
     {
-        QMessageBox::information(this, "Edit User",
-                "Cannot edit an administrator account that is not your own!", QMessageBox::Ok);
+        QMessageBox::information(this, "Edit User", "Cannot edit an administrator account that is not your own!", QMessageBox::Ok);
         return;
     }
+
+    if(edituser)
+        delete edituser;
+
+    edituser = new EditUser;
+    edituser->passParams(userVector, userVector->begin() + offset, this);
+    edituser->show();
 }
 
 void UserManager::on_deleteUserManager_clicked()
 {
-    int offset = ui->userComboBox->currentIndex();
-    User& selectedUser = (*userVector)[offset];
+    if(userVector->size() == 0)
+    {
+        QMessageBox::information(this, "Delete User", "No users to delete!", QMessageBox::Ok);
+        return;
+    }
 
-    if(!currentUser->mIsAdmin)
+    int offset = ui->userComboBox->currentIndex();
+    User selectedUser = (*userVector)[offset];
+
+    if(!currentUser->mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
     {
         QMessageBox::information(this, "Delete User",
                 "Current user is not an adminstrator!", QMessageBox::Ok);
@@ -99,14 +121,16 @@ void UserManager::on_deleteUserManager_clicked()
 
     if(clickedButton == QMessageBox::Ok)
     {
-        if(selectedUser.mUsername == currentUser->mUsername)
-        {
-            QMessageBox::question(this, "Delete User",
-                "You will stay logged in as this user until you exit the program.", QMessageBox::Ok);
-        }
-
         userVector->erase(userVector->begin() + offset);
         ui->userComboBox->removeItem(offset);
+
+        if(selectedUser.mUsername == currentUser->mUsername)
+        {
+            QMessageBox::information(this, "Logout Notice",
+                "Your profile has been deleted. You will be logged out.", QMessageBox::Ok);
+            close();
+            loginWindow->closeMainWindow();
+        }
     }
 }
 
@@ -120,6 +144,21 @@ void UserManager::passParams(Vector<User>* users, User* user, Login* login)
 
 void UserManager::updateUserList()
 {
+    selection_sort(userVector->begin(), userVector->end(),
+        [](User u1, User u2)
+        {
+            char* s1 = u1.mUsername.toUtf8().data();
+            char* s2 = u2.mUsername.toUtf8().data();
+
+            for(int i = 0; s1[i] != '\0'; ++i)
+                s1[i] = tolower(s1[i]);
+
+            for(int i = 0; s2[i] != '\0'; ++i)
+                s2[i] = tolower(s2[i]);
+
+            return strcmp(s1, s2) > 0;
+        });
+
     ui->userComboBox->clear();
     for(Vector<User>::iterator it = userVector->begin(); it != userVector->end(); ++it)
         ui->userComboBox->addItem(it->mUsername);
