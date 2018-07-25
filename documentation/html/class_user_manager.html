@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="alphaOmega.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">2D Graphics Project
    </div>
@@ -69,6 +70,8 @@ $(function() {
 <div class="title">UserManager Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="usermanager_8h_source.html">usermanager.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for UserManager:</div>
 <div class="dyncontent">
@@ -80,19 +83,120 @@ Inheritance diagram for UserManager:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a46fa8017069230f7336eee07afd58295"><td class="memItemLeft" align="right" valign="top"><a id="a46fa8017069230f7336eee07afd58295"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>UserManager</b> (QWidget *parent=0)</td></tr>
+<tr class="memitem:a46fa8017069230f7336eee07afd58295"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_manager.html#a46fa8017069230f7336eee07afd58295">UserManager</a> (QWidget *parent=0)</td></tr>
 <tr class="separator:a46fa8017069230f7336eee07afd58295"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7494c3192da339e8714b1a645b675570"><td class="memItemLeft" align="right" valign="top"><a id="a7494c3192da339e8714b1a645b675570"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>passParams</b> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="struct_user.html">User</a> &gt; *users, <a class="el" href="struct_user.html">User</a> *user, <a class="el" href="class_login.html">Login</a> *login)</td></tr>
+<tr class="memitem:ad6f661321c38b332c0e0eff3a933e753"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_manager.html#ad6f661321c38b332c0e0eff3a933e753">~UserManager</a> ()</td></tr>
+<tr class="separator:ad6f661321c38b332c0e0eff3a933e753"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7494c3192da339e8714b1a645b675570"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_manager.html#a7494c3192da339e8714b1a645b675570">passParams</a> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="struct_user.html">User</a> &gt; *users, <a class="el" href="struct_user.html">User</a> *user, <a class="el" href="class_login.html">Login</a> *login)</td></tr>
 <tr class="separator:a7494c3192da339e8714b1a645b675570"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa4461f227bf39f39469d71b517c18c6b"><td class="memItemLeft" align="right" valign="top"><a id="aa4461f227bf39f39469d71b517c18c6b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateUserList</b> ()</td></tr>
+<tr class="memitem:aa4461f227bf39f39469d71b517c18c6b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_user_manager.html#aa4461f227bf39f39469d71b517c18c6b">updateUserList</a> ()</td></tr>
 <tr class="separator:aa4461f227bf39f39469d71b517c18c6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements a QWidget that allows an administrative user to add, edit, or delete users. A guest user is only allowed to edit and delete their own user. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a46fa8017069230f7336eee07afd58295"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46fa8017069230f7336eee07afd58295">&#9670;&nbsp;</a></span>UserManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UserManager::UserManager </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default constructor. Initializes widgets. </p>
+
+</div>
+</div>
+<a id="ad6f661321c38b332c0e0eff3a933e753"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6f661321c38b332c0e0eff3a933e753">&#9670;&nbsp;</a></span>~UserManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">UserManager::~UserManager </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Destroys all child widgets and layouts. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7494c3192da339e8714b1a645b675570"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7494c3192da339e8714b1a645b675570">&#9670;&nbsp;</a></span>passParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UserManager::passParams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="struct_user.html">User</a> &gt; *&#160;</td>
+          <td class="paramname"><em>users</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_user.html">User</a> *&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_login.html">Login</a> *&#160;</td>
+          <td class="paramname"><em>login</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Passes the user vector, current user, and <a class="el" href="class_login.html">Login</a> widget </p>
+
+</div>
+</div>
+<a id="aa4461f227bf39f39469d71b517c18c6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4461f227bf39f39469d71b517c18c6b">&#9670;&nbsp;</a></span>updateUserList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void UserManager::updateUserList </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Updates the list of users when a new user is added. Sorts users alphabetically. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="usermanager_8h_source.html">usermanager.h</a></li>
-<li>usermanager.cpp</li>
+<li>2DGraphicsProject/qt-source/<a class="el" href="usermanager_8h_source.html">usermanager.h</a></li>
+<li>2DGraphicsProject/qt-source/usermanager.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

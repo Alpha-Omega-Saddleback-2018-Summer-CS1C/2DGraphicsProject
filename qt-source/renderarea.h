@@ -31,15 +31,21 @@
 
 using shape::Shape;
 
+/**	Implements a QWidget that renders shapes. */
 class RenderArea : public QWidget
 {
 public:
-    RenderArea(QWidget* parent = 0);
-    void addShapeVector(Vector<Shape*>* shapes);
+
+	/**	Default constructor. Initializes widgets */
+    explicit RenderArea(QWidget* parent = 0);
+	
+	/**	Passes the shape vector */
+    void passParams(Vector<Shape*>* shapes);
 
 public slots:
 
 protected:
+	/** Updates the render area when a shape is changed */
     void paintEvent(QPaintEvent* event) override;
 
 private:

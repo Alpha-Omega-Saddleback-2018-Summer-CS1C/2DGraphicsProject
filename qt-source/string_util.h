@@ -27,16 +27,16 @@
 #include <algorithm>
 #include <string>
 
-/* Trims the leading whitespace */
+/** Trims the leading whitespace. */
 std::string trim_leading_whitespace(const std::string& str);
 
-/* Trims the ending whitespace */
+/** Trims the ending whitespace. */
 std::string trim_ending_whitespace(const std::string& str);
 
-/* Trims the leading and ending whitespace */
+/** Trims the leading and ending whitespace. */
 std::string trim_leading_ending(const std::string& str);
 
-/* Trims whitespace in the entire string */
+/** Trims whitespace in the entire string. */
 std::string trim_whitespace(const std::string& str);
 
 #endif // STRING_UTIL_H

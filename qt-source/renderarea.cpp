@@ -32,7 +32,7 @@ RenderArea::RenderArea(QWidget* parent)
     setAutoFillBackground(true);
 }
 
-void RenderArea::addShapeVector(Vector<Shape*>* shapes)
+void RenderArea::passParams(Vector<Shape*>* shapes)
 {
     shapeVector = shapes;
     update();

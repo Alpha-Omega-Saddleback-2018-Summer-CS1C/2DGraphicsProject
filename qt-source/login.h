@@ -52,7 +52,6 @@ class Login : public QMainWindow
     Q_OBJECT
 
 public:
-
 	/** Default constructor. Initializes widgets. */
     explicit Login(QWidget *parent = nullptr);
 	

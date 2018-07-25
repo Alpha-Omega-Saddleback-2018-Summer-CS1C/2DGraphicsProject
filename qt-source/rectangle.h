@@ -29,36 +29,47 @@
 #include "custom_vector.h"
 #include "shape.h"
 
+/** \namespace shape
+ *	
+ * 	All shapes are defined in this namespace to avoid name collision with the standard library,
+ *  mainly "window.h".
+ */
 namespace shape
 {
+	/**	Implements a rectangle [x1, y1, length, width] that inherits from shape. It will be rendered by the
+     * 	RenderArea widget and can be saved in a text file.
+	 */
     class Rectangle : public Shape
     {
     public:
+		/**	Default constructor. Sets the shape ID to an invalid value. */
         Rectangle();
+		
+		/** Destructor. It is explicitly defined because this class is a derived type. */
         ~Rectangle() {}
 
-        /* Returns the area of this shape */
+        /** Returns the area of this shape. */
         double area() override;
 
-        /* Returns the dimensions of this shape for use in QLabels */
+		/** Returns a QString list detailing the dimensions of this shape.  */
         Vector<QString> dimensionLabels() override;
-
-        /* Draws this shape */
-        void draw() override;
-
-        /* Returns the dimensions of this shape as a vector */
+		
+		/** Returns the dimensions of this shape as a vector. */
         Vector<int> getDimensions() override;
-
-        /* Translates this shape by a given offset */
+		
+		/** Draw the shape. */
+        void draw() override;
+		
+		/** Translates the shape by a given offset. */
         void move(const QPoint& offset) override;
-
-        /* Returns the perimeter of this this shape */
+		
+		/** Returns the circumference of the shape. */
         double perimeter() override;
 
-        /* Sets the dimension of this shape */
+        /** Sets the dimension of this shape. */
         void setDimensions(int w, int h);
 
-        /* Sets the position of this shape */
+        /** Sets the position of this shape. */
         void setPosition(int x, int y);
 
     private:

@@ -32,19 +32,23 @@
 
 using shape::Shape;
 
+/**	Writes shape data to a text file. */
 class Serializer
 {
 public:
+	/** Default constructor. */
     Serializer() {}
+	
+	/** Destructor. Closes the file. */
     ~Serializer() { close(); }
 
-    /* Closes the input file if it is open */
+    /** Closes the input file if it is open. */
     void close();
 
-    /* Loads the file to be parsed. Returns true on success */
+    /** Loads the file to be parsed. Returns true on success. */
     bool loadFile(const std::string& filePath);
 
-    /* Loads the file to be parsed. Returns true on success */
+    /** Loads the file to be parsed. Returns true on success. */
     void save(Vector<Shape*>& shapeVector);
 
 private:

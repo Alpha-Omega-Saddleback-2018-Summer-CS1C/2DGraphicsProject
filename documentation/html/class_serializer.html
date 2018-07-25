@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="alphaOmega.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">2D Graphics Project
    </div>
@@ -69,22 +70,137 @@ $(function() {
 <div class="title">Serializer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="serializer_8h_source.html">serializer.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a61e828fbc89f6610cd564e9eb7697b6c"><td class="memItemLeft" align="right" valign="top"><a id="a61e828fbc89f6610cd564e9eb7697b6c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>close</b> ()</td></tr>
+<tr class="memitem:a9fe7f31924098f75278d059f8443fd5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a9fe7f31924098f75278d059f8443fd5b">Serializer</a> ()</td></tr>
+<tr class="separator:a9fe7f31924098f75278d059f8443fd5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a7d2d8e622ad1ef5f869813b498aa9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a42a7d2d8e622ad1ef5f869813b498aa9">~Serializer</a> ()</td></tr>
+<tr class="separator:a42a7d2d8e622ad1ef5f869813b498aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61e828fbc89f6610cd564e9eb7697b6c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a61e828fbc89f6610cd564e9eb7697b6c">close</a> ()</td></tr>
 <tr class="separator:a61e828fbc89f6610cd564e9eb7697b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6e8f5ebcc72a85834b1ebda6a1c97ed"><td class="memItemLeft" align="right" valign="top"><a id="ab6e8f5ebcc72a85834b1ebda6a1c97ed"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>loadFile</b> (const std::string &amp;filePath)</td></tr>
+<tr class="memitem:ab6e8f5ebcc72a85834b1ebda6a1c97ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#ab6e8f5ebcc72a85834b1ebda6a1c97ed">loadFile</a> (const std::string &amp;filePath)</td></tr>
 <tr class="separator:ab6e8f5ebcc72a85834b1ebda6a1c97ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab563483f074424a0eb1b918b7005733f"><td class="memItemLeft" align="right" valign="top"><a id="ab563483f074424a0eb1b918b7005733f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; &amp;shapeVector)</td></tr>
+<tr class="memitem:ab563483f074424a0eb1b918b7005733f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#ab563483f074424a0eb1b918b7005733f">save</a> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; &amp;shapeVector)</td></tr>
 <tr class="separator:ab563483f074424a0eb1b918b7005733f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Writes shape data to a text file. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a9fe7f31924098f75278d059f8443fd5b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fe7f31924098f75278d059f8443fd5b">&#9670;&nbsp;</a></span>Serializer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Serializer::Serializer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default constructor. </p>
+
+</div>
+</div>
+<a id="a42a7d2d8e622ad1ef5f869813b498aa9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a7d2d8e622ad1ef5f869813b498aa9">&#9670;&nbsp;</a></span>~Serializer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Serializer::~Serializer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Destructor. Closes the file. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a61e828fbc89f6610cd564e9eb7697b6c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61e828fbc89f6610cd564e9eb7697b6c">&#9670;&nbsp;</a></span>close()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Serializer::close </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Closes the input file if it is open. </p>
+
+</div>
+</div>
+<a id="ab6e8f5ebcc72a85834b1ebda6a1c97ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6e8f5ebcc72a85834b1ebda6a1c97ed">&#9670;&nbsp;</a></span>loadFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Serializer::loadFile </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Loads the file to be parsed. Returns true on success. </p>
+
+</div>
+</div>
+<a id="ab563483f074424a0eb1b918b7005733f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab563483f074424a0eb1b918b7005733f">&#9670;&nbsp;</a></span>save()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Serializer::save </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; &amp;&#160;</td>
+          <td class="paramname"><em>shapeVector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Loads the file to be parsed. Returns true on success. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="serializer_8h_source.html">serializer.h</a></li>
-<li>serializer.cpp</li>
+<li>2DGraphicsProject/qt-source/<a class="el" href="serializer_8h_source.html">serializer.h</a></li>
+<li>2DGraphicsProject/qt-source/serializer.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

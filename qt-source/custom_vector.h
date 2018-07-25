@@ -282,7 +282,7 @@ It custom_find(It first, It last, const T& value, Cmp func)
     return last;
 }
 
-/** Templated selection sort function */
+/** Templated selection sort function. Takes a lambda or function object as a comparator. */
 template<typename It, typename Cmp>
 void selection_sort(It first, It last, Cmp func)
 {

@@ -30,20 +30,24 @@
 #include "custom_vector.h"
 #include "userparser.h"
 
+/**	Writes user data to a text file. */
 class UserSerializer
 {
 public:
+	/** Default constructor. */
     UserSerializer() {}
+	
+	/** Destructor. Closes the file. */
     ~UserSerializer() { close(); }
 
-    /* Closes the input file if it is open */
+    /** Closes the input file if it is open. */
     void close();
 
-    /* Loads the file to be parsed. Returns true on success */
+    /** Loads the file to be parsed. Returns true on success. */
     bool loadFile(const std::string& filePath);
 
-    /* Loads the file to be parsed. Returns true on success */
-    void save(Vector<User>& userVector);
+    /** Loads the file to be parsed. Returns true on success. */
+    void save(Vector<User>& shapeVector);
 
 private:
     std::string     mOutputFilePath;

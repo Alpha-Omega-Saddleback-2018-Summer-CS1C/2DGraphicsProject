@@ -20,6 +20,7 @@
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="alphaOmega.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">2D Graphics Project
    </div>
@@ -70,6 +71,8 @@ $(function() {
 <div class="title">RenderArea Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="renderarea_8h_source.html">renderarea.h</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for RenderArea:</div>
 <div class="dyncontent">
@@ -81,22 +84,96 @@ Inheritance diagram for RenderArea:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2e337a64fb1f619e6c63832bd1027f99"><td class="memItemLeft" align="right" valign="top"><a id="a2e337a64fb1f619e6c63832bd1027f99"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>RenderArea</b> (QWidget *parent=0)</td></tr>
+<tr class="memitem:a2e337a64fb1f619e6c63832bd1027f99"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_area.html#a2e337a64fb1f619e6c63832bd1027f99">RenderArea</a> (QWidget *parent=0)</td></tr>
 <tr class="separator:a2e337a64fb1f619e6c63832bd1027f99"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a98614544c084b08b273c64883db6cc1b"><td class="memItemLeft" align="right" valign="top"><a id="a98614544c084b08b273c64883db6cc1b"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addShapeVector</b> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; *shapes)</td></tr>
-<tr class="separator:a98614544c084b08b273c64883db6cc1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0278aeb2935098fb6da45d7c8427d6c4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_area.html#a0278aeb2935098fb6da45d7c8427d6c4">passParams</a> (<a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; *shapes)</td></tr>
+<tr class="separator:a0278aeb2935098fb6da45d7c8427d6c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:ae9b5a1573f3b06590c717c7598ffaae4"><td class="memItemLeft" align="right" valign="top"><a id="ae9b5a1573f3b06590c717c7598ffaae4"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>paintEvent</b> (QPaintEvent *event) override</td></tr>
+<tr class="memitem:ae9b5a1573f3b06590c717c7598ffaae4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_render_area.html#ae9b5a1573f3b06590c717c7598ffaae4">paintEvent</a> (QPaintEvent *event) override</td></tr>
 <tr class="separator:ae9b5a1573f3b06590c717c7598ffaae4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Implements a QWidget that renders shapes. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2e337a64fb1f619e6c63832bd1027f99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e337a64fb1f619e6c63832bd1027f99">&#9670;&nbsp;</a></span>RenderArea()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RenderArea::RenderArea </td>
+          <td>(</td>
+          <td class="paramtype">QWidget *&#160;</td>
+          <td class="paramname"><em>parent</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Default constructor. Initializes widgets </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae9b5a1573f3b06590c717c7598ffaae4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9b5a1573f3b06590c717c7598ffaae4">&#9670;&nbsp;</a></span>paintEvent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RenderArea::paintEvent </td>
+          <td>(</td>
+          <td class="paramtype">QPaintEvent *&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Updates the render area when a shape is changed </p>
+
+</div>
+</div>
+<a id="a0278aeb2935098fb6da45d7c8427d6c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0278aeb2935098fb6da45d7c8427d6c4">&#9670;&nbsp;</a></span>passParams()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RenderArea::passParams </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_vector.html">Vector</a>&lt; <a class="el" href="classshape_1_1_shape.html">Shape</a> *&gt; *&#160;</td>
+          <td class="paramname"><em>shapes</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Passes the shape vector </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li><a class="el" href="renderarea_8h_source.html">renderarea.h</a></li>
-<li>renderarea.cpp</li>
+<li>2DGraphicsProject/qt-source/<a class="el" href="renderarea_8h_source.html">renderarea.h</a></li>
+<li>2DGraphicsProject/qt-source/renderarea.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

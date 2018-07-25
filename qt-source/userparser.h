@@ -30,26 +30,36 @@
 #include <QString>
 #include "custom_vector.h"
 
+/** Object that stores a users information */
 struct User
 {
+	/** Stores username */
     QString mUsername;
+	/** Stores password */
     QString mPassword;
-    bool    mIsAdmin;
+	/** Stores privileges */
+    bool mIsAdmin;
 };
 
+/** Parses a file that contains shape information and converts them into shapes
+ * to be used by the program.
+ */
 class UserParser
 {
 public:
+	/** Default constructor. */
     UserParser() {}
+	
+	/** Destructor. Closes the file. */
     ~UserParser() { close(); }
 
-    /* Closes the input file if it is open */
+    /** Closes the input file if it is open. */
     void close();
 
-    /* Loads an input file */
+    /** Loads an input file. */
     bool loadFile(const std::string& filePath);
 
-    /* Parses the input file */
+    /** Parses the input file. */
     bool parse(Vector<User>& userVector);
 
 private:

@@ -30,12 +30,19 @@
 #include <QString>
 #include "custom_vector.h"
 
+/** \namespace shape
+ *	
+ * 	All shapes are defined in this namespace to avoid name collision with the standard library,
+ *  mainly "window.h".
+ */
 namespace shape
 {
+	/**	Defines a shape abstract base class. All shapes are derived from this class. */
     class Shape
     {
     public:
 
+		/** Defines type of shape */
         enum ShapeType
         {
             LINE = 0,
@@ -48,80 +55,94 @@ namespace shape
             TEXTBOX
         };
 
+		/** Destructor. */
         virtual ~Shape() {}
 
-        /* Compares ID's */
+		/** Equality operator. Compares IDs */
         bool operator==(const Shape& shape) const;
+		
+		/** Greater than operator. Compares IDs */
         bool operator>(const Shape& shape) const;
+		
+		/** Less than operator. Compares IDs */
         bool operator<(const Shape& shape) const;
 
-        /* Returns the area of the shape */
+        /** Returns the area of the shape. */
         virtual double area() = 0;
 
-        /* Draws this shape */
+        /** Draws this shape. */
         virtual void draw() = 0;
 
-        /* Returns the dimensions of this shape for use in QLabels */
+        /** Returns a QString list detailing the dimensions of this shape. */
         virtual Vector<QString> dimensionLabels() = 0;
 
-        /* Returns the QBrush */
+        /** Returns the QBrush. */
         QBrush& getBrush();
 
-        /* Returns the dimensions of this shape as a vector */
+        /** Returns the dimensions of this shape as a vector. */
         virtual Vector<int> getDimensions() = 0;
 
-        /* Returns the Shape ID */
+        /** Returns the Shape ID. */
         int getID() const;
 
-        /* Returns the QPainter */
+        /** Returns the QPainter. */
         QPainter& getPainter();
 
-        /* Returns the QPen */
+        /** Returns the QPen. */
         QPen& getPen();
 
-        /* Returns the Shape type */
+        /** Returns the Shape type. */
         ShapeType getType() const;
 
-        /* Returns the Shape type as a QString */
+        /** Returns the Shape type as a QString. */
         QString getTypeAsQString() const;
 
-        /* Translates this shape by a given offset */
+        /** Translates this shape by a given offset. */
         virtual void move(const QPoint& offset) = 0;
 
-        /* Returns the perimeter of the shape */
+        /** Returns the perimeter of the shape. */
         virtual double perimeter() = 0;
 
-        /* Sets the QBrush type */
+        /** Sets the QBrush type. */
         void setBrush(const QBrush& brush);
 
-        /* Sets the Shape ID */
+        /** Sets the Shape ID. */
         void setID(int id);
 
-        /* Sets the QPen type */
+        /** Sets the QPen type. */
         void setPen(const QPen& pen);
 
     protected:
-        int 		mID;
-        ShapeType 	mType;
+	
+		/** Unique identifier */
+        int 		mID;	
+		/** Shape type */
+        ShapeType 	mType;		
 
-        QPainter    mPainter;
+		/** QPen object used to draw this shape */
+        QPainter    mPainter;	
+		/** QPen object used to set QPainter member */
         QPen        mPen;
+		/** QBrush object used to set QPainter member */
         QBrush      mBrush;
     };
 }
 
+/** Templated comparator. Returns true if the area of the first shape is larger than the area of the second */
 template<typename S>
 bool compare_shape_area(S shape1, S shape2)
 {
     return shape1->area() < shape2->area();
 }
 
+/** Templated comparator. Returns true if the perimeter of the first shape is larger than the area of the perimeter */
 template<typename S>
 bool compare_shape_perimeter(S shape1, S shape2)
 {
     return shape1->perimeter() < shape2->perimeter();
 }
 
+/** Templated selection sort. Takes a function pointer as a comparator. */
 template<typename It>
 void selection_sort(It first, It last, bool (*func)(shape::Shape*, shape::Shape*))
 {
@@ -143,55 +164,55 @@ void selection_sort(It first, It last, bool (*func)(shape::Shape*, shape::Shape*
  *  Helper functions
  */
 
-/* Returns brush style as a QString */
+/** Returns brush style as a QString. */
 QString getBrushStyleAsQString(Qt::BrushStyle style);
 
-/* Returns brush style from a QString */
+/** Returns brush style from a QString. */
 Qt::BrushStyle getBrushStyleFromQString(const QString& style);
 
-/* Returns font weight as a QString */
+/** Returns font weight as a QString. */
 QString getFontStyleAsQString(QFont::Style style);
 
-/* Returns font weight from a  QString */
+/** Returns font weight from a  QString. */
 QFont::Style getFontStyleFromQString(const QString& style);
 
-/* Returns font style as a QString */
+/** Returns font style as a QString. */
 QString getFontWeightAsQString(int weight);
 
-/* Returns font style from a QString */
+/** Returns font style from a QString. */
 int getFontWeightFromQString(const QString& weight);
 
-/* Returns pen cap style as a QString */
+/** Returns pen cap style as a QString. */
 QString getPenCapStyleAsQString(Qt::PenCapStyle style);
 
-/* Returns pen cap style from a QString */
+/** Returns pen cap style from a QString. */
 Qt::PenCapStyle getPenCapStyleFromQString(const QString& style);
 
-/* Returns pen join style as a QString */
+/** Returns pen join style as a QString. */
 QString getPenJoinStyleAsQString(Qt::PenJoinStyle style);
 
-/* Returns pen join style from a QString */
+/** Returns pen join style from a QString. */
 Qt::PenJoinStyle getPenJoinStyleFromQString(const QString& style);
 
-/* Returns PenStyle as a QString */
+/** Returns PenStyle as a QString. */
 QString getPenStyleAsQString(Qt::PenStyle style);
 
-/* Returns PenStyle from a QString */
+/** Returns PenStyle from a QString. */
 Qt::PenStyle getPenStyleFromQString(const QString& style);
 
-/* Returns QColor as a QString */
+/** Returns QColor as a QString. */
 QString getQColorAsQString(QColor color);
 
-/* Returns brush style as a QString */
+/** Returns brush style as a QString. */
 QString getTextAlignmentAsQString(Qt::AlignmentFlag alignment);
 
-/* Returns brush style from a QString */
+/** Returns brush style from a QString. */
 Qt::AlignmentFlag getTextAlignmentFromQString(const QString& alignment);
 
-/* Trims the QString if necessary */
+/** Trims the QString if necessary. */
 QString getTextStringTrimmed(const QString& str);
 
-/* Returns true if the string is a number */
+/** Returns true if the string is a number. */
 bool isNumber(const QString& str);
 
 #endif // SHAPE_H

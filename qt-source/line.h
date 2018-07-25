@@ -32,40 +32,39 @@
 /** \namespace shape
  *	
  * 	All shapes are defined in this namespace to avoid name collision with the standard library,
- *  mainly <window.h>
+ *  mainly "window.h".
  */
 namespace shape
 {
 	
-	/**	Implements a circle [x1, y1, x2, y2] that inherits from shape. It will be rendered by the
+	/**	Implements a line [x1, y1, x2, y2] that inherits from shape. It will be rendered by the
      * 	RenderArea widget and can be saved in a text file.
 	 */
     class Line : public Shape
     {
-    public:
-	
+    public:	
 		/**	Default constructor. Sets the shape ID to an invalid value. */
         Line();
 		
-		/** Destructor. It is explicitly defined because this class is a derived type */
+		/** Destructor. It is explicitly defined because this class is a derived type. */
         ~Line() {}
 
-        /** Returns the area of this circle */
+        /** Returns the area of this shape. */
         double area() override;
 		
-		/** Returns a QString list detailing the dimensions of this circle  */
+		/** Returns a QString list detailing the dimensions of this shape.  */
         Vector<QString> dimensionLabels() override;
 		
-		/** Returns the dimensions of this shape as a vector */
+		/** Returns the dimensions of this shape as a vector. */
         Vector<int> getDimensions() override;
 		
-		/** Draw the circle */
+		/** Draw the shape. */
         void draw() override;
 		
-		/** Translates the circle by a given offset */
+		/** Translates the shape by a given offset. */
         void move(const QPoint& offset) override;
 		
-		/** Returns the circumference of the circle */
+		/** Returns the circumference of the shape. */
         double perimeter() override;
 
         /** Sets the points of this line. */

@@ -207,9 +207,9 @@ void MainWindow::passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* 
     userVector = users;
     currentUser = user;
 
+    renderArea->passParams(shapes);
     connect(logoutButton, SIGNAL(clicked(bool)), loginWindow, SLOT(closeMainWindow()));
 
-    renderArea->addShapeVector(shapes);
     for(Vector<Shape*>::iterator it = shapeVector->begin(); it != shapeVector->end(); ++it)
         shapeComboBox->addItem(QString::number((*it)->getID()) + " - " + (*it)->getTypeAsQString());
 }

@@ -1164,11 +1164,13 @@ dl.section dd {
 #projectlogo img
 { 
 	border: 0px none;
+	height:	100px;
+	width: 100px;
 }
  
 #projectalign
 {
-        vertical-align: middle;
+	vertical-align: middle;
 }
 
 #projectname

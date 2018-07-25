@@ -36,12 +36,14 @@
 
 using shape::Shape;
 
-/* Parser manager */
+/** Parses a file that contains shape information and converts them into shapes
+ * to be used by the program.
+ */
 class Parser
 {
 private:
 
-    /* Saves shape information */
+    /** Defines shape information */
     struct ShapeInfo
     {
         ShapeInfo()
@@ -108,33 +110,33 @@ private:
     };
 
 public:
+	/** Default constructor. */
     Parser() {}
+	
+	/** Destructor. Closes the file. */
     ~Parser() { close(); }
 
-    /* Closes the input file if it is open */
+    /** Closes the input file if it is open. */
     void close();
 
-    /* Loads the file to be parsed. Returns true on success */
+    /** Loads the file to be parsed. Returns true on success. */
     bool loadFile(const std::string& filePath);
 
-    /* Loads the file to be parsed. Returns true on success */
+    /** Loads the file to be parsed. Returns true on success. */
     bool parse(Vector<Shape*>& shapeVector);
-
-public:
-    /* Functions used by MainWindow class to get QString values */
 
 private:
 
-    /* Adds a shape to the shape vector */
+    /** Adds a shape to the shape vector. */
     void addShape(Vector<Shape*>& shapeVector);
 
-    /* Parses ShapeDimension key/value. Returns the number of values extracted */
+    /** Parses ShapeDimension key/value. Returns the number of values extracted. */
     int* extractDimensions(const std::string& source, int& size, const std::string& line, size_t lineNumber);
 
-    /* Sets the integer to the string if the string is an integer */
+    /** Sets the integer to the string if the string is an integer. */
     bool setInteger(int& dest, const std::string& source) const;
 
-    /* Sets a part of shape info */
+    /** Sets a part of shape info. */
     void setKeyValue(Vector<Shape*>& shapeVector, const std::string& key, const std::string& value, const std::string& line, size_t lineNumber);
 
 private:
