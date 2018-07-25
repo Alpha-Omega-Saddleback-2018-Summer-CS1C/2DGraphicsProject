@@ -21,6 +21,7 @@
     Defines the "User Manager" window
  */
 
+#include <QtWidgets>
 #include "usermanager.h"
 #include "ui_usermanager.h"
 
@@ -38,30 +39,88 @@ UserManager::~UserManager()
     if(adduser) delete adduser;
 }
 
-void UserManager::passParams(Vector<User>* users, User* user)
-{
-    userVector = users;
-    currentUser = user;
-
-    for(Vector<User>::iterator it = userVector->begin(); it != userVector->end(); ++it)
-        ui->userComboBox->addItem(it->mUsername);
-
-}
-
 void UserManager::on_addUserButton_clicked()
 {
-   adduser = new AddUser;
-   adduser->passParams(userVector, currentUser);
-   adduser->show();
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Add User",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
+    if(adduser)
+        delete adduser;
+
+    adduser = new AddUser;
+    adduser->passParams(userVector, currentUser, this);
+    adduser->show();
 }
 
 void UserManager::on_editUserButton_clicked()
-{
-    //go to edit user
+{   
+    User& selectedUser = (*userVector)[ui->userComboBox->currentIndex()];
+
+    if(!currentUser->mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
+    {
+        QMessageBox::information(this, "Edit User",
+                "Non-administrators can only edit their own user profile!", QMessageBox::Ok);
+        return;
+    }
+
+    if(selectedUser.mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
+    {
+        QMessageBox::information(this, "Edit User",
+                "Cannot edit an administrator account that is not your own!", QMessageBox::Ok);
+        return;
+    }
 }
 
 void UserManager::on_deleteUserManager_clicked()
 {
-    //go to delete user
+    int offset = ui->userComboBox->currentIndex();
+    User& selectedUser = (*userVector)[offset];
+
+    if(!currentUser->mIsAdmin)
+    {
+        QMessageBox::information(this, "Delete User",
+                "Current user is not an adminstrator!", QMessageBox::Ok);
+        return;
+    }
+
+    if(selectedUser.mIsAdmin && selectedUser.mUsername != currentUser->mUsername)
+    {
+        QMessageBox::information(this, "Delete User",
+                "Cannot delete an administrator account that is not your own!", QMessageBox::Ok);
+        return;
+    }
+
+    int clickedButton = QMessageBox::question(this, "Delete User",
+        "Are you sure you want to delete this user?", QMessageBox::Ok | QMessageBox::Cancel);
+
+    if(clickedButton == QMessageBox::Ok)
+    {
+        if(selectedUser.mUsername == currentUser->mUsername)
+        {
+            QMessageBox::question(this, "Delete User",
+                "You will stay logged in as this user until you exit the program.", QMessageBox::Ok);
+        }
+
+        userVector->erase(userVector->begin() + offset);
+        ui->userComboBox->removeItem(offset);
+    }
 }
 
+void UserManager::passParams(Vector<User>* users, User* user, Login* login)
+{
+    userVector = users;
+    currentUser = user;
+    loginWindow = login;
+    updateUserList();
+}
+
+void UserManager::updateUserList()
+{
+    ui->userComboBox->clear();
+    for(Vector<User>::iterator it = userVector->begin(); it != userVector->end(); ++it)
+        ui->userComboBox->addItem(it->mUsername);
+}

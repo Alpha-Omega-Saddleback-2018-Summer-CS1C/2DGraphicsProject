@@ -152,9 +152,9 @@ void AddShape::passParams(Vector<Shape*>* shapes, MainWindow* parentWindow)
     for(int i = 1; i < 100; ++i)
     {
         if(custom_find(shapeVector->begin(), shapeVector->end(), i,
-            [](Vector<Shape*>::iterator it, int id)
+            [](Shape* s, int id)
             {
-                return (*it)->getID() == id;
+                return s->getID() == id;
             }) ==  shapeVector->end())
             shapeIDComboBox->addItem(QString::number(i));
     }

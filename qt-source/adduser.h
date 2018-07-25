@@ -28,6 +28,8 @@
 #include "custom_vector.h"
 #include "userparser.h"
 
+class UserManager;
+
 namespace Ui {
 class AddUser;
 }
@@ -40,7 +42,7 @@ public:
     explicit AddUser(QWidget *parent = 0);
     ~AddUser();
 
-    void passParams(Vector<User>* users, User* user);
+    void passParams(Vector<User>* users, User* user, UserManager* parentWindow);
 
 private slots:
     void on_createNewUserButton_clicked();
@@ -49,6 +51,7 @@ private:
     Ui::AddUser *ui;
     Vector<User>* userVector;
     User* currentUser;
+    UserManager* userManager;
 };
 
 #endif // ADDUSER_H

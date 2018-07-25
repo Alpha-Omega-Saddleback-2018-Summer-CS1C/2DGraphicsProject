@@ -257,7 +257,7 @@ It custom_find(It first, It last, const T& value, Cmp func)
 {
     while(first != last)
     {
-        if(func(first, value))
+        if(func(*first, value))
             return first;
         ++first;
     }

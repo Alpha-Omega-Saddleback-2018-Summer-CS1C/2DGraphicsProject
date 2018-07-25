@@ -29,6 +29,8 @@
 #include "custom_vector.h"
 #include "userparser.h"
 
+class Login;
+
 namespace Ui {
 class UserManager;
 }
@@ -41,15 +43,13 @@ public:
     explicit UserManager(QWidget *parent = 0);
     ~UserManager();
 
-    void passParams(Vector<User>* users, User* user);
+    void passParams(Vector<User>* users, User* user, Login* login);
+    void updateUserList();
 
 private slots:
     void on_addUserButton_clicked();
-
     void on_editUserButton_clicked();
-
     void on_deleteUserManager_clicked();
-
 
 private:
     Ui::UserManager *ui;
@@ -57,6 +57,7 @@ private:
 
     Vector<User>* userVector; // Does not require deletion
     User* currentUser; // Does not require deletion
+    Login* loginWindow;
 };
 
 #endif // USERMANAGER_H

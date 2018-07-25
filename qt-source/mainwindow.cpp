@@ -160,13 +160,6 @@ void MainWindow::createEditShape()
 
 void MainWindow::createUserManager()
 {
-    if(!currentUser->mIsAdmin)
-    {
-        QMessageBox::information(this, "Shape Manager",
-                "Current user is not an adminstrator!", QMessageBox::Ok);
-        return;
-    }
-
     if(userManager)
     {
         userManager->close();
@@ -174,7 +167,7 @@ void MainWindow::createUserManager()
     }
 
     userManager = new UserManager();
-    userManager->passParams(userVector, currentUser);
+    userManager->passParams(userVector, currentUser, loginWindow);
     userManager->show();
 }
 
