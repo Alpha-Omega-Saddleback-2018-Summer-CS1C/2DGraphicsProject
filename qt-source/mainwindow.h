@@ -42,6 +42,9 @@ class QLabel;
 class QGridLayout;
 class Login;
 
+/**	Implements a QWidget that serves as the main application window. It contains the render area and buttons
+ *	that will add, edit, and remove shapes as well as open the user manager or logout.
+ */
 class MainWindow : public QWidget
 {
     Q_OBJECT
@@ -51,17 +54,33 @@ class MainWindow : public QWidget
     static const int shapeDescriptionLabelCount = 14;
 
 public:
+	/**	Default constructor. Initializes widgets */
     MainWindow();
+	
+	/** Destroys all child widgets and layouts */
     ~MainWindow();
 
+	/**	Passes the shape vector, user vector, current user, and previous window */
     void passParams(Login* login, Vector<Shape*>* shapes, Vector<User>* users, User* user);
+	
+	/** Updates the interface when a new shape is added. */
     void updateShapeList();
 
 private slots:
+
+	/** Opens the AddShape widget if the user is an administrator. */
     void createAddShape();
+	
+	/** Opens the EditShape widget if the user is an administrator. */
     void createEditShape();
+	
+	/** Opens the UserManager widget. */
     void createUserManager();
+	
+	/** Deletes the selected shape if the user is an administrator */
     void deleteShape();
+	
+	/** Updates the interface when the selected shape is changed. */
     void updateShapeInfo();
 
 private:

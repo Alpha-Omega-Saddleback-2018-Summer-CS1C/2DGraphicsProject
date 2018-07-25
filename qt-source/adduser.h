@@ -31,21 +31,41 @@
 class UserManager;
 class Login;
 
+/** \namespace Ui
+ *	
+ * 	Created by Qt. All UI-defined widgets are under this namespace
+ */
 namespace Ui {
-class AddUser;
+	
+	/**	External widget created by the QT UI editor that is used by the AddUser class.
+	 *	Manages all widgets and layouts.
+  	 */
+	class AddUser;
 }
 
+/**	Implements a QWidget that allows a user to add a user to the user vector. */
 class AddUser : public QDialog
 {
     Q_OBJECT
 
 public:
+
+	/** Default constructor. Initializes widgets. */
     explicit AddUser(QWidget *parent = 0);
+	
+	/** Destroys all child widgets and layouts */
     ~AddUser();
 
+	/**	Passes the user vector, previous window, and initial login window. */
     void passParams(Vector<User>* users, UserManager* parentWindow, Login* login);
 
 private slots:
+
+	/** Adds a new user to the user vector if the username is not already taken, and both password inputs 
+	 * are the same. If the user is signed in as the default user (no saved users in the user vector),
+	 * the created user must be an administrator. Once the new user is created, the user is signed out
+	 * of the default user.
+	 */
     void on_createNewUserButton_clicked();
 
 private:

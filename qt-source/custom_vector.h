@@ -26,6 +26,9 @@
 
 #include <assert.h>
 
+/** 
+ *	Defines a templated vector modeled after the STL vector.
+ */
 template<typename T>
 class Vector
 {
@@ -33,25 +36,27 @@ class Vector
 
 public:
 
-    /* Type aliasing */
+    /** Alias for a pointer of type T */
     using iterator = T*;
+	
+	/** Alias for a const pointer of type T */
     using const_iterator = const T*;
 
-    /* Default constructor */
+    /** Default constructor. Allocates DEFAULT_SIZE elements and sets the used size to 0. */
     Vector() : mArray(new T[DEFAULT_SIZE]), mSize(0), mReservedSize(DEFAULT_SIZE)
     {
         for(int i = 0; i < mReservedSize; ++i)
             mArray[i] = T();
     }
 
-    /* Alternate constructor */
+    /** Alternate constructor. Allocates a given number of elements and sets the used size to 0. */
     explicit Vector(int size)  : mArray(new T[size]), mSize(0), mReservedSize(size)
     {
         for(int i = 0; i < mReservedSize; ++i)
             mArray[i] = T();
     }
 
-    /* Copy constructor */
+    /** Copy constructor. */
     Vector(const Vector& vec) : mSize(vec.mSize), mReservedSize(vec.mReservedSize)
     {
         mArray = new T[mReservedSize];
@@ -59,7 +64,7 @@ public:
             mArray[i] = vec.mArray[i];
     }
 
-    /* Move constructor */
+    /** Move constructor. (C++11)*/
     Vector(Vector&& vec) : mArray(vec.mArray), mSize(vec.mSize), mReservedSize(vec.mReservedSize)
     {
         vec.mArray = nullptr;
@@ -67,7 +72,7 @@ public:
         vec.mReservedSize = 0;
     }
 
-    /* Destructor */
+    /** Destructor. Destroys the contents of this container. */
     ~Vector()
     {
         if(mArray != nullptr)
@@ -77,7 +82,7 @@ public:
         }
     }
 
-    /* Copy assignment */
+    /** Copy assignment. */
     Vector& operator=(const Vector& vec)
     {
         if(mArray != nullptr)
@@ -92,7 +97,7 @@ public:
         return *this;
     }
 
-    /* Move assignment */
+    /** Move assignment. */
     Vector& operator=(Vector&& vec)
     {
         if(mArray != nullptr)
@@ -108,57 +113,59 @@ public:
         return *this;
     }
 
-    /* Access operator */
+    /** Access operator. */
     T& operator[](int n)
     {
         assert(n < mSize);
         return mArray[n];
     }
 
-    /* Access operator */
+    /** Access operator. (const reference) */
     const T& operator[](int n) const
     {
         assert(n < mSize);
         return mArray[n];
     }
 
-    /* Returns an iterator to the first element */
+    /** Returns an iterator to the first element. */
     iterator begin()
     {
         return mArray;
     }
 
-    /* Returns an iterator to the first element */
+    /** Returns an const_iterator to the first element. */
     const_iterator begin() const
     {
         return mArray;
     }
 
-    /* Returns the number of elements allocated in the vector */
+    /** Returns the number of elements allocated in the vector. */
     int capacity() const
     {
         return mReservedSize;
     }
 
-    /* Sets the number of elements to 0, effectively clearing the vector */
+    /** Sets the number of elements to 0, effectively clearing the vector. */
     void clear()
     {
         mSize = 0;
     }
 
-    /* Returns an iterator to the element beyond the last element */
+    /** Returns an iterator to the element beyond the last element. */
     iterator end()
     {
         return &mArray[mSize];
     }
 
-    /* Returns an iterator to the element beyond the last element */
+    /** Returns an const_iterator to the element beyond the last element */
     const_iterator end() const
     {
         return &mArray[mSize];
     }
 
-    /* Removes an element pointed to by a given iterator */
+    /** Removes an element pointed to by a given iterator and returns an iterator to the element stored at the same index
+	 * 	as the deleted element (the elements that was after the deleted element). 
+	 */
     iterator erase(iterator it)
     {
         for(iterator i = it; i != &mArray[mSize - 1]; ++i)
@@ -168,7 +175,7 @@ public:
         return it;
     }
 
-    /* Inserts a new element before a given iterator */
+    /** Inserts an element before the given iterator and returns an iterator to the new element. */
     iterator insert(iterator it, const T& value)
     {
         if(mSize + 1 > mReservedSize)
@@ -189,13 +196,13 @@ public:
         return it;
     }
 
-    /* Deletes the last element */
+    /** Deletes the last element. */
     void pop_back()
     {
         --mSize;
     }
 
-    /* Adds an element and the end */
+    /** Adds an element at the end. */
     void push_back(const T& value)
     {
         if(mSize + 1 > mReservedSize)
@@ -212,7 +219,7 @@ public:
         ++mSize;
     }
 
-    /* Resizes the vector if the requested size is large than the current reserved size */
+    /** Resizes the vector if the requested size is large than the current reserved size. */
     void reserve(int size)
     {
         if(size > mReservedSize)
@@ -227,7 +234,7 @@ public:
         }
     }
 
-    /* Resizes the vector */
+    /** Resizes the vector to a given size. */
     void resize(int size)
     {
         T* tmp = mArray;
@@ -240,7 +247,7 @@ public:
         delete[] tmp;
     }
 
-    /* Returns the number of elements stored in the vector */
+    /** Returns the number of elements stored in the vector. */
     int size() const
     {
         return mSize;
@@ -252,6 +259,7 @@ private:
     int mReservedSize;
 };
 
+/** Templated swap function */
 template<typename T>
 void custom_swap(T& a, T& b)
 {
@@ -260,6 +268,7 @@ void custom_swap(T& a, T& b)
     b = c;
 }
 
+/** Templated swap function */
 template<typename It, typename T, typename Cmp>
 It custom_find(It first, It last, const T& value, Cmp func)
 {
@@ -273,6 +282,7 @@ It custom_find(It first, It last, const T& value, Cmp func)
     return last;
 }
 
+/** Templated selection sort function */
 template<typename It, typename Cmp>
 void selection_sort(It first, It last, Cmp func)
 {

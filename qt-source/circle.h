@@ -27,26 +27,55 @@
 #include <QPoint>
 #include "shape.h"
 
+ 
+/** \namespace shape
+ *	
+ * 	All shapes are defined in this namespace to avoid name collision with the standard library,
+ *  mainly <window.h>
+ */
 namespace shape
 {
+	/**	Implements a circle [x, y, radius] that inherits from shape. It will be rendered by the
+     * 	RenderArea widget and can be saved in a text file.
+	 */
     class Circle: public Shape
     {
     public:
+	
+		/**	Default constructor. Sets the shape ID to an invalid value. */
         Circle();
+		
+		/** Destructor. It is explicitly defined because this class is a derived type */
         ~Circle() {}
 
-        double area() override; // Return the area of the ciricle
-        Vector<QString> dimensionLabels() override; // Returns the dimensions of this shape for use in QLabels
-        Vector<int> getDimensions() override; // Returns the dimensions of this shape as a vector
-        void draw() override; // Draw the circle
-        void move(const QPoint& offset) override; // Translates the circle by a given offset
-        double perimeter() override; // return the circumference of the ciricle
-        void setRadius(int r); // set the radius of the ciricle
-        void setPosition(int x, int y); // Set the position of the circle
+		/** Returns the area of this circle */
+        double area() override;
+		
+		/** Returns a QString list detailing the dimensions of this circle  */
+        Vector<QString> dimensionLabels() override;
+		
+		/** Returns the dimensions of this shape as a vector */
+        Vector<int> getDimensions() override;
+		
+		/** Draw the circle */
+        void draw() override;
+		
+		/** Translates the circle by a given offset */
+        void move(const QPoint& offset) override;
+		
+		/** Returns the circumference of the circle */
+        double perimeter() override;
+		
+		/** Sets the radius of the circle */
+        void setRadius(int r);
+		
+		/** Set the position of the circle */
+        void setPosition(int x, int y);
 
     private:
         QPoint mPosition;
         int radius;
     };
 }
+
 #endif // CIRCLE_H

@@ -6,21 +6,36 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-namespace Ui {class contact;}
+/** \namespace Ui
+ *	
+ * 	Created by Qt. All UI-defined widgets are under this namespace
+ */
+namespace Ui 
+{
+	/**	External widget created by the QT UI editor that is used by the contact class.
+	 *	Manages all widgets and layouts.
+  	 */
+	class contact;
+}
 
+/**	Implements a QWidget as a pop-up window that allows a user to contact the development team. */
 class contact : public QMainWindow
 {
     Q_OBJECT
 public:
+
+	/** Default constructor. Initializes widgets. */
     explicit contact(QMainWindow *previous, QWidget *parent = nullptr);
+	
+	/** Destroys all child widgets and layouts */
     ~contact(){};
-signals:
-    void requestMailTo();
-    void requestLoginWindow();
-public slots:
 
 private slots:
+
+	/** Opens up the users default mail application with a email template to send to the team. */
     void on_pushButton_clicked();
+	
+	/** Closes this widget and returns to the Login widget. */
     void on_pushButton_2_clicked();
 
 private:

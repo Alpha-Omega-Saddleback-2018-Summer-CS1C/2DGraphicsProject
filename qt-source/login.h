@@ -32,26 +32,54 @@
 
 using shape::Shape;
 
-namespace Ui {
-class Login;
+/** \namespace Ui
+ *	
+ * 	Created by Qt. All UI-defined widgets are under this namespace
+ */
+namespace Ui 
+{
+	/**	External widget created by the QT UI editor that is used by the Login class.
+	 *	Manages all widgets and layouts.
+  	 */
+	class Login;
 }
 
+/**	Implements a QWidget that prompts users to login. If there are no users in the user vector,
+ * 	the user is logged in under the default user until a new user is created.
+ */
 class Login : public QMainWindow
 {
     Q_OBJECT
 
 public:
+
+	/** Default constructor. Initializes widgets. */
     explicit Login(QWidget *parent = nullptr);
+	
+	/** Destroys all child widgets and layouts. */
     ~Login();
 
+	/**	Passes the shape vector and the user vector. */
     void passParams(Vector<Shape*>* shapes, Vector<User>* users);
 
 public slots:
+
+	/** Closes the MainWindow widget. This functions is called externally from widgets that have a member
+	 *	that points to this object.
+	 */
     void closeMainWindow();
 
 private slots:
+
+	/** Verifies login credentials and calls openMainWindow() if the username and password match a given
+	 *	user profile.
+	 */
     void on_loginButton_clicked();
+	
+	/** Opens the contact widget */
     void openContactWindow();
+	
+	/** Opens the MainWindow widget */
     void openMainWindow();
 
 private:

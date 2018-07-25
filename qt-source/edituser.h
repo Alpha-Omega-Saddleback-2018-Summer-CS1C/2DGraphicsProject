@@ -30,21 +30,40 @@
 
 class UserManager;
 
-namespace Ui {
-class EditUser;
+/** \namespace Ui
+ *	
+ * 	Created by Qt. All UI-defined widgets are under this namespace
+ */
+namespace Ui 
+{
+	/**	External widget created by the QT UI editor that is used by the AddUser class.
+	 *	Manages all widgets and layouts.
+  	 */
+	class EditUser;
 }
 
+/**	Implements a QWidget that allows a user to change the password of a user in the user vector. 
+ *  A guest user can only edit their own user profile. An administrator can edit any guest user as
+ * 	well as their own, but not another administrators
+ */
 class EditUser : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit EditUser(QWidget *parent = 0);
-    ~EditUser();
 
+	/** Default constructor. Initializes widgets. */
+    explicit EditUser(QWidget *parent = 0);
+	
+	/** Destroys all child widgets and layouts */
+    ~EditUser();
+	
+	/**	Passes the user vector, previous window, and initial login window. */
     void passParams(Vector<User>* users, User* user, UserManager* parentWindow);
 
 private slots:
+
+	/** Saves the user if both password inputs are the same. */
     void on_saveUserButton_clicked();
 
 private:

@@ -39,6 +39,10 @@ class MainWindow;
 
 using shape::Shape;
 
+/**	Implements a QWidget that allows a user to add a shape to the shape vector.
+ *	Upon exiting this widget, the RenderArea QWidget will be updated and the shape
+ *	will be rendered.
+ */
 class AddShape : public QWidget
 {
     Q_OBJECT
@@ -47,17 +51,31 @@ class AddShape : public QWidget
     static const int shapeDescriptionCount = 7;
 
 public:
+	/**	Default constructor. Initializes widgets */
     explicit AddShape(QWidget *parent = nullptr);
+	
+	/** Destroys all child widgets and layouts */
     ~AddShape();
-
+	
+	/**	Passes the shape vector and previous window. */
     void passParams(Vector<Shape*>* shapes, MainWindow* mainWindow);
 
-signals:
-
 public slots:
+
+	/** Adds an additional (x, y) input when creating a polyline or polygon. */	
     void addDimensionPoint();
+	
+	/** Adds a shape to the shape vector and exits the widget. Before exiting, the shape vector will
+	 * be sorted numerically by ID.
+	 */	
     void addShape();
+	
+	/** Removes an (x, y) input when creating a polyline or polygon. If there are only two or three points for a
+	 *	polyline and polygon, respectively, it will notify the user and will not remove an input.
+	 */	
     void removeDimensionPoint();
+	
+	/** Changes the interface accordingly when the shape type has been changed. */
     void shapeTypeChanged();
 
 private:

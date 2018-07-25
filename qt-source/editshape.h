@@ -39,6 +39,10 @@ class MainWindow;
 
 using shape::Shape;
 
+/**	Implements a QWidget that allows a user to edit a shape in the shape vector.
+ *	Upon exiting this widget, the RenderArea QWidget will be updated and the shape
+ *	will be rendered.
+ */
 class EditShape : public QWidget
 {
     Q_OBJECT
@@ -47,16 +51,26 @@ class EditShape : public QWidget
     static const int shapeDescriptionCount = 7;
 
 public:
+	/**	Default constructor. Initializes widgets */
     explicit EditShape(QWidget *parent = nullptr);
+	
+	/** Destroys all child widgets and layouts */
     ~EditShape();
 
+	/**	Passes the shape vector and previous window. */
     void passParams(Shape* shape, MainWindow* mainWindow);
 
-signals:
-
 public slots:
+
+	/** Adds an additional (x, y) input when creating a polyline or polygon. */	
     void addDimensionPoint();
+	
+	/** Saves the selected shape and exits the widget. */
     void editShape();
+	
+	/** Removes an (x, y) input when creating a polyline or polygon. If there are only two or three points for a
+	 *	polyline and polygon, respectively, it will notify the user and will not remove an input.
+	 */	
     void removeDimensionPoint();
 
 private:
