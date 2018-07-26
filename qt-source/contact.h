@@ -1,6 +1,6 @@
 #ifndef CONTACT_H
 #define CONTACT_H
-#include <QMainWindow>
+#include <QWidget>
 #include "login.h"
 #include <QPixmap>
 #include <QDesktopServices>
@@ -19,12 +19,12 @@ namespace Ui
 }
 
 /**	Implements a QWidget as a pop-up window that allows a user to contact the development team. */
-class contact : public QMainWindow
+class contact : public QWidget
 {
     Q_OBJECT
 public:
 
-	/** Default constructor. Initializes widgets. */
+    /** Alternate constructor. Initializes widgets. */
     explicit contact(QMainWindow *previous, QWidget *parent = nullptr);
 	
 	/** Destroys all child widgets and layouts */

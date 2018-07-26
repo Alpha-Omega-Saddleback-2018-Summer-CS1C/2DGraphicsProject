@@ -4,8 +4,8 @@
 #include "login.h"
 
 
-contact::contact(QMainWindow* previous, QWidget *parent) : QMainWindow(parent),
-
+contact::contact(QMainWindow* previous, QWidget *parent) :
+    QWidget(parent),
     ui(new Ui::contact), m_login{previous}
 {
     ui->setupUi(this);
