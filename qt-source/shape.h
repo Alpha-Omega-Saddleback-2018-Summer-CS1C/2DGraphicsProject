@@ -126,38 +126,24 @@ namespace shape
 		/** QBrush object used to set QPainter member */
         QBrush      mBrush;
     };
-}
 
-/** Templated comparator. Returns true if the area of the first shape is larger than the area of the second */
-template<typename S>
-bool compare_shape_area(S shape1, S shape2)
-{
-    return shape1->area() < shape2->area();
-}
-
-/** Templated comparator. Returns true if the perimeter of the first shape is larger than the area of the perimeter */
-template<typename S>
-bool compare_shape_perimeter(S shape1, S shape2)
-{
-    return shape1->perimeter() < shape2->perimeter();
-}
-
-/** Templated selection sort. Takes a function pointer as a comparator. */
-template<typename It>
-void selection_sort(It first, It last, bool (*func)(shape::Shape*, shape::Shape*))
-{
-    for(It it1 = first ; it1 != last; ++it1)
+    /** Templated comparator. Returns true if the area of the first shape is larger than the area of the second */
+    struct compare_shape_area
     {
-        It it2 = it1;
-
-        for(It it3 = it1; it3 != last; ++it3)
+        bool operator()(Shape* s1, Shape* s2)
         {
-            if(func(*it2, *it3))
-                it2 = it3;
+            return s1->area() < s2->area();
         }
+    };
 
-        custom_swap(*it1, *it2);
-    }
+    /** Templated comparator. Returns true if the perimeter of the first shape is larger than the area of the perimeter */
+    struct compare_shape_perimeter
+    {
+        bool operator()(Shape* s1, Shape* s2)
+        {
+            return s1->perimeter() < s2->perimeter();
+        }
+    };
 }
 
 /*
